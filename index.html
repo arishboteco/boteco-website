@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boteco – Restaurante Brasileiro</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, .brand-name {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section position-relative">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/videos/hero.mp4" type="video/mp4">
+        </video>
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white">
+            <img src="assets/images/logo.png" alt="Boteco Logo" class="mb-3" style="max-width: 200px;">
+            <h1 class="brand-name">Boteco – Restaurante Brasileiro</h1>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Menu</h2>
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Menu item">
+                        <div class="card-body">
+                            <h5 class="card-title">Feijoada</h5>
+                            <p class="card-text">₹450</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Menu item">
+                        <div class="card-body">
+                            <h5 class="card-title">Coxinha</h5>
+                            <p class="card-text">₹200</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Menu item">
+                        <div class="card-body">
+                            <h5 class="card-title">Pão de Queijo</h5>
+                            <p class="card-text">₹150</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Upcoming Events</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="event p-3 border rounded">
+                        <h5>Live Samba Night</h5>
+                        <p>Saturday, August 10</p>
+                        <p>Join us for an evening of live samba music and dancing.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="event p-3 border rounded">
+                        <h5>Caipirinha Workshop</h5>
+                        <p>Sunday, August 18</p>
+                        <p>Learn how to make Brazil's signature cocktail with our mixologist.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="event p-3 border rounded">
+                        <h5>Brazilian BBQ Feast</h5>
+                        <p>Friday, August 23</p>
+                        <p>A special churrasco dinner featuring an array of grilled meats.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Book a Table</h2>
+            <div class="ratio ratio-16x9">
+                <!-- Replace with your booking platform embed code -->
+                <iframe src="" title="Booking"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Party Enquiries</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
