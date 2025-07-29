@@ -68,6 +68,15 @@
     color: #f8b400 !important;
 }
 
+/* Enlarge logo and brand text for a more prominent header */
+.navbar-brand img {
+    height: 80px;
+}
+.navbar-brand .brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 /* Dark section styling */
 .section-dark {
     background-color: #1a1a2e;
