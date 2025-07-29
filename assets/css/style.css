@@ -1,0 +1,22 @@
+/* Custom styles for Boteco – Restaurante Brasileiro */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-section .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: brightness(70%);
+}
+.event {
+    background-color: #fff;
+}
+
