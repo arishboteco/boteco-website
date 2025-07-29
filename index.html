@@ -22,26 +22,53 @@
     </style>
 </head>
 <body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar text-center text-white py-2">
+        Open all days 12 pm to 12:30 am. Book a table.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="assets/images/logo.png" alt="Boteco Logo" class="me-2" style="height:40px;">
+                Boteco
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero-section position-relative">
-        <video class="hero-video" autoplay muted loop playsinline>
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
             <source src="assets/videos/hero.mp4" type="video/mp4">
         </video>
         <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white">
-            <img src="assets/images/logo.png" alt="Boteco Logo" class="mb-3" style="max-width: 200px;">
+            <img src="assets/images/logo.png" alt="Boteco Logo" class="mb-3" style="max-width:200px;">
             <h1 class="brand-name">Boteco – Restaurante Brasileiro</h1>
         </div>
     </section>
 
     <!-- Menu Section -->
-    <section id="menu" class="py-5">
+    <section id="menu" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">Menu</h2>
             <div class="row g-4">
                 <!-- Card 1 -->
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Menu item">
+                    <div class="card h-100">
+                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Feijoada">
                         <div class="card-body">
                             <h5 class="card-title">Feijoada</h5>
                             <p class="card-text">₹450</p>
@@ -50,8 +77,8 @@
                 </div>
                 <!-- Card 2 -->
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Menu item">
+                    <div class="card h-100">
+                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Coxinha">
                         <div class="card-body">
                             <h5 class="card-title">Coxinha</h5>
                             <p class="card-text">₹200</p>
@@ -60,8 +87,8 @@
                 </div>
                 <!-- Card 3 -->
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Menu item">
+                    <div class="card h-100">
+                        <img src="assets/images/menu-item-1.jpg" class="card-img-top" alt="Pão de Queijo">
                         <div class="card-body">
                             <h5 class="card-title">Pão de Queijo</h5>
                             <p class="card-text">₹150</p>
@@ -73,26 +100,26 @@
     </section>
 
     <!-- Events Section -->
-    <section id="events" class="py-5 bg-light">
+    <section id="events" class="py-5 section-dark">
         <div class="container">
             <h2 class="text-center mb-4">Upcoming Events</h2>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="event p-3 border rounded">
+                    <div class="p-4 border rounded bg-transparent">
                         <h5>Live Samba Night</h5>
                         <p>Saturday, August 10</p>
                         <p>Join us for an evening of live samba music and dancing.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="event p-3 border rounded">
+                    <div class="p-4 border rounded bg-transparent">
                         <h5>Caipirinha Workshop</h5>
                         <p>Sunday, August 18</p>
                         <p>Learn how to make Brazil's signature cocktail with our mixologist.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="event p-3 border rounded">
+                    <div class="p-4 border rounded bg-transparent">
                         <h5>Brazilian BBQ Feast</h5>
                         <p>Friday, August 23</p>
                         <p>A special churrasco dinner featuring an array of grilled meats.</p>
@@ -103,7 +130,7 @@
     </section>
 
     <!-- Booking Section -->
-    <section id="booking" class="py-5">
+    <section id="booking" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">Book a Table</h2>
             <div class="ratio ratio-16x9">
@@ -114,7 +141,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5 bg-light">
+    <section id="contact" class="py-5 section-dark">
         <div class="container">
             <h2 class="text-center mb-4">Party Enquiries</h2>
             <div class="row justify-content-center">
