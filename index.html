@@ -51,13 +51,37 @@
 
     <!-- Hero Section -->
     <section class="hero-section position-relative">
-        <!-- Static hero background: use an image instead of video to ensure the hero section always displays -->
-        <div class="hero-background position-absolute top-0 start-0 w-100 h-100" style="background-image: url('assets/images/menu-item-1.jpg'); background-size: cover; background-position: center;"></div>
+        <!-- Hero video with poster fallback. The poster image will show if the video cannot be loaded. -->
+        <video class="hero-video" poster="assets/images/menu-item-1.jpg" autoplay muted loop playsinline preload="auto">
+            <source src="assets/videos/hero.mp4" type="video/mp4">
+        </video>
         <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white">
             <img src="assets/images/logo.png" alt="Boteco Logo" class="mb-3" style="max-width:200px;">
             <h1 class="brand-name">Boteco – Restaurante Brasileiro</h1>
         </div>
     </section>
+
+    <!-- PDF Menus Section -->
+    <section id="menus" class="py-5 section-dark">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Menus</h2>
+            <div class="row g-4 justify-content-center">
+                <!-- Food Menu -->
+                <div class="col-md-4 d-flex justify-content-center">
+                    <a href="assets/menus/food-menu.pdf" target="_blank" class="btn btn-primary w-100 py-3">Food Menu</a>
+                </div>
+                <!-- Bar Menu -->
+                <div class="col-md-4 d-flex justify-content-center">
+                    <a href="assets/menus/bar-menu.pdf" target="_blank" class="btn btn-primary w-100 py-3">Bar Menu</a>
+                </div>
+                <!-- Specials Menu -->
+                <div class="col-md-4 d-flex justify-content-center">
+                    <a href="assets/menus/specials-menu.pdf" target="_blank" class="btn btn-primary w-100 py-3">Specials Menu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Menu Section -->
     <section id="menu" class="py-5 bg-light">
