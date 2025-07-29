@@ -46,8 +46,17 @@
 
     <!-- Hero Section -->
     <section class="hero-section position-relative">
-        <div class="hero-background"></div>
-        <!-- Overlay for slight darkening of the hero background -->
+        <!-- Use a lightweight WebM video for the hero background. The original MP4
+             could not be served reliably on GitHub Pages due to codec and streaming
+             restrictions. The WebM file is small (a few seconds) and supported by
+             modern browsers. A poster image is provided as a fallback while the
+             video loads. -->
+        <video class="hero-video" autoplay muted loop playsinline
+               poster="assets/images/menu-item-1.jpg">
+            <source src="assets/videos/hero-small.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Overlay for slight darkening of the hero video to improve text contrast -->
         <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
     </section>
 
