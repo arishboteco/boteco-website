@@ -20,3 +20,43 @@
     background-color: #fff;
 }
 
+/* Announcement bar styling */
+.announcement-bar {
+    background-color: #1a1a2e;
+    font-size: 0.9rem;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #1a1a2e !important;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #f8b400 !important;
+}
+
+/* Dark section styling */
+.section-dark {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+.section-dark h2 {
+    color: #fff;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #f8b400;
+    border-color: #f8b400;
+}
+.btn-primary:hover {
+    background-color: #d9a200;
+    border-color: #d9a200;
+}
+
