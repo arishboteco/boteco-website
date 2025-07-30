@@ -1,28 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  let menuLists = {};
+  try {
+    const res = await fetch('assets/menus/menus.json');
+    if (res.ok) {
+      menuLists = await res.json();
+    }
+  } catch (e) {
+    console.warn('Could not load menus.json', e);
+  }
+
   const galleries = document.querySelectorAll('[data-menu-gallery]');
-  galleries.forEach(async (wrapper) => {
+  galleries.forEach((wrapper) => {
     const menu = wrapper.dataset.menuGallery;
     const imgEl = wrapper.querySelector('.menu-image');
     const counterEl = wrapper.querySelector('.image-counter');
     const prevBtn = wrapper.querySelector('.prev-btn');
     const nextBtn = wrapper.querySelector('.next-btn');
 
-    async function fetchImages() {
-      const imgs = [];
-      for (let i = 1; i <= 50; i++) {
-        const url = `assets/menus/${menu}-pg${i}.jpg`;
-        try {
-          const res = await fetch(url, { method: 'HEAD' });
-          if (!res.ok) break;
-          imgs.push(url);
-        } catch (e) {
-          break;
-        }
-      }
-      return imgs;
-    }
-
-    const images = await fetchImages();
+    const images = menuLists[menu] ? menuLists[menu].map(name => `assets/menus/${name}`) : [];
     if (images.length === 0) {
       wrapper.innerHTML = `<p>No ${menu.replace('-', ' ')} images available.</p>`;
       return;

@@ -9,7 +9,7 @@ To avoid hitting GitHub API limits, a cached `events.json` file is also used.
 
 1. **Add or remove event images** in `assets/events/` using the format
    `YYYY-MM-DD-Event-Name.jpg` (or `.png`, `.webp`).
-2. Run `python3 scripts/generate_events_json.py` to rebuild
+2. Run `python3 scripts/generate_events.py` to rebuild
    `events.json` from those filenames. The generated file will contain an
    array of event objects like:
 
@@ -45,3 +45,4 @@ displays images stored in `assets/menus/` following the naming pattern
 `<menu-name>-pg#.jpg` (for example, `food-menu-pg1.jpg`). All menu pages load
 these images automatically, so simply add or remove files and they will appear
 in their respective galleries.
+Run `python3 scripts/build_menu_json.py` to regenerate `assets/menus/menus.json` after adding images.

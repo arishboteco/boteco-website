@@ -15,6 +15,17 @@
  * Accent 3 (green):     #a2d06e
  */
 
+/* Typography */
+body {
+  font-family: 'Playfair Display', serif;
+}
+h1,
+h2,
+h3,
+.brand-name {
+  font-family: 'Playfair Display', serif;
+}
+
 
 .hero-section .container {
   position: relative;
