@@ -165,13 +165,13 @@
 
 /* Brand logo sizing and text colour */
 .navbar-brand img {
-  height: 60px !important;
+  /* Increase logo size for better visibility */
+  height: 80px !important;
 }
 
 .navbar-brand .brand-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #005aab;
+  /* Hide the brand name text next to the logo to declutter the header */
+  display: none;
 }
 
 /* Section styling for dark areas */
@@ -253,10 +253,35 @@ footer a:hover {
 /* Ensure event images show fully within their card frame */
 #events-grid img {
   width: 100%;
-  /* Maintain a 1:1 aspect ratio so each image appears like a square Instagram post */
-  aspect-ratio: 1 / 1;
-  /* Cover ensures the image completely fills the square frame, cropping the excess */
-  object-fit: cover;
-  /* Rounded top corners to match card style */
+  /* Display the full creative within its cell while preserving aspect ratio */
+  height: auto;
+  object-fit: contain;
   border-radius: 0.5rem 0.5rem 0 0;
+}
+
+/* Video background styling for hero section */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section .hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Overlay to darken the video for better readability of text */
+.hero-section .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: -1;
 }
