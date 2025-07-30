@@ -6,7 +6,11 @@
  * to ensure a harmonious look and feel across the site. If you use
  * this file remember to remove or comment out the existing colour
  * definitions in your current CSS to avoid conflicts.
- */
+*/
+
+:root {
+  --navbar-logo-max-height: 120px;
+}
 
 /* Palette reference:
  * Primary (dark blue):  #005aab
@@ -166,7 +170,8 @@
 /* Brand logo sizing and text colour */
 .navbar-brand img {
   /* Increase logo size for better visibility */
-  height: 120px !important;
+  max-height: var(--navbar-logo-max-height) !important;
+  height: auto;
 }
 
 .navbar-brand .brand-name {
@@ -291,4 +296,10 @@ footer a:hover {
   background: rgba(0, 0, 0, 0.45);
   /* Layer the overlay above the video */
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-logo-max-height: 80px;
+  }
 }

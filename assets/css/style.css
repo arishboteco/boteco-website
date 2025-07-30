@@ -1,4 +1,7 @@
 /* Custom styles for Boteco – Restaurante Brasileiro */
+:root {
+    --navbar-logo-max-height: 120px;
+}
 .hero-section {
     position: relative;
     height: 100vh;
@@ -73,7 +76,8 @@
    any inline styles that may be present on the <img> element. */
 .navbar-brand img {
     /* Enlarged for better visibility */
-    height: 120px !important;
+    max-height: var(--navbar-logo-max-height) !important;
+    height: auto;
 }
 .navbar-brand .brand-name {
     font-size: 1.5rem;
@@ -98,5 +102,11 @@
 .btn-primary:hover {
     background-color: #d9a200;
     border-color: #d9a200;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --navbar-logo-max-height: 80px;
+    }
 }
 
