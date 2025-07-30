@@ -71,9 +71,8 @@
 
 .event-card img {
   width: 100%;
-  aspect-ratio: 1;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 
@@ -207,17 +206,11 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Ensure event images show fully within their card frame */
-/*
- * Event images should fill their square frame similarly to an Instagram post.
- * Using object-fit: cover with a 1/1 aspect ratio ensures the image covers the
- * entire area while keeping the cards responsive.
- */
+/* Ensure event images display fully without cropping */
 #events-grid img {
   width: 100%;
-  aspect-ratio: 1;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   background-color: #ffffff;
   border-radius: 0.5rem 0.5rem 0 0;
 }
