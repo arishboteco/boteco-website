@@ -166,7 +166,7 @@
 /* Brand logo sizing and text colour */
 .navbar-brand img {
   /* Increase logo size for better visibility */
-  height: 80px !important;
+  height: 120px !important;
 }
 
 .navbar-brand .brand-name {

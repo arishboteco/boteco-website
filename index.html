@@ -40,14 +40,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Align the menu items to the left on larger screens -->
                 <ul class="navbar-nav me-auto align-items-lg-center">
-                    <!-- Navigate to the About section which introduces the restaurant -->
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <!-- Primary navigation items -->
-                    <li class="nav-item"><a class="nav-link" href="#menus">Menus</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
-                    <!-- Link to party/event enquiry form -->
-                    <li class="nav-item"><a class="nav-link" href="#partyenquiry">Party&nbsp;Booking</a></li>
+                    <!-- All section links collapsed into a single dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sectionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sections
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="sectionsDropdown">
+                            <li><a class="dropdown-item" href="#about">About</a></li>
+                            <li><a class="dropdown-item" href="#menus">Menus</a></li>
+                            <li><a class="dropdown-item" href="#events">Events</a></li>
+                            <li><a class="dropdown-item" href="#booking">Booking</a></li>
+                            <li><a class="dropdown-item" href="#partyenquiry">Party Booking</a></li>
+                        </ul>
+                    </li>
                     <!-- Call‑to‑action button for reservations -->
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-primary px-4 py-2" href="#booking">Book&nbsp;Now</a>

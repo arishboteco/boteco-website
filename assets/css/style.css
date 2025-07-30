@@ -72,7 +72,8 @@
 /* Force larger logo height in navbar. Use !important to override
    any inline styles that may be present on the <img> element. */
 .navbar-brand img {
-    height: 80px !important;
+    /* Enlarged for better visibility */
+    height: 120px !important;
 }
 .navbar-brand .brand-name {
     font-size: 1.5rem;
