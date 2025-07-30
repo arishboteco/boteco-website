@@ -37,3 +37,11 @@ changes.
 
 When network errors or API limits occur, visitors will see a friendly
 "No upcoming events" message instead of the section disappearing.
+
+## Updating Menus
+
+Each menu page (e.g. `food-menu.html`, `bar-menu.html`, `specials-menu.html`)
+displays a simple gallery of images. Menu images live in `assets/menus/` and
+follow the naming pattern `<menu-name>-pg#.jpg` (for example,
+`food-menu-pg1.jpg`). Just add or remove images using this convention and edit
+the HTML pages if needed to include the new `<img>` tags.
