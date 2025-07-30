@@ -31,5 +31,9 @@ To avoid hitting GitHub API limits, a cached `events.json` file is also used.
    from `events.json` first and only fall back to the GitHub API if the
    file is missing or empty.
 
+The `update-events` GitHub Actions workflow can regenerate `events.json`
+automatically based on the filenames in `assets/events/` and commit any
+changes.
+
 When network errors or API limits occur, visitors will see a friendly
 "No upcoming events" message instead of the section disappearing.
