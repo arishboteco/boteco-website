@@ -253,6 +253,10 @@ footer a:hover {
 /* Ensure event images show fully within their card frame */
 #events-grid img {
   width: 100%;
-  height: 200px;
-  object-fit: contain;
+  /* Maintain a 1:1 aspect ratio so each image appears like a square Instagram post */
+  aspect-ratio: 1 / 1;
+  /* Cover ensures the image completely fills the square frame, cropping the excess */
+  object-fit: cover;
+  /* Rounded top corners to match card style */
+  border-radius: 0.5rem 0.5rem 0 0;
 }
