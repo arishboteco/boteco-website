@@ -9,7 +9,9 @@ To avoid hitting GitHub API limits, a cached `events.json` file is also used.
 
 1. **Add or remove event images** in `assets/events/` using the format
    `YYYY-MM-DD-Event-Name.jpg` (or `.png`, `.webp`).
-2. **Update `events.json`** in the same folder with an array of event objects:
+2. Run `python3 scripts/generate_events_json.py` to rebuild
+   `events.json` from those filenames. The generated file will contain an
+   array of event objects like:
 
    ```json
    [
