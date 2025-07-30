@@ -251,11 +251,16 @@ footer a:hover {
 }
 
 /* Ensure event images show fully within their card frame */
+/*
+ * When displaying event posters or creatives, we don’t want to crop them.
+ * Use object‑fit: contain and a fixed height so each card remains the same size.
+ * A light background colour ensures letterboxing around smaller images isn’t too distracting.
+ */
 #events-grid img {
   width: 100%;
-  /* Display the full creative within its cell while preserving aspect ratio */
-  height: auto;
+  height: 200px;
   object-fit: contain;
+  background-color: #ffffff;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
