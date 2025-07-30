@@ -139,6 +139,9 @@
         const eventsGrid = document.getElementById('events-grid');
         if (!eventsSection || !eventsGrid) return;
 
+        const sortByDate = (arr) =>
+            arr.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+
         const renderEvents = (events) => {
             if (!events || events.length === 0) {
                 eventsGrid.innerHTML = '<p class="text-center w-100">No upcoming events</p>';
@@ -171,7 +174,8 @@
             if (localRes.ok) {
                 const cachedEvents = await localRes.json();
                 if (Array.isArray(cachedEvents) && cachedEvents.length > 0) {
-                    renderEvents(cachedEvents);
+                    const sorted = sortByDate(cachedEvents);
+                    renderEvents(sorted);
                     return; // Skip API call when cache is available
                 }
             }
@@ -200,7 +204,8 @@
                 const title = titleParts.join(' ').replace(/_/g, ' ');
                 return { date: isoDate, title, image: file.name };
             }).filter(Boolean);
-            renderEvents(events);
+            const sortedEvents = sortByDate(events);
+            renderEvents(sortedEvents);
         } catch (error) {
             console.error('Error loading events:', error);
             renderEvents([]); // Show friendly message
