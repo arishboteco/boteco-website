@@ -48,9 +48,9 @@
 }
 
 .menu-card img {
-  max-height: 200px;
   width: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Events section styling – white background with card design */
@@ -259,6 +259,6 @@ footer a:hover {
 
 @media (max-width: 575.98px) {
   .menu-card img {
-    height: 160px;
+    max-height: 160px;
   }
 }
