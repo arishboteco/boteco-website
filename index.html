@@ -28,86 +28,132 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="assets/images/logo.png" alt="Boteco Logo" class="me-2" style="height:50px;">
+                <img src="assets/images/logo.png" alt="Boteco Logo" class="me-2">
                 <span class="ms-1 brand-name">Boteco – Restaurante Brasileiro</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <!-- Navigate to the About section which introduces the restaurant -->
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <!-- Primary navigation items -->
                     <li class="nav-item"><a class="nav-link" href="#menus">Menus</a></li>
                     <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
                     <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <!-- Call‑to‑action button for reservations -->
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary px-4 py-2" href="#booking">Book&nbsp;Now</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section position-relative">
-        <!-- Use a lightweight WebM video for the hero background. The original MP4
-             could not be served reliably on GitHub Pages due to codec and streaming
-             restrictions. The WebM file is small (a few seconds) and supported by
-             modern browsers. A poster image is provided as a fallback while the
-             video loads. -->
-        <video class="hero-video" autoplay muted loop playsinline
-               poster="assets/images/menu-item-1.jpg">
-            <!-- Updated to use the user-provided hero video encoded as a WebM
-                 (scaled down and reduced frame rate for performance). -->
-            <source src="assets/videos/hero-video.webm" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Overlay for slight darkening of the hero video to improve text contrast -->
-        <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+    <!-- Hero Section: uses a high‑quality photo of Brazilian cuisine as the background.
+         A centred heading, subheading and call‑to‑action invite guests to book a table.
+         The section occupies most of the viewport height for an immersive welcome. -->
+    <section class="hero-section d-flex align-items-center text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold text-white mb-3">Bringing Brazil to Bengaluru</h1>
+            <p class="lead text-white-50 mb-4">Experience authentic Brazilian flavours and culture right here.</p>
+            <a href="#booking" class="btn btn-lg btn-primary px-4">Reserve Your Table</a>
+        </div>
     </section>
 
-    <!-- PDF Menus Section -->
-    <section id="menus" class="py-5 section-dark">
+    <!-- About Section -->
+    <section id="about" class="py-5 about-section">
         <div class="container">
-            <h2 class="text-center mb-4">Our Menus</h2>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4 d-flex justify-content-center">
-                    <a href="assets/menus/food-menu.pdf" target="_blank" class="btn btn-primary w-100 py-3">Food Menu</a>
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <!-- Placeholder image representing the cosy interior or team; replace with a photo of your restaurant -->
+                    <img src="assets/images/about-placeholder.png" alt="Inside Boteco restaurant" class="img-fluid rounded">
                 </div>
-                <div class="col-md-4 d-flex justify-content-center">
-                    <a href="assets/menus/bar-menu.pdf" target="_blank" class="btn btn-primary w-100 py-3">Bar Menu</a>
+                <div class="col-lg-6">
+                    <h2 class="mb-3">About Us</h2>
+                    <p>Boteco is a cosy Brazilian haven in Bengaluru, bringing the vibrant flavours, rhythms and spirit of Brazil to your neighbourhood. Our chefs craft authentic dishes with fresh ingredients, while our bartenders serve signature caipirinhas and more. Gather with friends, enjoy live music and feel the warmth of Brazilian hospitality.</p>
                 </div>
-                <div class="col-md-4 d-flex justify-content-center">
-                    <a href="assets/menus/specials-menu.pdf" target="_blank" class="btn btn-primary w-100 py-3">Specials Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menus Section -->
+    <section id="menus" class="py-5 menus-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Explore Our Menus</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="menu-card h-100">
+                        <img src="assets/images/food-placeholder.png" class="card-img-top" alt="Delicious dishes">
+                        <div class="p-3">
+                            <h5 class="mb-2">Food Menu</h5>
+                            <p class="small">A selection of starters, mains and desserts inspired by Brazilian cuisine.</p>
+                            <a href="assets/menus/food-menu.pdf" target="_blank" class="btn btn-primary">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="menu-card h-100">
+                        <img src="assets/images/drinks-placeholder.png" class="card-img-top" alt="Signature drinks">
+                        <div class="p-3">
+                            <h5 class="mb-2">Bar Menu</h5>
+                            <p class="small">Signature cocktails, fine wines and craft beers.</p>
+                            <a href="assets/menus/bar-menu.pdf" target="_blank" class="btn btn-primary">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="menu-card h-100">
+                        <img src="assets/images/specials-placeholder.png" class="card-img-top" alt="Chef's specials">
+                        <div class="p-3">
+                            <h5 class="mb-2">Specials</h5>
+                            <p class="small">Seasonal dishes and chef's creations.</p>
+                            <a href="assets/menus/specials-menu.pdf" target="_blank" class="btn btn-primary">View Menu</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Events Section -->
-    <section id="events" class="py-5 section-dark">
+    <section id="events" class="py-5 events-section">
         <div class="container">
             <h2 class="text-center mb-4">Upcoming Events</h2>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-4 border rounded bg-transparent">
-                        <h5>Live Samba Night</h5>
-                        <p>Saturday, August 10</p>
-                        <p>Join us for an evening of live samba music and dancing.</p>
+                    <div class="card event-card h-100">
+                        <img src="assets/images/event-placeholder.png" class="card-img-top" alt="Live Samba Night">
+                        <div class="card-body">
+                            <h5 class="card-title">Live Samba Night</h5>
+                            <p class="card-text">Saturday, August 10</p>
+                            <p class="card-text small">Join us for an evening of live samba music and dancing.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 border rounded bg-transparent">
-                        <h5>Caipirinha Workshop</h5>
-                        <p>Sunday, August 18</p>
-                        <p>Learn how to make Brazil's signature cocktail with our mixologist.</p>
+                    <div class="card event-card h-100">
+                        <img src="assets/images/event-placeholder.png" class="card-img-top" alt="Caipirinha Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">Caipirinha Workshop</h5>
+                            <p class="card-text">Sunday, August 18</p>
+                            <p class="card-text small">Learn how to make Brazil's signature cocktail with our mixologist.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 border rounded bg-transparent">
-                        <h5>Brazilian BBQ Feast</h5>
-                        <p>Friday, August 23</p>
-                        <p>A special churrasco dinner featuring an array of grilled meats.</p>
+                    <div class="card event-card h-100">
+                        <img src="assets/images/event-placeholder.png" class="card-img-top" alt="Brazilian BBQ Feast">
+                        <div class="card-body">
+                            <h5 class="card-title">Brazilian BBQ Feast</h5>
+                            <p class="card-text">Friday, August 23</p>
+                            <p class="card-text small">A special churrasco dinner featuring an array of grilled meats.</p>
+                        </div>
                     </div>
                 </div>
             </div>
