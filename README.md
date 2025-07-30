@@ -41,7 +41,7 @@ When network errors or API limits occur, visitors will see a friendly
 ## Updating Menus
 
 Each menu page (e.g. `food-menu.html`, `bar-menu.html`, `specials-menu.html`)
-displays a simple gallery of images. Menu images live in `assets/menus/` and
-follow the naming pattern `<menu-name>-pg#.jpg` (for example,
-`food-menu-pg1.jpg`). Just add or remove images using this convention and edit
-the HTML pages if needed to include the new `<img>` tags.
+displays images stored in `assets/menus/` following the naming pattern
+`<menu-name>-pg#.jpg` (for example, `food-menu-pg1.jpg`). All menu pages load
+these images automatically, so simply add or remove files and they will appear
+in their respective galleries.
