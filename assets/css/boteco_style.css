@@ -136,13 +136,24 @@
  * against busy backgrounds. On scroll, Bootstrap’s fixed‑top class will
  * keep it at the top of the viewport.
  */
+/* Navigation bar styling
+ *
+ * To make the logo and menu items more prominent, the navigation bar
+ * uses a semi‑transparent white background with a slight blur and
+ * subtle shadow. Dark blue text (our primary colour) ensures good
+ * contrast against the light background, while hover states use the
+ * golden accent. Adjust the opacity to taste – higher values make the
+ * bar more opaque.
+ */
 .navbar {
-  background-color: rgba(0, 90, 171, 0.85) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
   backdrop-filter: blur(6px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* Navigation links – dark blue by default, golden on hover */
 .nav-link {
-  color: #ffffff !important;
+  color: #005aab !important;
   font-weight: 600;
   transition: color 0.3s ease;
 }
@@ -152,7 +163,7 @@
   color: #fdb813 !important;
 }
 
-/* Brand logo sizing */
+/* Brand logo sizing and text colour */
 .navbar-brand img {
   height: 60px !important;
 }
@@ -160,7 +171,7 @@
 .navbar-brand .brand-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #005aab;
 }
 
 /* Section styling for dark areas */
