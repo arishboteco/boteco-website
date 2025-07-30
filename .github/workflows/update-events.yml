@@ -18,7 +18,7 @@ jobs:
           python-version: '3.x'
 
       - name: Generate events.json
-        run: python scripts/generate_events.py
+        run: python scripts/generate_events_json.py
 
       - name: Commit and push changes
         run: |
