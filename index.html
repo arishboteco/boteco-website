@@ -174,54 +174,29 @@
 
     <!-- Load events dynamically from the GitHub events directory -->
     <script>
-    // Fetch images from the repository's events folder and build event cards on page load.
+    // Fetch event data from a local cache or the GitHub API and build cards.
     async function loadEvents() {
         const eventsSection = document.getElementById('events');
         const eventsGrid = document.getElementById('events-grid');
         if (!eventsSection || !eventsGrid) return;
-        try {
-            const apiUrl = 'https://api.github.com/repos/arishboteco/boteco-website/contents/assets/events?ref=main';
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error('Network response was not ok');
-            const files = await response.json();
-            // Filter image files (jpg, jpeg, png, webp)
-            const imageFiles = files.filter(item => item.type === 'file' && /\.(png|jpe?g|webp)$/i.test(item.name));
-            // If no images, hide the entire events section
-            if (imageFiles.length === 0) {
-                eventsSection.style.display = 'none';
+
+        const renderEvents = (events) => {
+            if (!events || events.length === 0) {
+                eventsGrid.innerHTML = '<p class="text-center w-100">No upcoming events</p>';
                 return;
             }
-            // Build cards for each event image
             eventsGrid.innerHTML = '';
-            imageFiles.forEach(file => {
-                // Remove the extension and split by hyphen
-                const baseName = file.name.replace(/\.[^.]+$/, '');
-                const parts = baseName.split('-');
-                // Expect YYYY-MM-DD-Event-Name, parse date and title
-                let year = parts[0];
-                let month = parts[1];
-                let day = parts[2];
-                let titleParts = parts.slice(3);
-                // If not enough parts, skip this file
-                if (!year || !month || !day || titleParts.length === 0) return;
-                const isoDate = `${year}-${month}-${day}`;
-                // Create a human‑friendly date string, e.g. "August 10"
-                let dateString;
-                try {
-                    const dateObj = new Date(isoDate);
-                    dateString = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-                } catch (e) {
-                    dateString = isoDate;
-                }
-                // Convert remaining parts to a title (replace underscores with spaces)
-                const title = titleParts.join(' ').replace(/_/g, ' ');
-                // Create the card element
+            events.forEach(evt => {
+                const dateObj = new Date(evt.date);
+                const dateString = isNaN(dateObj)
+                    ? evt.date
+                    : dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
                 const cardHtml = `
                     <div class="col-md-4">
                         <div class="card event-card h-100">
-                            <img src="${file.download_url}" class="card-img-top" alt="${title}">
+                            <img src="assets/events/${evt.image}" class="card-img-top" alt="${evt.title}">
                             <div class="card-body">
-                                <h5 class="card-title">${title}</h5>
+                                <h5 class="card-title">${evt.title}</h5>
                                 <p class="card-text">${dateString}</p>
                             </div>
                         </div>
@@ -229,10 +204,47 @@
                 `;
                 eventsGrid.insertAdjacentHTML('beforeend', cardHtml);
             });
+        };
+
+        // Attempt to load cached events first
+        try {
+            const localRes = await fetch('assets/events/events.json');
+            if (localRes.ok) {
+                const cachedEvents = await localRes.json();
+                if (Array.isArray(cachedEvents) && cachedEvents.length > 0) {
+                    renderEvents(cachedEvents);
+                    return; // Skip API call when cache is available
+                }
+            }
+        } catch (e) {
+            console.warn('Could not load local events cache:', e);
+        }
+
+        // Fallback to GitHub API
+        try {
+            const apiUrl = 'https://api.github.com/repos/arishboteco/boteco-website/contents/assets/events?ref=main';
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const files = await response.json();
+            const imageFiles = files.filter(item => item.type === 'file' && /\.(png|jpe?g|webp)$/i.test(item.name));
+            if (imageFiles.length === 0) {
+                renderEvents([]);
+                return;
+            }
+            const events = imageFiles.map(file => {
+                const baseName = file.name.replace(/\.[^.]+$/, '');
+                const parts = baseName.split('-');
+                if (parts.length < 4) return null;
+                const [year, month, day, ...titleParts] = parts;
+                if (!year || !month || !day || titleParts.length === 0) return null;
+                const isoDate = `${year}-${month}-${day}`;
+                const title = titleParts.join(' ').replace(/_/g, ' ');
+                return { date: isoDate, title, image: file.name };
+            }).filter(Boolean);
+            renderEvents(events);
         } catch (error) {
             console.error('Error loading events:', error);
-            // Hide section on error
-            eventsSection.style.display = 'none';
+            renderEvents([]); // Show friendly message
         }
     }
     document.addEventListener('DOMContentLoaded', loadEvents);
