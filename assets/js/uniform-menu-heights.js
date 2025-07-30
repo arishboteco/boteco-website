@@ -16,8 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   images.forEach(img => {
     const applyHeight = () => {
-      if (img.naturalHeight > 0) {
-        minHeight = Math.min(minHeight, img.naturalHeight);
+      // Use the rendered height after layout so all cards scale
+      // relative to their displayed size rather than the image's
+      // intrinsic dimensions. Fallback to naturalHeight if the
+      // element isn't rendered yet.
+      const rendered = img.clientHeight || img.naturalHeight;
+      if (rendered > 0) {
+        minHeight = Math.min(minHeight, rendered);
       }
       loaded++;
       checkDone();
