@@ -8,9 +8,6 @@
  * definitions in your current CSS to avoid conflicts.
 */
 
-:root {
-  --navbar-logo-max-height: 120px;
-}
 
 /* Palette reference:
  * Primary (dark blue):  #005aab
@@ -296,10 +293,4 @@ footer a:hover {
   background: rgba(0, 0, 0, 0.45);
   /* Layer the overlay above the video */
   z-index: 1;
-}
-
-@media (max-width: 768px) {
-  :root {
-    --navbar-logo-max-height: 80px;
-  }
 }

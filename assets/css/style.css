@@ -72,8 +72,8 @@
 }
 
 /* Enlarge logo and brand text for a more prominent header */
-/* Force larger logo height in navbar. Use !important to override
-   any inline styles that may be present on the <img> element. */
+/* Use max-height with a CSS variable so the logo scales responsively
+   and still overrides any inline height styles on the <img> element. */
 .navbar-brand img {
     /* Enlarged for better visibility */
     max-height: var(--navbar-logo-max-height) !important;
