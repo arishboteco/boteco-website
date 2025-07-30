@@ -164,17 +164,10 @@
   color: #fdb813 !important;
 }
 
-/* Brand logo sizing and text colour */
-.navbar-brand img {
-  /* Increase logo size for better visibility */
-  max-height: var(--navbar-logo-max-height) !important;
-  height: auto;
-}
-
-.navbar-brand .brand-name {
-  /* Hide the brand name text next to the logo to declutter the header */
-  display: none;
-}
+/* Brand logo and brand text sizing
+ * Duplicate rules removed to avoid conflicts with style.css.
+ * The logo size is controlled via the --navbar-logo-max-height variable
+ * declared in the main stylesheet. */
 
 /* Section styling for dark areas */
 /* Section styling – lighten backgrounds for a more airy look while

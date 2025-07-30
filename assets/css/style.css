@@ -79,10 +79,6 @@
     max-height: var(--navbar-logo-max-height) !important;
     height: auto;
 }
-.navbar-brand .brand-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
 
 /* Dark section styling */
 .section-dark {
