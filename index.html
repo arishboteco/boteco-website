@@ -31,21 +31,23 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
+                <!-- Larger logo; text removed for a cleaner header -->
                 <img src="assets/images/logo.png" alt="Boteco Logo" class="me-2">
-                <span class="ms-1 brand-name">Boteco – Restaurante Brasileiro</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+                <!-- Align the menu items to the left on larger screens -->
+                <ul class="navbar-nav me-auto align-items-lg-center">
                     <!-- Navigate to the About section which introduces the restaurant -->
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <!-- Primary navigation items -->
                     <li class="nav-item"><a class="nav-link" href="#menus">Menus</a></li>
                     <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
                     <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <!-- Link to party/event enquiry form -->
+                    <li class="nav-item"><a class="nav-link" href="#partyenquiry">Party&nbsp;Booking</a></li>
                     <!-- Call‑to‑action button for reservations -->
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-primary px-4 py-2" href="#booking">Book&nbsp;Now</a>
@@ -55,11 +57,16 @@
         </div>
     </nav>
 
-    <!-- Hero Section: uses a high‑quality photo of Brazilian cuisine as the background.
-         A centred heading, subheading and call‑to‑action invite guests to book a table.
-         The section occupies most of the viewport height for an immersive welcome. -->
-    <section class="hero-section d-flex align-items-center text-center">
-        <div class="container">
+    <!-- Hero Section: plays a looping hero.mp4 video behind the call‑to‑action.
+         A semi‑transparent overlay darkens the video for readability. -->
+    <section class="hero-section d-flex align-items-center text-center position-relative">
+        <!-- Video background playing behind the call‑to‑action. Muted and looped for a seamless effect. -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/videos/hero.mp4" type="video/mp4">
+        </video>
+        <!-- Semi‑transparent overlay to improve text contrast -->
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
             <h1 class="display-4 fw-bold text-white mb-3">Bringing Brazil to Bengaluru</h1>
             <p class="lead text-white-50 mb-4">Experience authentic Brazilian flavours and culture right here.</p>
             <a href="#booking" class="btn btn-lg btn-primary px-4">Reserve Your Table</a>
@@ -145,28 +152,14 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-5 section-dark">
+    <!-- Party Enquiry Section (Google Form) -->
+    <section id="partyenquiry" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4">Party Enquiries</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form action="https://formsubmit.co/your-email@example.com" method="POST">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </form>
-                </div>
+            <h2 class="text-center mb-4">Party / Event Enquiries</h2>
+            <!-- Embed your Google Form here. Replace the src URL with your actual Google form URL. -->
+            <div class="ratio ratio-16x9">
+                <iframe src="YOUR_GOOGLE_FORM_URL"
+                        title="Party Enquiry Form" frameborder="0" allowfullscreen style="width: 100%; height: 100%;"></iframe>
             </div>
         </div>
     </section>
