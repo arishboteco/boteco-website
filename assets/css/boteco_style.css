@@ -383,3 +383,18 @@ footer a:hover {
     height: 40px;
   }
 }
+
+/* About section info tiles */
+.about-tile {
+  background-color: #f7f8fc;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.about-tile .h5 {
+  color: #005aab;
+}
+
+.about-tile p {
+  color: #545454;
+}
