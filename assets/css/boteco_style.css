@@ -364,3 +364,19 @@ footer a:hover {
   font-size: 1rem;
   margin: 0 0.5rem;
 }
+
+/* Header awards */
+.header-awards {
+  gap: 0.5rem;
+}
+
+.header-awards img {
+  height: 40px;
+  width: auto;
+}
+
+@media (max-width: 767.98px) {
+  .header-awards img {
+    height: 30px;
+  }
+}
