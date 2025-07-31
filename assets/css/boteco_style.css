@@ -365,6 +365,13 @@ footer a:hover {
   margin: 0 0.5rem;
 }
 
+/* Allow pinch zoom within menu carousels on mobile */
+#foodMenuCarousel,
+#barMenuCarousel,
+#specialsMenuCarousel {
+  touch-action: auto;
+}
+
 /* Header awards */
 /* Display awards inline and slightly larger */
 .header-awards {
