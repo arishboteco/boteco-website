@@ -323,12 +323,10 @@ footer a:hover {
 }
 
 .menu-gallery .image-counter {
-  background-color: rgba(255, 255, 255, 0.7);
-  color: #005aab;
+  color: #000;
   font-weight: 600;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  margin: 0 0.5rem;
 }
 
 .menu-gallery .menu-title {
