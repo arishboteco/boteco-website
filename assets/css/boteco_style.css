@@ -14,6 +14,9 @@
  * Accent 2 (teal):      #54c5d0
  * Accent 3 (green):     #a2d06e
  */
+body { font-family: 'Fraunces', serif; }
+h1, h2, h3, .brand-name { font-family: 'Fraunces', serif; }
+
 
 
 .hero-section .container {

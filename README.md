@@ -45,3 +45,7 @@ displays images stored in `assets/menus/` following the naming pattern
 `<menu-name>-pg#.jpg` (for example, `food-menu-pg1.jpg`). All menu pages load
 these images automatically, so simply add or remove files and they will appear
 in their respective galleries.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
