@@ -78,6 +78,25 @@ h1, h2, h3, .brand-name { font-family: 'Fraunces', serif; }
   object-fit: contain;
 }
 
+/* Contact section styling */
+.contact-section {
+  background-color: #f7f8fc;
+  color: #1a1a1a;
+}
+
+.contact-section h2 {
+  color: #005aab;
+}
+
+.contact-info a {
+  color: #005aab;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
 
 /* Announcement bar uses the primary colour */
 .announcement-bar {
