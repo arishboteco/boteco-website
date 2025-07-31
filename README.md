@@ -2,6 +2,10 @@
 
 This repository contains the static files for the Boteco restaurant website.
 
+## Security
+
+External CDN resources are loaded with [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) attributes to ensure the assets have not been tampered with. Event titles are inserted using the DOM API to prevent cross-site scripting.
+
 ## Updating Events
 
 Event cards on the homepage are built from images in `assets/events/`.

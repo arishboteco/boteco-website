@@ -11,11 +11,11 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces&display=swap" rel="stylesheet" integrity="sha384-zEcalnl3zJemSzuIhx6Lp0EdLpnIrzJVIjdRevCLqBM78Wju8L7plXDMKwUyeWYG" crossorigin="anonymous">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous">
     <!-- Consolidated site styles -->
     <!-- Custom color palette derived from logo -->
     <link rel="stylesheet" href="assets/css/boteco_style.css">
@@ -322,18 +322,37 @@
                 const dateString = isNaN(dateObj)
                     ? evt.date
                     : dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-                const cardHtml = `
-                    <div class="col-md-4">
-                        <div class="card event-card h-100">
-                            <img loading="lazy" src="assets/events/${evt.image}" class="card-img-top" alt="${evt.title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${evt.title}</h5>
-                                <p class="card-text">${dateString}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                eventsGrid.insertAdjacentHTML('beforeend', cardHtml);
+
+                const col = document.createElement('div');
+                col.className = 'col-md-4';
+
+                const card = document.createElement('div');
+                card.className = 'card event-card h-100';
+
+                const img = document.createElement('img');
+                img.loading = 'lazy';
+                img.src = `assets/events/${evt.image}`;
+                img.className = 'card-img-top';
+                img.alt = evt.title;
+
+                const body = document.createElement('div');
+                body.className = 'card-body';
+
+                const titleEl = document.createElement('h5');
+                titleEl.className = 'card-title';
+                titleEl.textContent = evt.title;
+
+                const dateEl = document.createElement('p');
+                dateEl.className = 'card-text';
+                dateEl.textContent = dateString;
+
+                body.appendChild(titleEl);
+                body.appendChild(dateEl);
+                card.appendChild(img);
+                card.appendChild(body);
+                col.appendChild(card);
+
+                eventsGrid.appendChild(col);
             });
         };
 
@@ -385,6 +404,6 @@
 
     <script src="assets/js/header.js" defer></script>
     <script src="assets/js/uniform-menu-heights.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></script>
 </body>
 </html>
