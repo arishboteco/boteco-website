@@ -1,18 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- include head -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Boteco is a cosy Brazilian restaurant in Bengaluru offering authentic flavours, signature caipirinhas and live music in a vibrant atmosphere.">
+    <meta property="og:title" content="Boteco – Restaurante Brasileiro">
+    <meta property="og:description" content="Boteco is a cosy Brazilian restaurant in Bengaluru serving authentic dishes, cocktails and live events.">
+    <meta property="og:image" content="assets/images/hero.jpg">
+    <title>Boteco – Restaurante Brasileiro</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Consolidated site styles -->
+    <!-- Custom color palette derived from logo -->
+    <link rel="stylesheet" href="assets/css/boteco_style.css">
 </head>
 <body>
    
-    <!-- include header -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <!-- Larger logo; text removed for a cleaner header -->
+                <img loading="lazy" src="assets/images/logo.png" alt="Boteco Logo" class="me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Align the menu items to the left on larger screens -->
+                <ul class="navbar-nav me-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menus">Menus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Upcoming Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#reservationsModal">Reservations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="party-booking.html">Party Bookings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section: plays a looping hero.mp4 video behind the call‑to‑action.
+         A semi‑transparent overlay darkens the video for readability. -->
     <section class="hero-section d-flex align-items-center text-center position-relative">
+        <!-- Video background playing behind the call‑to‑action. Muted and looped for a seamless effect. -->
         <video class="hero-video" autoplay muted loop playsinline poster="assets/images/hero.jpg">
             <source src="assets/videos/hero-video.webm" type="video/webm">
             <source src="assets/videos/hero.mp4" type="video/mp4">
         </video>
+        <!-- Semi‑transparent overlay to improve text contrast -->
         <div class="hero-overlay"></div>
         <div class="container position-relative">
             <p class="lead text-white-50 mb-4">Experience authentic Brazilian flavours and culture right here.</p>
@@ -25,6 +66,7 @@
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
+                    <!-- Placeholder image representing the cosy interior or team; replace with a photo of your restaurant -->
                     <img loading="lazy" src="assets/images/about-placeholder.png" alt="Inside Boteco restaurant" class="img-fluid rounded">
                 </div>
                 <div class="col-lg-6">
@@ -42,7 +84,7 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="menu-card h-100">
-                        <a href="food-menu.html">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#foodMenuModal">
                             <img loading="lazy" src="assets/images/food-placeholder.png" class="card-img-top" alt="Delicious dishes">
                         </a>
                         <div class="p-3">
@@ -53,7 +95,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="menu-card h-100">
-                        <a href="bar-menu.html">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#barMenuModal">
                             <img loading="lazy" src="assets/images/drinks-placeholder.png" class="card-img-top" alt="Signature drinks">
                         </a>
                         <div class="p-3">
@@ -64,7 +106,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="menu-card h-100">
-                        <a href="specials-menu.html">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#specialsMenuModal">
                             <img loading="lazy" src="assets/images/specials-placeholder.png" class="card-img-top" alt="Chef's specials">
                         </a>
                         <div class="p-3">
@@ -76,6 +118,145 @@
             </div>
         </div>
     </section>
+
+    <!-- Food Menu Modal -->
+    <div class="modal fade" id="foodMenuModal" tabindex="-1" aria-labelledby="foodMenuLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="foodMenuLabel">Food Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="foodMenuCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img loading="lazy" src="assets/menus/food-menu-pg1.jpg" class="d-block w-100" alt="Food Menu page 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg2.jpg" class="d-block w-100" alt="Food Menu page 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg3.jpg" class="d-block w-100" alt="Food Menu page 3">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg4.jpg" class="d-block w-100" alt="Food Menu page 4">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg5.jpg" class="d-block w-100" alt="Food Menu page 5">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg6.jpg" class="d-block w-100" alt="Food Menu page 6">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg7.jpg" class="d-block w-100" alt="Food Menu page 7">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg8.jpg" class="d-block w-100" alt="Food Menu page 8">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg9.jpg" class="d-block w-100" alt="Food Menu page 9">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/food-menu-pg10.jpg" class="d-block w-100" alt="Food Menu page 10">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#foodMenuCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#foodMenuCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bar Menu Modal -->
+    <div class="modal fade" id="barMenuModal" tabindex="-1" aria-labelledby="barMenuLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="barMenuLabel">Bar Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="barMenuCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg1.jpg" class="d-block w-100" alt="Bar Menu page 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg2.jpg" class="d-block w-100" alt="Bar Menu page 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg3.jpg" class="d-block w-100" alt="Bar Menu page 3">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg4.jpg" class="d-block w-100" alt="Bar Menu page 4">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg5.jpg" class="d-block w-100" alt="Bar Menu page 5">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg6.jpg" class="d-block w-100" alt="Bar Menu page 6">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg7.jpg" class="d-block w-100" alt="Bar Menu page 7">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg8.jpg" class="d-block w-100" alt="Bar Menu page 8">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg9.jpg" class="d-block w-100" alt="Bar Menu page 9">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg10.jpg" class="d-block w-100" alt="Bar Menu page 10">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg11.jpg" class="d-block w-100" alt="Bar Menu page 11">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg12.jpg" class="d-block w-100" alt="Bar Menu page 12">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg13.jpg" class="d-block w-100" alt="Bar Menu page 13">
+                            </div>
+                            <div class="carousel-item">
+                                <img loading="lazy" src="assets/menus/bar-menu-pg14.jpg" class="d-block w-100" alt="Bar Menu page 14">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#barMenuCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#barMenuCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specials Menu Modal -->
+    <div class="modal fade" id="specialsMenuModal" tabindex="-1" aria-labelledby="specialsMenuLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="specialsMenuLabel">Specials Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Specials menu coming soon.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Reservations Modal -->
     <div class="modal fade" id="reservationsModal" tabindex="-1" aria-labelledby="reservationsModalLabel" aria-hidden="true">
@@ -96,13 +277,99 @@
     <section id="events" class="py-5 events-section">
         <div class="container">
             <h2 class="text-center mb-4">Upcoming Events</h2>
-            <!--- Events will be rendered here by build.js -->
+            <!-- Dynamic events grid: cards will be inserted here via JavaScript -->
             <div id="events-grid" class="row g-4">
-                <!-- events -->
+                <!-- If no events images are present, this grid will remain empty and the section will be hidden -->
             </div>
         </div>
     </section>
 
-    <!-- include footer -->
+
+    <!-- Load events dynamically from the GitHub events directory -->
+    <script>
+    // Fetch event data from a local cache or the GitHub API and build cards.
+    async function loadEvents() {
+        const eventsSection = document.getElementById('events');
+        const eventsGrid = document.getElementById('events-grid');
+        if (!eventsSection || !eventsGrid) return;
+
+        const sortByDate = (arr) =>
+            arr.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        const renderEvents = (events) => {
+            if (!events || events.length === 0) {
+                eventsGrid.innerHTML = '<p class="text-center w-100">No upcoming events</p>';
+                return;
+            }
+            eventsGrid.innerHTML = '';
+            events.forEach(evt => {
+                const dateObj = new Date(evt.date);
+                const dateString = isNaN(dateObj)
+                    ? evt.date
+                    : dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+                const cardHtml = `
+                    <div class="col-md-4">
+                        <div class="card event-card h-100">
+                            <img loading="lazy" src="assets/events/${evt.image}" class="card-img-top" alt="${evt.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${evt.title}</h5>
+                                <p class="card-text">${dateString}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                eventsGrid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        };
+
+        // Attempt to load cached events first
+        try {
+            const localRes = await fetch('assets/events/events.json');
+            if (localRes.ok) {
+                const cachedEvents = await localRes.json();
+                if (Array.isArray(cachedEvents) && cachedEvents.length > 0) {
+                    const sorted = sortByDate(cachedEvents);
+                    renderEvents(sorted);
+                    return; // Skip API call when cache is available
+                }
+            }
+        } catch (e) {
+            console.warn('Could not load local events cache:', e);
+        }
+
+        // Fallback to GitHub API
+        try {
+            const apiUrl = 'https://api.github.com/repos/arishboteco/boteco-website/contents/assets/events?ref=main';
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const files = await response.json();
+            const imageFiles = files.filter(item => item.type === 'file' && /\.(png|jpe?g|webp)$/i.test(item.name));
+            if (imageFiles.length === 0) {
+                renderEvents([]);
+                return;
+            }
+            const events = imageFiles.map(file => {
+                const baseName = file.name.replace(/\.[^.]+$/, '');
+                const parts = baseName.split('-');
+                if (parts.length < 4) return null;
+                const [year, month, day, ...titleParts] = parts;
+                if (!year || !month || !day || titleParts.length === 0) return null;
+                const isoDate = `${year}-${month}-${day}`;
+                const title = titleParts.join(' ').replace(/_/g, ' ');
+                return { date: isoDate, title, image: file.name };
+            }).filter(Boolean);
+            const sortedEvents = sortByDate(events);
+            renderEvents(sortedEvents);
+        } catch (error) {
+            console.error('Error loading events:', error);
+            renderEvents([]); // Show friendly message
+        }
+    }
+    document.addEventListener('DOMContentLoaded', loadEvents);
+    </script>
+
+    <script src="assets/js/header.js" defer></script>
+    <script src="assets/js/uniform-menu-heights.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>
