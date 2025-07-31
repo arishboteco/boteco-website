@@ -6,13 +6,14 @@ import re
 from pathlib import Path
 
 EVENT_DIR = Path(__file__).resolve().parents[1] / "assets" / "events"
+DATA_DIR = Path(__file__).resolve().parents[1] / "_data"
 PATTERN = re.compile(r"(?P<date>\d{4}-\d{2}-\d{2})-(?P<title>.+?)\.(?:jpg|png|webp)$", re.IGNORECASE)
 
 
 def parse_events():
     events = []
     for path in sorted(EVENT_DIR.iterdir()):
-        if not path.is_file() or path.name == "events.json":
+        if not path.is_file() or path.name.endswith(".json"):
             continue
         m = PATTERN.match(path.name)
         if not m:
@@ -25,7 +26,7 @@ def parse_events():
 
 def main() -> None:
     events = parse_events()
-    out_file = EVENT_DIR / "events.json"
+    out_file = DATA_DIR / "events.json"
     with out_file.open("w", encoding="utf-8") as f:
         json.dump(events, f, indent=2)
         f.write("\n")
