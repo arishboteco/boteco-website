@@ -68,7 +68,7 @@ h1, h2, h3, .brand-name { font-family: 'Fraunces', serif; }
 }
 
 .event-card .card-text {
-  color: #54c5d0;
+  color: #2d8c97;
   font-weight: 500;
 }
 
@@ -88,22 +88,21 @@ h1, h2, h3, .brand-name { font-family: 'Fraunces', serif; }
 
 /* Navigation bar styling */
 /*
- * Make the navigation bar semi‑transparent so it floats over the hero
- * content without dominating it. A slight blur improves readability
- * against busy backgrounds. On scroll, Bootstrap’s fixed‑top class will
- * keep it at the top of the viewport.
+ * The navigation bar uses a light background so the dark blue links and
+ * logo remain readable against the hero video. A subtle blur and shadow
+ * maintain separation from page content while it stays fixed at the
+ * top of the viewport.
  */
 /* Navigation bar styling
  *
  * To make the logo and menu items more prominent, the navigation bar
- * uses a semi‑transparent white background with a slight blur and
+ * uses a solid light background (#f7f8fc) with a slight blur and
  * subtle shadow. Dark blue text (our primary colour) ensures good
- * contrast against the light background, while hover states use the
- * golden accent. Adjust the opacity to taste – higher values make the
- * bar more opaque.
+ * contrast against the background, while hover states use the golden
+ * accent.
  */
 .navbar {
-  background-color: rgba(253, 184, 19, 0.6) !important;
+  background-color: #f7f8fc !important;
   backdrop-filter: blur(6px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   padding-top: 0 !important;   /* Keep header height equal to the logo */
@@ -154,14 +153,14 @@ h1, h2, h3, .brand-name { font-family: 'Fraunces', serif; }
 .btn-primary {
   background-color: #fdb813;
   border-color:    #fdb813;
-  color: #005aab;
+  color: #003560;
   font-weight: 600;
 }
 
 .btn-primary:hover {
   background-color: #d89a0f;
   border-color:    #d89a0f;
-  color: #fff;
+  color: #003560;
 }
 
 /* Form controls – subtle outline using teal accent */
@@ -193,7 +192,7 @@ textarea.form-control:focus {
 }
 
 .event-date {
-  color: #54c5d0;
+  color: #2d8c97;
   font-weight: 500;
 }
 
@@ -205,12 +204,12 @@ footer {
 }
 
 footer a {
-  color: #fdb813;
+  color: #fee1ab;
   text-decoration: none;
 }
 
 footer a:hover {
-  color: #54c5d0;
+  color: #ffffff;
   text-decoration: underline;
 }
 
