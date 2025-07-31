@@ -28,12 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    const cache = images.map(src => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
+
     let index = 0;
     const update = () => {
-      imgEl.src = images[index];
-      counterEl.textContent = `${index + 1} / ${images.length}`;
-      prevBtn.disabled = index === 0;
-      nextBtn.disabled = index === images.length - 1;
+      const cached = cache[index];
+      const show = () => {
+        imgEl.src = cached.src;
+        counterEl.textContent = `${index + 1} / ${images.length}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === images.length - 1;
+        requestAnimationFrame(() => { imgEl.style.opacity = 1; });
+      };
+
+      imgEl.style.opacity = 0;
+      if (cached.complete) {
+        show();
+      } else {
+        cached.addEventListener('load', show, { once: true });
+      }
     };
 
     prevBtn.addEventListener('click', () => {
