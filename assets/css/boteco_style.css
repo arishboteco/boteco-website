@@ -14,8 +14,20 @@
  * Accent 2 (teal):      #54c5d0
  * Accent 3 (green):     #a2d06e
  */
-body { font-family: 'Fraunces', serif; }
-h1, h2, h3, .brand-name { font-family: 'Fraunces', serif; }
+/* Try to load a custom font from assets/fonts/ first.  If the files
+ * `boteco-font.woff2` or `boteco-font.woff` are not present the rule
+ * is ignored and the site falls back to the Fraunces web font. */
+@font-face {
+  font-family: 'BotecoFont';
+  src: url('../fonts/boteco-font.woff2') format('woff2'),
+       url('../fonts/boteco-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body { font-family: 'BotecoFont', 'Fraunces', serif; }
+h1, h2, h3, .brand-name { font-family: 'BotecoFont', 'Fraunces', serif; }
 
 
 

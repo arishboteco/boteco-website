@@ -50,6 +50,13 @@ displays images stored in `assets/menus/` following the naming pattern
 these images automatically, so simply add or remove files and they will appear
 in their respective galleries.
 
+## Custom Fonts
+
+Place your own font files in `assets/fonts/` using the filenames
+`boteco-font.woff2` or `boteco-font.woff`. The stylesheet will try to
+load these files first. If the directory is empty the site falls back to
+the Fraunces typeface served from Google Fonts.
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
