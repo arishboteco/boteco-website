@@ -35,16 +35,18 @@
     </nav>
     <main class="py-5 mt-5">
         <div class="container">
-            <h1 class="text-center mb-4">Bar Menu</h1>
             <div id="barMenuGallery" data-menu-gallery="bar-menu" class="menu-gallery mb-4 text-center">
-                <div class="position-relative d-inline-block">
-                    <button class="prev-btn btn btn-primary position-absolute top-50 start-0 translate-middle-y" style="z-index:2">
+                <div class="d-flex justify-content-center align-items-center mb-3">
+                    <button class="prev-btn btn btn-primary me-3">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <img loading="lazy" class="menu-image img-fluid" src="" alt="Bar Menu">
-                    <button class="next-btn btn btn-primary position-absolute top-50 end-0 translate-middle-y" style="z-index:2">
+                    <h1 class="menu-title mb-0">Bar Menu</h1>
+                    <button class="next-btn btn btn-primary ms-3">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
+                </div>
+                <div class="position-relative d-inline-block">
+                    <img loading="lazy" class="menu-image img-fluid" src="" alt="Bar Menu">
                     <div class="image-counter position-absolute bottom-0 end-0 m-2"></div>
                 </div>
             </div>

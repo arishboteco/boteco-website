@@ -67,6 +67,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    let touchStartX = null;
+    wrapper.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+      }
+    });
+
+    wrapper.addEventListener('touchend', (e) => {
+      if (touchStartX === null || e.changedTouches.length !== 1) return;
+      const diff = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(diff) > 50) {
+        if (diff < 0 && index < images.length - 1) {
+          index++;
+          update();
+        } else if (diff > 0 && index > 0) {
+          index--;
+          update();
+        }
+      }
+    });
+
     update();
   });
 });
