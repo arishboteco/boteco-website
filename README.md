@@ -52,10 +52,11 @@ in their respective galleries.
 
 ## Custom Fonts
 
-Place your own font files in `assets/fonts/` using the filenames
-`boteco-font.woff2` or `boteco-font.woff`. The stylesheet will try to
-load these files first. If the directory is empty the site falls back to
-the Fraunces typeface served from Google Fonts.
+Place your own font file(s) in `assets/fonts/` using the original file
+name and extension of the downloaded font. For example,
+`Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf`. Update the CSS
+`@font-face` rule to reference this file. If the directory is empty the
+site falls back to the Fraunces typeface served from Google Fonts.
 
 ## License
 
