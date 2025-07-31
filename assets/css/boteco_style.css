@@ -14,13 +14,15 @@
  * Accent 2 (teal):      #54c5d0
  * Accent 3 (green):     #a2d06e
  */
-/* Try to load a custom font from assets/fonts/ first.  If the files
- * `boteco-font.woff2` or `boteco-font.woff` are not present the rule
- * is ignored and the site falls back to the Fraunces web font. */
+/* Try to load a custom font from assets/fonts/ first. Use the font's
+ * original filename and format, for example
+ * `Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf`. If the file is not
+ * present the rule is ignored and the site falls back to the Fraunces
+ * web font. */
 @font-face {
   font-family: 'BotecoFont';
-  src: url('../fonts/boteco-font.woff2') format('woff2'),
-       url('../fonts/boteco-font.woff') format('woff');
+  src: url('../fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf')
+       format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
