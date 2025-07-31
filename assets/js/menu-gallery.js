@@ -11,13 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const imgs = [];
       for (let i = 1; i <= 50; i++) {
         const url = `assets/menus/${menu}-pg${i}.jpg`;
-        try {
-          const res = await fetch(url, { method: 'HEAD' });
-          if (!res.ok) break;
-          imgs.push(url);
-        } catch (e) {
-          break;
-        }
+        const exists = await new Promise(res => {
+          const img = new Image();
+          img.onload = () => res(true);
+          img.onerror = () => res(false);
+          img.src = url;
+        });
+        if (!exists) break;
+        imgs.push(url);
       }
       return imgs;
     }
