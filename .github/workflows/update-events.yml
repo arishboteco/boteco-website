@@ -24,8 +24,8 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          if git status --porcelain | grep 'events.json'; then
-            git add assets/events/events.json
+          if git status --porcelain | grep '_data/events.json'; then
+            git add _data/events.json
             git commit -m 'chore: update events.json'
             git push
           else
