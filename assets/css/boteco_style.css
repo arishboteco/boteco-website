@@ -366,17 +366,20 @@ footer a:hover {
 }
 
 /* Header awards */
+/* Display awards inline and slightly larger */
 .header-awards {
+  display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .header-awards img {
-  height: 40px;
+  height: 60px;
   width: auto;
 }
 
 @media (max-width: 767.98px) {
   .header-awards img {
-    height: 30px;
+    height: 40px;
   }
 }
