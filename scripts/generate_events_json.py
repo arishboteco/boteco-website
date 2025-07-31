@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 EVENT_DIR = Path(__file__).resolve().parents[1] / "assets" / "events"
-PATTERN = re.compile(r"(?P<date>\d{4}-\d{2}-\d{2})-(?P<title>.+?)\.(?:jpg|png|webp)", re.IGNORECASE)
+PATTERN = re.compile(r"(?P<date>\d{4}-\d{2}-\d{2})-(?P<title>.+?)\.(?:jpg|png|webp)$", re.IGNORECASE)
 
 
 def parse_events():
