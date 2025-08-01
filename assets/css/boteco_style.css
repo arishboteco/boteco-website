@@ -381,13 +381,14 @@ footer a:hover {
 }
 
 .header-awards img {
-  height: 60px;
-  width: auto;
+  height: 24px;
+  width: 24px;
 }
 
 @media (max-width: 767.98px) {
   .header-awards img {
-    height: 40px;
+    height: 24px;
+    width: 24px;
   }
 }
 
