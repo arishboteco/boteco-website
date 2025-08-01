@@ -22,14 +22,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var awardsContainer = document.getElementById('header-awards');
   if (awardsContainer) {
-    for (var i = 1; i <= 10; i++) {
+    awardsContainer.style.display = 'flex';
+    awardsContainer.style.gap = '12px';
+
+    var socialLinks = [
+      {
+        href: 'https://www.instagram.com/boteco_india/?hl=en',
+        icon: 'instagram',
+        alt: 'Instagram'
+      },
+      {
+        href: 'https://www.facebook.com/BotecoIndiaa/',
+        icon: 'facebook',
+        alt: 'Facebook'
+      },
+      {
+        href:
+          'https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-1-mg-road-bangalore',
+        icon: 'zomato',
+        alt: 'Zomato'
+      },
+      {
+        href: 'https://share.google/NarMPlfSI9EkznbtY',
+        icon: 'googlemaps',
+        alt: 'Google Maps'
+      }
+    ];
+
+    socialLinks.forEach(function (link) {
+      var a = document.createElement('a');
+      a.href = link.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+
       var img = new Image();
-      img.src = 'assets/images/award-header-' + i + '.jpg';
-      img.alt = 'Award ' + i;
-      img.loading = 'lazy';
-      img.className = 'award-img';
-      img.onerror = function () { this.remove(); };
-      awardsContainer.appendChild(img);
-    }
+      img.src =
+        'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/' +
+        link.icon +
+        '.svg';
+      img.alt = link.alt;
+      img.width = 24;
+      img.height = 24;
+
+      a.appendChild(img);
+      awardsContainer.appendChild(a);
+    });
   }
 });
