@@ -3,6 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   galleries.forEach(async (wrapper) => {
     const menu = wrapper.dataset.menuGallery;
     const imgEl = wrapper.querySelector('.menu-image');
+    const container = imgEl.parentElement;
+    const overlay = imgEl.cloneNode();
+    overlay.style.position = 'absolute';
+    overlay.style.inset = '0';
+    overlay.style.opacity = 0;
+    overlay.style.pointerEvents = 'none';
+    imgEl.style.pointerEvents = 'none';
+    container.style.position = 'relative';
+    container.appendChild(overlay);
+    let activeImg = imgEl;
+    let hiddenImg = overlay;
     const counterEl = wrapper.querySelector('.image-counter');
     const prevBtn = wrapper.querySelector('.prev-btn');
     const nextBtn = wrapper.querySelector('.next-btn');
@@ -46,14 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const update = () => {
       const cached = cache[index];
       const show = () => {
-        imgEl.src = cached.src;
+        hiddenImg.src = cached.src;
         counterEl.textContent = `${index + 1} / ${images.length}`;
         prevBtn.disabled = index === 0;
         nextBtn.disabled = index === images.length - 1;
-        requestAnimationFrame(() => { imgEl.style.opacity = 1; });
+        requestAnimationFrame(() => {
+          activeImg.style.opacity = 0;
+          hiddenImg.style.opacity = 1;
+        });
+        const tmp = activeImg;
+        activeImg = hiddenImg;
+        hiddenImg = tmp;
       };
 
-      imgEl.style.opacity = 0;
       if (cached.complete) {
         show();
       } else {
@@ -75,27 +91,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    let touchStartX = null;
-    wrapper.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 1) {
-        touchStartX = e.touches[0].clientX;
+    let startX = null;
+    wrapper.addEventListener('pointerdown', (e) => {
+      startX = e.clientX;
+    });
+
+    wrapper.addEventListener('pointermove', (e) => {
+      if (startX === null) return;
+      const diff = e.clientX - startX;
+      if (diff > 50 && index > 0) {
+        index--;
+        startX = e.clientX;
+        update();
+      } else if (diff < -50 && index < images.length - 1) {
+        index++;
+        startX = e.clientX;
+        update();
       }
     });
 
-    wrapper.addEventListener('touchend', (e) => {
-      if (touchStartX === null || e.changedTouches.length !== 1) return;
-      const diff = e.changedTouches[0].clientX - touchStartX;
-      touchStartX = null;
-      if (Math.abs(diff) > 50) {
-        if (diff < 0 && index < images.length - 1) {
-          index++;
-          update();
-        } else if (diff > 0 && index > 0) {
-          index--;
-          update();
-        }
-      }
-    });
+    wrapper.addEventListener('pointerup', () => { startX = null; });
+    wrapper.addEventListener('pointercancel', () => { startX = null; });
 
     update();
   });
