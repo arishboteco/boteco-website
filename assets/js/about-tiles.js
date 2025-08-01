@@ -17,7 +17,7 @@
           img.remove();
           return;
         }
-        img.src = 'assets/images/about-us-tile' + i + exts[extIndex++];
+        img.src = 'assets/images/about/about-us-tile' + i + exts[extIndex++];
       }
       img.onerror = loadNext;
       loadNext();
