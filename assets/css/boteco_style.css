@@ -405,3 +405,11 @@ footer a:hover {
 .about-tile p {
   color: #545454;
 }
+
+/* About section image grid */
+.about-photo-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
