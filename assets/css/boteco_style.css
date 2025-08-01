@@ -384,13 +384,20 @@ footer a:hover {
   align-items: center;
 }
 
-.header-awards img {
+.header-awards .social-icon svg {
   height: 24px;
   width: 24px;
+  fill: currentColor;
+  color: #005aab;
+  transition: color 0.3s ease;
+}
+
+.header-awards .social-icon:hover svg {
+  color: var(--hover-color);
 }
 
 @media (max-width: 767.98px) {
-  .header-awards img {
+  .header-awards .social-icon svg {
     height: 24px;
     width: 24px;
   }

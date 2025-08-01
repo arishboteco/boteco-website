@@ -43,23 +43,27 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         href: 'https://www.instagram.com/boteco_india/?hl=en',
         icon: 'instagram',
-        alt: 'Instagram'
+        alt: 'Instagram',
+        color: '#FF0069'
       },
       {
         href: 'https://www.facebook.com/BotecoIndiaa/',
         icon: 'facebook',
-        alt: 'Facebook'
+        alt: 'Facebook',
+        color: '#0866FF'
       },
       {
         href:
           'https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-1-mg-road-bangalore',
         icon: 'zomato',
-        alt: 'Zomato'
+        alt: 'Zomato',
+        color: '#E23744'
       },
       {
         href: 'https://share.google/NarMPlfSI9EkznbtY',
         icon: 'googlemaps',
-        alt: 'Google Maps'
+        alt: 'Google Maps',
+        color: '#4285F4'
       }
     ];
 
@@ -69,16 +73,17 @@ document.addEventListener('DOMContentLoaded', function () {
       a.target = '_blank';
       a.rel = 'noopener';
 
-      var img = new Image();
-      img.src =
-        'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/' +
-        link.icon +
-        '.svg';
-      img.alt = link.alt;
-      img.width = 24;
-      img.height = 24;
+      a.classList.add('social-icon', link.icon);
+      a.style.setProperty('--hover-color', link.color);
 
-      a.appendChild(img);
+      fetch('assets/icons/' + link.icon + '.svg')
+        .then(function (res) {
+          return res.text();
+        })
+        .then(function (svg) {
+          a.innerHTML = svg;
+        });
+
       awardsContainer.appendChild(a);
     });
   }
