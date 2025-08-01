@@ -8,17 +8,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = wrapper.querySelector('.next-btn');
 
     async function fetchImages() {
-      const imgs = [];
-      for (let i = 1; i <= 50; i++) {
-        const url = `assets/menus/${menu}-pg${i}.jpg`;
-        const exists = await new Promise(res => {
+      const checks = Array.from({ length: 50 }, (_, i) => {
+        const url = `assets/menus/${menu}-pg${i + 1}.jpg`;
+        return new Promise(resolve => {
           const img = new Image();
-          img.onload = () => res(true);
-          img.onerror = () => res(false);
+          img.onload = () => resolve({ url, index: i });
+          img.onerror = () => resolve({ url: null, index: i });
           img.src = url;
         });
-        if (!exists) break;
-        imgs.push(url);
+      });
+
+      const results = await Promise.all(checks);
+      const imgs = [];
+      for (const res of results) {
+        if (res.url) {
+          imgs.push(res.url);
+        } else {
+          break;
+        }
       }
       return imgs;
     }

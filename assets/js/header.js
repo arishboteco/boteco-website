@@ -4,16 +4,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
   navbar.classList.add('navbar-hidden');
   var pointerInTop = false;
+  var scrolledPastTop = false;
+
+  var sentinel = document.createElement('div');
+  sentinel.style.position = 'absolute';
+  sentinel.style.top = 0;
+  sentinel.style.left = 0;
+  sentinel.style.width = '100%';
+  sentinel.style.height = '1px';
+  sentinel.style.pointerEvents = 'none';
+  document.body.prepend(sentinel);
+
+  var observer = new IntersectionObserver(function (entries) {
+    scrolledPastTop = !entries[0].isIntersecting;
+    updateVisibility();
+  });
+  observer.observe(sentinel);
 
   function updateVisibility() {
-    if (window.scrollY > 0 || pointerInTop) {
+    if (scrolledPastTop || pointerInTop) {
       navbar.classList.remove('navbar-hidden');
     } else {
       navbar.classList.add('navbar-hidden');
     }
   }
-
-  window.addEventListener('scroll', updateVisibility);
 
   document.addEventListener('mousemove', function (e) {
     pointerInTop = e.clientY <= 80;
