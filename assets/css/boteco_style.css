@@ -373,7 +373,7 @@ footer a:hover {
 #foodMenuCarousel,
 #barMenuCarousel,
 #specialsMenuCarousel {
-  touch-action: auto;
+  touch-action: pan-y pinch-zoom;
 }
 
 /* Header awards */
