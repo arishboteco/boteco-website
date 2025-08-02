@@ -1,0 +1,39 @@
+name: Convert images to WebP
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'assets/**/*.png'
+      - 'assets/**/*.jpg'
+      - 'assets/**/*.jpeg'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install pillow
+
+      - name: Convert images to WebP
+        run: python scripts/convert_images_to_webp.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          if git status --porcelain | grep '.webp'; then
+            git add assets
+            git commit -m 'chore: convert images to webp'
+            git push
+          else
+            echo 'No images to convert.'
+          fi
