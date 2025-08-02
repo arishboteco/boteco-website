@@ -6,7 +6,10 @@
     "minify:css": "cleancss -o assets/css/boteco_style.min.css assets/css/boteco_style.css",
     "minify:js": "bash -c 'for file in assets/js/*.js; do [[ \"$file\" == *.min.js ]] && continue; uglifyjs \"$file\" -c -m -o \"${file%.js}.min.js\"; done'",
     "build": "npm-run-all minify:css minify:js",
-    "test": "echo \"No tests specified\" && exit 0"
+    "lint:js": "eslint assets/js",
+    "lint:html": "htmlhint \"**/*.html\" --ignore node_modules/**",
+    "lint": "npm-run-all lint:js lint:html",
+    "test": "npm run lint"
   },
   "keywords": [],
   "author": "Boteco",
@@ -14,6 +17,8 @@
   "type": "commonjs",
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
+    "eslint": "^8.57.1",
+    "htmlhint": "^1.6.3",
     "npm-run-all": "^4.1.5",
     "uglify-js": "^3.19.3"
   }
