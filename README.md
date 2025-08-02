@@ -94,14 +94,28 @@ in their respective galleries.
 
 ## Image Optimization
 
-Add images as `.jpg` or `.png` and create faster-loading `.webp` copies with:
+Add images as `.jpg` or `.png` and create faster-loading `.webp` copies locally:
 
 ```bash
 python3 scripts/convert_images_to_webp.py
 ```
 
-Use `--dry-run` to preview conversions without writing files. A GitHub Action
-will also run this script on pushes to ensure WebP versions are committed.
+Generated `.webp` files sit next to the originals but are ignored by Git,
+so run this script before deploying. Use `--dry-run` to preview conversions
+without writing files.
+
+When embedding an image in HTML, wrap it in a `<picture>` element so browsers
+can load the WebP version when supported while still providing a fallback:
+
+```html
+<picture>
+  <source type="image/webp" srcset="assets/images/example.webp">
+  <img src="assets/images/example.jpg" alt="Description" loading="lazy">
+</picture>
+```
+
+Reference the `.webp` filename in the `<source>`; the script will generate that
+file alongside the original image.
 
 ## Custom Fonts
 

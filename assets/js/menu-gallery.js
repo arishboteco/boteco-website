@@ -3,16 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   galleries.forEach(async (wrapper) => {
     const menu = wrapper.dataset.menuGallery;
     const imgEl = wrapper.querySelector('.menu-image');
-    const container = imgEl.parentElement;
-    const overlay = imgEl.cloneNode();
+    const pictureEl = imgEl.closest('picture');
+    const container = pictureEl ? pictureEl.parentElement : imgEl.parentElement;
+    const overlay = pictureEl ? pictureEl.cloneNode(true) : imgEl.cloneNode();
     overlay.style.position = 'absolute';
     overlay.style.inset = '0';
     overlay.style.opacity = 0;
     overlay.style.pointerEvents = 'none';
-    imgEl.style.pointerEvents = 'none';
+    (pictureEl || imgEl).style.pointerEvents = 'none';
     container.style.position = 'relative';
     container.appendChild(overlay);
-    let activeImg = imgEl;
+    let activeImg = pictureEl || imgEl;
     let hiddenImg = overlay;
     const counterEl = wrapper.querySelector('.image-counter');
     const prevBtn = wrapper.querySelector('.prev-btn');
@@ -57,7 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const update = () => {
       const cached = cache[index];
       const show = () => {
-        hiddenImg.src = cached.src;
+        if (pictureEl) {
+          const hiddenSource = hiddenImg.querySelector('source');
+          const hiddenImage = hiddenImg.querySelector('img');
+          hiddenSource.srcset = cached.src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+          hiddenImage.src = cached.src;
+        } else {
+          hiddenImg.src = cached.src;
+        }
         counterEl.textContent = `${index + 1} / ${images.length}`;
         prevBtn.disabled = index === 0;
         nextBtn.disabled = index === images.length - 1;
