@@ -94,7 +94,7 @@ in their respective galleries.
 
 ## Image Optimization
 
-Add images as `.jpg` or `.png` and create faster-loading `.webp` copies with:
+Add images as `.jpg`, `.png`, or `.gif` and create faster-loading `.webp` copies with:
 
 ```bash
 python3 scripts/convert_images_to_webp.py
