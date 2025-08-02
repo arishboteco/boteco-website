@@ -14,6 +14,20 @@
  * Accent 2 (teal):      #54c5d0
  * Accent 3 (green):     #a2d06e
  */
+:root {
+  --color-primary: #005aab;
+  --color-accent-1: #fdb813;
+  --color-accent-1-dark: #d89a0f;
+  --color-primary-dark: #003560;
+  --color-accent-2: #54c5d0;
+  --color-accent-2-dark: #2d8c97;
+  --color-accent-3: #a2d06e;
+  --color-white: #ffffff;
+  --color-black: #000;
+  --color-text-dark: #1a1a1a;
+  --color-text-muted: #545454;
+  --color-bg-light: #f7f8fc;
+}
 /* Try to load a custom font from assets/fonts/ first. Use the font's
  * original filename and format, for example
  * `Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf`. If the file is not
@@ -45,28 +59,28 @@ html {
 
 /* About section styling – neutral background and dark text for readability */
 .about-section {
-  background-color: #ffffff;
-  color: #1a1a1a;
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
 }
 
 /* Menus section styling – light background with cards for each menu */
 .menus-section {
-  background-color: #f7f8fc;
-  color: #1a1a1a;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
 }
 
 .menu-card {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
 }
 
 .menu-card h5 {
-  color: #005aab;
+  color: var(--color-primary);
 }
 
 .menu-card p {
-  color: #545454;
+  color: var(--color-text-muted);
 }
 
 .menu-card img {
@@ -77,17 +91,17 @@ html {
 
 /* Events section styling – white background with card design */
 .events-section {
-  background-color: #ffffff;
-  color: #1a1a1a;
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
 }
 
 .event-card .card-title {
-  color: #005aab;
+  color: var(--color-primary);
   font-weight: 600;
 }
 
 .event-card .card-text {
-  color: #2d8c97;
+  color: var(--color-accent-2-dark);
   font-weight: 500;
 }
 
@@ -99,16 +113,16 @@ html {
 
 /* Contact section styling */
 .contact-section {
-  background-color: #f7f8fc;
-  color: #1a1a1a;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
 }
 
 .contact-section h2 {
-  color: #005aab;
+  color: var(--color-primary);
 }
 
 .contact-info a {
-  color: #005aab;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -119,8 +133,8 @@ html {
 
 /* Announcement bar uses the primary colour */
 .announcement-bar {
-  background-color: #005aab;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   font-size: 0.9rem;
 }
 
@@ -140,7 +154,7 @@ html {
  * accent.
  */
 .navbar {
-  background-color: #f7f8fc !important;
+  background-color: var(--color-bg-light) !important;
   backdrop-filter: blur(6px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   padding-top: 0 !important;   /* Keep header height equal to the logo */
@@ -154,14 +168,14 @@ html {
 
 /* Navigation links – dark blue by default, golden on hover */
 .nav-link {
-  color: #005aab !important;
+  color: var(--color-primary) !important;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #fdb813 !important;
+  color: var(--color-accent-1) !important;
 }
 
 /* Brand logo sizing and text colour */
@@ -177,7 +191,7 @@ html {
 
 /* Mobile navbar toggler – match icon colour with the logo */
 .navbar-dark .navbar-toggler {
-  border-color: #005aab;
+  border-color: var(--color-primary);
 }
 
 .navbar-dark .navbar-toggler-icon {
@@ -188,65 +202,65 @@ html {
 /* Section styling – lighten backgrounds for a more airy look while
    retaining accent colours for headings. */
 .section-dark {
-  background-color: #f7f8fc;
-  color: #1a1a1a;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
 }
 
 .section-dark h2 {
-  color: #005aab;
+  color: var(--color-primary);
 }
 
 /* Button styling – matches the golden accent */
 .btn-primary {
-  background-color: #fdb813;
-  border-color:    #fdb813;
-  color: #003560;
+  background-color: var(--color-accent-1);
+  border-color:    var(--color-accent-1);
+  color: var(--color-primary-dark);
   font-weight: 600;
 }
 
 .btn-primary:hover {
-  background-color: #d89a0f;
-  border-color:    #d89a0f;
-  color: #003560;
+  background-color: var(--color-accent-1-dark);
+  border-color:    var(--color-accent-1-dark);
+  color: var(--color-primary-dark);
 }
 
 /* Form controls – subtle outline using teal accent */
 .form-control,
 .form-select,
 textarea.form-control {
-  border: 1px solid #54c5d0;
+  border: 1px solid var(--color-accent-2);
   border-radius: 0.25rem;
 }
 
 .form-control:focus,
 .form-select:focus,
 textarea.form-control:focus {
-  border-color: #a2d06e;
+  border-color: var(--color-accent-3);
   box-shadow: 0 0 0 0.25rem rgba(165, 208, 110, 0.25);
 }
 
 /* Events section cards */
 .event {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border: none;
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
 }
 
 .event-title {
-  color: #005aab;
+  color: var(--color-primary);
   font-weight: 600;
 }
 
 .event-date {
-  color: #2d8c97;
+  color: var(--color-accent-2-dark);
   font-weight: 500;
 }
 
 /* Footer (if present) */
 footer {
-  background-color: #005aab;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   padding: 1rem 0;
 }
 
@@ -256,7 +270,7 @@ footer a {
 }
 
 footer a:hover {
-  color: #ffffff;
+  color: var(--color-white);
   text-decoration: underline;
 }
 
@@ -265,7 +279,7 @@ footer a:hover {
   width: 100%;
   height: auto;
   object-fit: contain;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
@@ -341,7 +355,7 @@ footer a:hover {
 }
 
 .menu-gallery .image-counter {
-  color: #000;
+  color: var(--color-black);
   font-weight: 600;
   font-size: 1rem;
   margin: 0 0.5rem;
@@ -368,7 +382,7 @@ footer a:hover {
 }
 
 .modal .image-counter {
-  color: #000;
+  color: var(--color-black);
   font-weight: 600;
   font-size: 1rem;
   margin: 0 0.5rem;
@@ -393,7 +407,7 @@ footer a:hover {
   height: 24px;
   width: 24px;
   fill: currentColor;
-  color: #005aab;
+  color: var(--color-primary);
   transition: color 0.3s ease;
 }
 
@@ -410,17 +424,17 @@ footer a:hover {
 
 /* About section info tiles */
 .about-tile {
-  background-color: #f7f8fc;
+  background-color: var(--color-bg-light);
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
 }
 
 .about-tile .h5 {
-  color: #005aab;
+  color: var(--color-primary);
 }
 
 .about-tile p {
-  color: #545454;
+  color: var(--color-text-muted);
 }
 
 /* About section image grid */
