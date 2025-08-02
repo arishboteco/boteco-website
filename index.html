@@ -48,7 +48,10 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <!-- Larger logo; text removed for a cleaner header -->
-                <img loading="lazy" src="assets/images/logos/logo.png" alt="Boteco Logo" class="me-2">
+                <picture>
+                    <source srcset="assets/images/logos/logo.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/logos/logo.png" alt="Boteco Logo" class="me-2">
+                </picture>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -105,12 +108,30 @@
             </div>
             <!-- Grid of photos showcasing the restaurant -->
             <div id="about-images-grid" class="about-photo-grid mb-4">
-                <img loading="lazy" src="assets/images/about/about-us-tile1.jpg" alt="Boteco interior image 1" class="rounded">
-                <img loading="lazy" src="assets/images/about/about-us-tile2.jpg" alt="Boteco interior image 2" class="rounded">
-                <img loading="lazy" src="assets/images/about/about-us-tile3.jpg" alt="Boteco interior image 3" class="rounded">
-                <img loading="lazy" src="assets/images/about/about-us-tile4.jpg" alt="Boteco interior image 4" class="rounded">
-                <img loading="lazy" src="assets/images/about/about-us-tile5.jpg" alt="Boteco interior image 5" class="rounded">
-                <img loading="lazy" src="assets/images/about/about-us-tile6.jpg" alt="Boteco interior image 6" class="rounded">
+                <picture>
+                    <source srcset="assets/images/about/about-us-tile1.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/about/about-us-tile1.jpg" alt="Boteco interior image 1" class="rounded">
+                </picture>
+                <picture>
+                    <source srcset="assets/images/about/about-us-tile2.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/about/about-us-tile2.jpg" alt="Boteco interior image 2" class="rounded">
+                </picture>
+                <picture>
+                    <source srcset="assets/images/about/about-us-tile3.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/about/about-us-tile3.jpg" alt="Boteco interior image 3" class="rounded">
+                </picture>
+                <picture>
+                    <source srcset="assets/images/about/about-us-tile4.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/about/about-us-tile4.jpg" alt="Boteco interior image 4" class="rounded">
+                </picture>
+                <picture>
+                    <source srcset="assets/images/about/about-us-tile5.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/about/about-us-tile5.jpg" alt="Boteco interior image 5" class="rounded">
+                </picture>
+                <picture>
+                    <source srcset="assets/images/about/about-us-tile6.webp" type="image/webp">
+                    <img loading="lazy" src="assets/images/about/about-us-tile6.jpg" alt="Boteco interior image 6" class="rounded">
+                </picture>
             </div>
             <div class="row row-cols-1 row-cols-md-2 g-3">
                 <div class="col">
@@ -137,7 +158,10 @@
                 <div class="col-md-4">
                     <div class="menu-card h-100">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#foodMenuModal">
-                            <img loading="lazy" src="assets/images/placeholders/food-placeholder.png" class="card-img-top" alt="Delicious dishes">
+                            <picture>
+                                <source srcset="assets/images/placeholders/food-placeholder.webp" type="image/webp">
+                                <img loading="lazy" src="assets/images/placeholders/food-placeholder.png" class="card-img-top" alt="Delicious dishes">
+                            </picture>
                         </a>
                         <div class="p-3">
                             <p class="h5 mb-2">Food Menu</p>
@@ -148,7 +172,10 @@
                 <div class="col-md-4">
                     <div class="menu-card h-100">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#barMenuModal">
-                            <img loading="lazy" src="assets/images/placeholders/drinks-placeholder.png" class="card-img-top" alt="Signature drinks">
+                            <picture>
+                                <source srcset="assets/images/placeholders/drinks-placeholder.webp" type="image/webp">
+                                <img loading="lazy" src="assets/images/placeholders/drinks-placeholder.png" class="card-img-top" alt="Signature drinks">
+                            </picture>
                         </a>
                         <div class="p-3">
                             <p class="h5 mb-2">Bar Menu</p>
@@ -159,7 +186,9 @@
                 <div class="col-md-4">
                     <div class="menu-card h-100">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#specialsMenuModal">
-                            <img loading="lazy" src="assets/images/placeholders/specials-placeholder.gif" class="card-img-top" alt="Chef's specials">
+                            <picture>
+                                <img loading="lazy" src="assets/images/placeholders/specials-placeholder.gif" class="card-img-top" alt="Chef's specials">
+                            </picture>
                         </a>
                         <div class="p-3">
                             <p class="h5 mb-2">Specials</p>
@@ -193,34 +222,54 @@
                     <div id="foodMenuCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img loading="lazy" src="assets/menus/food-menu-pg1.jpg" class="d-block w-100" alt="Food Menu page 1">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg1.jpg" class="d-block w-100" alt="Food Menu page 1">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg2.jpg" class="d-block w-100" alt="Food Menu page 2">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg2.jpg" class="d-block w-100" alt="Food Menu page 2">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg3.jpg" class="d-block w-100" alt="Food Menu page 3">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg3.jpg" class="d-block w-100" alt="Food Menu page 3">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg4.jpg" class="d-block w-100" alt="Food Menu page 4">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg4.jpg" class="d-block w-100" alt="Food Menu page 4">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg5.jpg" class="d-block w-100" alt="Food Menu page 5">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg5.jpg" class="d-block w-100" alt="Food Menu page 5">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg6.jpg" class="d-block w-100" alt="Food Menu page 6">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg6.jpg" class="d-block w-100" alt="Food Menu page 6">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg7.jpg" class="d-block w-100" alt="Food Menu page 7">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg7.jpg" class="d-block w-100" alt="Food Menu page 7">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg8.jpg" class="d-block w-100" alt="Food Menu page 8">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg8.jpg" class="d-block w-100" alt="Food Menu page 8">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg9.jpg" class="d-block w-100" alt="Food Menu page 9">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg9.jpg" class="d-block w-100" alt="Food Menu page 9">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/food-menu-pg10.jpg" class="d-block w-100" alt="Food Menu page 10">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/food-menu-pg10.jpg" class="d-block w-100" alt="Food Menu page 10">
+                                </picture>
                             </div>
                         </div>
                     </div>
@@ -251,46 +300,74 @@
                     <div id="barMenuCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg1.jpg" class="d-block w-100" alt="Bar Menu page 1">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg1.jpg" class="d-block w-100" alt="Bar Menu page 1">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg2.jpg" class="d-block w-100" alt="Bar Menu page 2">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg2.jpg" class="d-block w-100" alt="Bar Menu page 2">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg3.jpg" class="d-block w-100" alt="Bar Menu page 3">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg3.jpg" class="d-block w-100" alt="Bar Menu page 3">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg4.jpg" class="d-block w-100" alt="Bar Menu page 4">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg4.jpg" class="d-block w-100" alt="Bar Menu page 4">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg5.jpg" class="d-block w-100" alt="Bar Menu page 5">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg5.jpg" class="d-block w-100" alt="Bar Menu page 5">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg6.jpg" class="d-block w-100" alt="Bar Menu page 6">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg6.jpg" class="d-block w-100" alt="Bar Menu page 6">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg7.jpg" class="d-block w-100" alt="Bar Menu page 7">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg7.jpg" class="d-block w-100" alt="Bar Menu page 7">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg8.jpg" class="d-block w-100" alt="Bar Menu page 8">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg8.jpg" class="d-block w-100" alt="Bar Menu page 8">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg9.jpg" class="d-block w-100" alt="Bar Menu page 9">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg9.jpg" class="d-block w-100" alt="Bar Menu page 9">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg10.jpg" class="d-block w-100" alt="Bar Menu page 10">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg10.jpg" class="d-block w-100" alt="Bar Menu page 10">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg11.jpg" class="d-block w-100" alt="Bar Menu page 11">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg11.jpg" class="d-block w-100" alt="Bar Menu page 11">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg12.jpg" class="d-block w-100" alt="Bar Menu page 12">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg12.jpg" class="d-block w-100" alt="Bar Menu page 12">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg13.jpg" class="d-block w-100" alt="Bar Menu page 13">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg13.jpg" class="d-block w-100" alt="Bar Menu page 13">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/bar-menu-pg14.jpg" class="d-block w-100" alt="Bar Menu page 14">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/bar-menu-pg14.jpg" class="d-block w-100" alt="Bar Menu page 14">
+                                </picture>
                             </div>
                         </div>
                     </div>
@@ -321,13 +398,19 @@
                     <div id="specialsMenuCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img loading="lazy" src="assets/menus/specials-menu-pg1.jpg" class="d-block w-100" alt="Specials Menu page 1">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/specials-menu-pg1.jpg" class="d-block w-100" alt="Specials Menu page 1">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/specials-menu-pg2.jpg" class="d-block w-100" alt="Specials Menu page 2">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/specials-menu-pg2.jpg" class="d-block w-100" alt="Specials Menu page 2">
+                                </picture>
                             </div>
                             <div class="carousel-item">
-                                <img loading="lazy" src="assets/menus/specials-menu-pg3.jpg" class="d-block w-100" alt="Specials Menu page 3">
+                                <picture>
+                                    <img loading="lazy" src="assets/menus/specials-menu-pg3.jpg" class="d-block w-100" alt="Specials Menu page 3">
+                                </picture>
                             </div>
                         </div>
                     </div>
@@ -393,7 +476,9 @@
             <div class="instagram-feed text-center">
                 <div class="embedsocial-hashtag" data-ref="d76db09fa5b92455720066617a6f8a04df4daa87">
                     <a class="feed-powered-by-es feed-powered-by-es-slider-img es-widget-branding" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget">
-                        <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial">
+                        <picture>
+                            <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial">
+                        </picture>
                         <div class="es-widget-branding-text">Instagram widget</div>
                     </a>
                 </div>
