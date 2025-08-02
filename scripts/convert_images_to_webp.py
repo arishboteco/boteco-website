@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert JPG and PNG images under assets/ to WebP format."""
+"""Convert JPG, PNG, and GIF images under assets/ to WebP format."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ except ImportError as exc:
     raise SystemExit("Pillow is required to convert images: pip install pillow") from exc
 
 ASSETS_DIR = Path(__file__).resolve().parents[1] / "assets"
-IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif"}
 
 
 def convert_image(path: Path, *, dry_run: bool = False) -> None:
@@ -24,7 +24,10 @@ def convert_image(path: Path, *, dry_run: bool = False) -> None:
     if dry_run:
         return
     with Image.open(path) as img:
-        img.save(out_path, "WEBP", quality=80)
+        save_kwargs = {"quality": 80}
+        if getattr(img, "is_animated", False):
+            save_kwargs["save_all"] = True
+        img.save(out_path, "WEBP", **save_kwargs)
 
 
 def main() -> None:
