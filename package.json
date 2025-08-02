@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "This repository contains the static files for the Boteco restaurant website.",
   "scripts": {
+    "prefix:css": "postcss assets/css/boteco_style.css -o assets/css/boteco_style.css",
     "minify:css": "cleancss -o assets/css/boteco_style.min.css assets/css/boteco_style.css",
     "minify:js": "bash -c 'for file in assets/js/*.js; do [[ \"$file\" == *.min.js ]] && continue; uglifyjs \"$file\" -c -m -o \"${file%.js}.min.js\"; done'",
-    "build": "npm-run-all minify:css minify:js",
+    "build": "npm-run-all prefix:css minify:css minify:js",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [],
@@ -13,8 +14,11 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "autoprefixer": "^10.4.21",
     "clean-css-cli": "^5.6.3",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
     "uglify-js": "^3.19.3"
   }
 }
