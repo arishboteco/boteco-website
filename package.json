@@ -2,7 +2,6 @@
   "name": "boteco-website",
   "version": "1.0.0",
   "description": "This repository contains the static files for the Boteco restaurant website.",
-  "main": "index.js",
   "scripts": {
     "minify:css": "cleancss -o assets/css/boteco_style.min.css assets/css/boteco_style.css",
     "minify:js": "bash -c 'for file in assets/js/*.js; do uglifyjs \"$file\" -c -m -o \"${file%.js}.min.js\"; done'",
