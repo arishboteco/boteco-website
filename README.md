@@ -2,6 +2,48 @@
 
 This repository contains the static files for the Boteco restaurant website.
 
+## Development Workflow
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   # for image conversion
+   pip install pillow
+   ```
+
+2. Add or update assets as needed (see sections below for events, menus, images, and fonts).
+
+3. Convert newly added images to WebP for faster loading:
+
+   ```bash
+   python3 scripts/convert_images_to_webp.py
+   ```
+
+   Use `--dry-run` to preview conversions.
+
+4. Regenerate the events cache whenever event images change:
+
+   ```bash
+   python3 scripts/generate_events_json.py
+   ```
+
+5. Minify CSS and JavaScript for production:
+
+   ```bash
+   npm run build
+   ```
+
+6. Preview the site locally, for example:
+
+   ```bash
+   npx http-server .
+   # or
+   python3 -m http.server
+   ```
+
+7. Commit the resulting changes and deploy.
+
 ## Security
 
 External CDN resources are loaded with [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) attributes to ensure the assets have not been tampered with. Event titles are inserted using the DOM API to prevent cross-site scripting.
