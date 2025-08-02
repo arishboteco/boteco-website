@@ -8,7 +8,7 @@
     "build": "npm-run-all minify:css minify:js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Boteco",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
