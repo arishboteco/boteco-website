@@ -2,17 +2,19 @@
 async function loadEvents() {
     const eventsSection = document.getElementById('events');
     const eventsGrid = document.getElementById('events-grid');
+    const archiveSection = document.getElementById('events-archive');
+    const archiveGrid = document.getElementById('archive-grid');
     if (!eventsSection || !eventsGrid) return;
 
     const sortByDate = (arr) =>
         arr.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    const renderEvents = (events) => {
+    const renderEvents = (events, container, basePath, emptyMsg) => {
         if (!events || events.length === 0) {
-            eventsGrid.innerHTML = '<p class="text-center w-100">No upcoming events</p>';
+            container.innerHTML = `<p class="text-center w-100">${emptyMsg}</p>`;
             return;
         }
-        eventsGrid.innerHTML = '';
+        container.innerHTML = '';
         events.forEach(evt => {
             const dateObj = new Date(evt.date);
             const dateString = isNaN(dateObj)
@@ -27,7 +29,7 @@ async function loadEvents() {
 
             const img = document.createElement('img');
             img.loading = 'lazy';
-            img.src = `assets/events/${evt.image}`;
+            img.src = `${basePath}/${evt.image}`;
             img.className = 'card-img-top';
             img.alt = evt.title;
 
@@ -48,19 +50,20 @@ async function loadEvents() {
             card.appendChild(body);
             col.appendChild(card);
 
-            eventsGrid.appendChild(col);
+            container.appendChild(col);
         });
     };
 
     // Attempt to load cached events first
+    let loadedUpcoming = false;
     try {
         const localRes = await fetch('assets/events/events.json');
         if (localRes.ok) {
             const cachedEvents = await localRes.json();
             if (Array.isArray(cachedEvents) && cachedEvents.length > 0) {
                 const sorted = sortByDate(cachedEvents);
-                renderEvents(sorted);
-                return; // Skip API call when cache is available
+                renderEvents(sorted, eventsGrid, 'assets/events', 'No upcoming events');
+                loadedUpcoming = true;
             }
         }
     } catch (e) {
@@ -68,31 +71,53 @@ async function loadEvents() {
     }
 
     // Fallback to GitHub API
-    try {
-        const apiUrl = 'https://api.github.com/repos/arishboteco/boteco-website/contents/assets/events?ref=main';
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error('Network response was not ok');
-        const files = await response.json();
-        const imageFiles = files.filter(item => item.type === 'file' && /\.(png|jpe?g|webp)$/i.test(item.name));
-        if (imageFiles.length === 0) {
-            renderEvents([]);
-            return;
+    if (!loadedUpcoming) {
+        try {
+            const apiUrl = 'https://api.github.com/repos/arishboteco/boteco-website/contents/assets/events?ref=main';
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const files = await response.json();
+            const imageFiles = files.filter(item => item.type === 'file' && /\.(png|jpe?g|webp)$/i.test(item.name));
+            if (imageFiles.length === 0) {
+                renderEvents([], eventsGrid, 'assets/events', 'No upcoming events');
+            } else {
+                const events = imageFiles.map(file => {
+                    const baseName = file.name.replace(/\.[^.]+$/, '');
+                    const parts = baseName.split('-');
+                    if (parts.length < 4) return null;
+                    const [year, month, day, ...titleParts] = parts;
+                    if (!year || !month || !day || titleParts.length === 0) return null;
+                    const isoDate = `${year}-${month}-${day}`;
+                    const title = titleParts.join(' ').replace(/_/g, ' ');
+                    return { date: isoDate, title, image: file.name };
+                }).filter(Boolean);
+                const sortedEvents = sortByDate(events);
+                renderEvents(sortedEvents, eventsGrid, 'assets/events', 'No upcoming events');
+            }
+        } catch (error) {
+            console.error('Error loading events:', error);
+            renderEvents([], eventsGrid, 'assets/events', 'No upcoming events'); // Show friendly message
         }
-        const events = imageFiles.map(file => {
-            const baseName = file.name.replace(/\.[^.]+$/, '');
-            const parts = baseName.split('-');
-            if (parts.length < 4) return null;
-            const [year, month, day, ...titleParts] = parts;
-            if (!year || !month || !day || titleParts.length === 0) return null;
-            const isoDate = `${year}-${month}-${day}`;
-            const title = titleParts.join(' ').replace(/_/g, ' ');
-            return { date: isoDate, title, image: file.name };
-        }).filter(Boolean);
-        const sortedEvents = sortByDate(events);
-        renderEvents(sortedEvents);
-    } catch (error) {
-        console.error('Error loading events:', error);
-        renderEvents([]); // Show friendly message
+    }
+
+    // Load archived events
+    if (archiveSection && archiveGrid) {
+        try {
+            const archRes = await fetch('assets/events/archive/archive.json');
+            if (archRes.ok) {
+                const archivedEvents = await archRes.json();
+                if (Array.isArray(archivedEvents) && archivedEvents.length > 0) {
+                    const sortedArchived = sortByDate(archivedEvents);
+                    renderEvents(sortedArchived, archiveGrid, 'assets/events/archive', 'No past events');
+                } else {
+                    archiveSection.style.display = 'none';
+                }
+            } else {
+                archiveSection.style.display = 'none';
+            }
+        } catch (e) {
+            archiveSection.style.display = 'none';
+        }
     }
 }
 
