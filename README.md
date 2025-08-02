@@ -50,6 +50,17 @@ displays images stored in `assets/menus/` following the naming pattern
 these images automatically, so simply add or remove files and they will appear
 in their respective galleries.
 
+## Image Optimization
+
+Add images as `.jpg` or `.png` and create faster-loading `.webp` copies with:
+
+```bash
+python3 scripts/convert_images_to_webp.py
+```
+
+Use `--dry-run` to preview conversions without writing files. A GitHub Action
+will also run this script on pushes to ensure WebP versions are committed.
+
 ## Custom Fonts
 
 Place your own font file(s) in `assets/fonts/` using the original file
