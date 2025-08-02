@@ -3,17 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
   galleries.forEach(async (wrapper) => {
     const menu = wrapper.dataset.menuGallery;
     const imgEl = wrapper.querySelector('.menu-image');
-    const container = imgEl.parentElement;
-    const overlay = imgEl.cloneNode();
-    overlay.style.position = 'absolute';
-    overlay.style.inset = '0';
-    overlay.style.opacity = 0;
-    overlay.style.pointerEvents = 'none';
+    const pictureEl = imgEl.parentElement;
+    const container = pictureEl.parentElement;
+    const overlayPicture = pictureEl.cloneNode(true);
+    const overlayImg = overlayPicture.querySelector('img');
+    overlayPicture.style.position = 'absolute';
+    overlayPicture.style.inset = '0';
+    overlayPicture.style.opacity = 0;
+    overlayPicture.style.pointerEvents = 'none';
     imgEl.style.pointerEvents = 'none';
     container.style.position = 'relative';
-    container.appendChild(overlay);
+    container.appendChild(overlayPicture);
+    let activePicture = pictureEl;
     let activeImg = imgEl;
-    let hiddenImg = overlay;
+    let hiddenPicture = overlayPicture;
+    let hiddenImg = overlayImg;
     const counterEl = wrapper.querySelector('.image-counter');
     const prevBtn = wrapper.querySelector('.prev-btn');
     const nextBtn = wrapper.querySelector('.next-btn');
@@ -57,14 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const update = () => {
       const cached = cache[index];
       const show = () => {
+        const webpSrc = cached.src.replace('.jpg', '.webp');
+        hiddenPicture.querySelector('source').srcset = webpSrc;
         hiddenImg.src = cached.src;
         counterEl.textContent = `${index + 1} / ${images.length}`;
         prevBtn.disabled = index === 0;
         nextBtn.disabled = index === images.length - 1;
         requestAnimationFrame(() => {
-          activeImg.style.opacity = 0;
-          hiddenImg.style.opacity = 1;
+          activePicture.style.opacity = 0;
+          hiddenPicture.style.opacity = 1;
         });
+        let tmpPicture = activePicture;
+        activePicture = hiddenPicture;
+        hiddenPicture = tmpPicture;
         const tmp = activeImg;
         activeImg = hiddenImg;
         hiddenImg = tmp;
