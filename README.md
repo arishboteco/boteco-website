@@ -28,7 +28,7 @@ This repository contains the static files for the Boteco restaurant website.
    python3 scripts/generate_events_json.py
    ```
 
-5. Minify CSS and JavaScript for production:
+5. Minify CSS and JavaScript for production (CSS is autoprefixed via PostCSS):
 
    ```bash
    npm run build
