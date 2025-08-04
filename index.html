@@ -75,10 +75,13 @@
          A semi‑transparent overlay darkens the video for readability. -->
     <section class="hero-section d-flex align-items-center text-center position-relative">
         <!-- Video background playing behind the call‑to‑action. Muted and looped for a seamless effect. -->
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/images/hero.jpg">
-            <source src="assets/videos/hero/hero-video.webm" type="video/webm">
-            <source src="assets/videos/hero/hero.mp4" type="video/mp4">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/hero.jpg">
+            <source data-src="assets/videos/hero/hero-video.webm" type="video/webm">
+            <source data-src="assets/videos/hero/hero.mp4" type="video/mp4">
         </video>
+        <noscript>
+            <img src="assets/images/hero.jpg" alt="Boteco hero image" class="hero-video">
+        </noscript>
         <!-- Semi‑transparent overlay to improve text contrast -->
         <div class="hero-overlay"></div>
         <div class="container position-relative">
@@ -515,6 +518,7 @@
       <img src="assets/images/logos/Digital_Glyph_Green.svg" alt="WhatsApp logo" width="64" height="64" style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
     </a>
 
+    <script src="assets/js/hero-video.min.js" defer="defer"></script>
     <script src="assets/js/header.min.js" defer="defer"></script>
     <script src="assets/js/fade-in.min.js" defer="defer"></script>
     <script src="assets/js/uniform-menu-heights.min.js" defer="defer"></script>
