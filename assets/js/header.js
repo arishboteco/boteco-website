@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var navbar = document.querySelector('nav.navbar');
   if (!navbar) return;
 
-  navbar.classList.add('navbar-hidden');
   var pointerInTop = false;
   var scrolledPastTop = false;
 
