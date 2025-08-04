@@ -84,35 +84,6 @@ function renderEvents(events, container, basePath, emptyMsg) {
     container.appendChild(fragment);
 }
 
-// Fetch events and render them.
-async function fetchAndRenderEvents(url, gridEl, sectionEl, basePath, emptyMsg) {
-    try {
-        const res = await fetch(url);
-        if (res.ok) {
-            const events = await res.json();
-            if (Array.isArray(events) && events.length > 0) {
-                const sorted = sortByDate(events);
-                renderEvents(sorted, gridEl, basePath, emptyMsg);
-            } else if (sectionEl) {
-                sectionEl.style.display = 'none';
-            } else {
-                renderEvents([], gridEl, basePath, emptyMsg);
-            }
-        } else if (sectionEl) {
-            sectionEl.style.display = 'none';
-        } else {
-            renderEvents([], gridEl, basePath, emptyMsg);
-        }
-    } catch (e) {
-        console.warn(`Could not load events from ${url}:`, e);
-        if (sectionEl) {
-            sectionEl.style.display = 'none';
-        } else {
-            renderEvents([], gridEl, basePath, emptyMsg);
-        }
-    }
-}
-
 // Fetch event data from a local cache and build cards.
 async function loadEvents() {
     const eventsSection = document.getElementById('events');
@@ -121,25 +92,35 @@ async function loadEvents() {
     const archiveGrid = document.getElementById('archive-grid');
     if (!eventsSection || !eventsGrid) return;
 
-    const upcomingPromise = fetchAndRenderEvents(
-        'assets/events/events.json',
-        eventsGrid,
-        null,
-        'assets/events',
-        'No upcoming events'
-    );
+    try {
+        const res = await fetch('assets/events/events_combined.json');
+        if (!res.ok) {
+            throw new Error('Failed to fetch events');
+        }
+        const data = await res.json();
 
-    const archivePromise = (archiveSection && archiveGrid)
-        ? fetchAndRenderEvents(
-            'assets/events/archive/archive.json',
-            archiveGrid,
-            archiveSection,
-            'assets/events/archive',
-            'No past events'
-        )
-        : Promise.resolve();
+        const upcoming = Array.isArray(data.upcoming)
+            ? sortByDate(data.upcoming)
+            : [];
+        renderEvents(upcoming, eventsGrid, 'assets/events', 'No upcoming events');
 
-    await Promise.all([upcomingPromise, archivePromise]);
+        if (archiveSection && archiveGrid) {
+            const archive = Array.isArray(data.archive)
+                ? sortByDate(data.archive)
+                : [];
+            if (archive.length > 0) {
+                renderEvents(archive, archiveGrid, 'assets/events/archive', 'No past events');
+            } else {
+                archiveSection.style.display = 'none';
+            }
+        }
+    } catch (e) {
+        console.warn('Could not load events:', e);
+        renderEvents([], eventsGrid, 'assets/events', 'No upcoming events');
+        if (archiveSection) {
+            archiveSection.style.display = 'none';
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', loadEvents);
