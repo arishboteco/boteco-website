@@ -34,8 +34,19 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(request)
         .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          if (response.status === 200) {
+            const headers = new Headers(response.headers);
+            const futureDate = new Date();
+            futureDate.setFullYear(futureDate.getFullYear() + 1);
+            headers.set('Expires', futureDate.toUTCString());
+            const modifiedResponse = new Response(response.clone().body, {
+              status: response.status,
+              statusText: response.statusText,
+              headers
+            });
+            caches.open(CACHE_NAME).then(cache => cache.put(request, modifiedResponse.clone()));
+            return modifiedResponse;
+          }
           return response;
         })
         .catch(() => caches.match(request))
@@ -51,8 +62,17 @@ self.addEventListener('fetch', event => {
 
         return fetch(request).then(response => {
           if (response.status === 200) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+            const headers = new Headers(response.headers);
+            const futureDate = new Date();
+            futureDate.setFullYear(futureDate.getFullYear() + 1);
+            headers.set('Expires', futureDate.toUTCString());
+            const modifiedResponse = new Response(response.clone().body, {
+              status: response.status,
+              statusText: response.statusText,
+              headers
+            });
+            caches.open(CACHE_NAME).then(cache => cache.put(request, modifiedResponse.clone()));
+            return modifiedResponse;
           }
           return response;
         });
