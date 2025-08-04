@@ -1,4 +1,4 @@
-// Fetch event data from a local cache or the GitHub API and build cards.
+// Fetch event data from a local cache and build cards.
 async function loadEvents() {
     const eventsSection = document.getElementById('events');
     const eventsGrid = document.getElementById('events-grid');
@@ -55,50 +55,21 @@ async function loadEvents() {
         container.appendChild(fragment);
     };
 
-    // Attempt to load cached events first
-    let loadedUpcoming = false;
+    // Load upcoming events from the local cache
     try {
         const localRes = await fetch('assets/events/events.json');
         if (localRes.ok) {
             const cachedEvents = await localRes.json();
-            if (Array.isArray(cachedEvents) && cachedEvents.length > 0) {
-                const sorted = sortByDate(cachedEvents);
-                renderEvents(sorted, eventsGrid, 'assets/events', 'No upcoming events');
-                loadedUpcoming = true;
-            }
+            const sorted = Array.isArray(cachedEvents)
+                ? sortByDate(cachedEvents)
+                : [];
+            renderEvents(sorted, eventsGrid, 'assets/events', 'No upcoming events');
+        } else {
+            renderEvents([], eventsGrid, 'assets/events', 'No upcoming events');
         }
     } catch (e) {
-        console.warn('Could not load local events cache:', e);
-    }
-
-    // Fallback to GitHub API
-    if (!loadedUpcoming) {
-        try {
-            const apiUrl = 'https://api.github.com/repos/arishboteco/boteco-website/contents/assets/events?ref=main';
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error('Network response was not ok');
-            const files = await response.json();
-            const imageFiles = files.filter(item => item.type === 'file' && /\.(png|jpe?g|webp)$/i.test(item.name));
-            if (imageFiles.length === 0) {
-                renderEvents([], eventsGrid, 'assets/events', 'No upcoming events');
-            } else {
-                const events = imageFiles.map(file => {
-                    const baseName = file.name.replace(/\.[^.]+$/, '');
-                    const parts = baseName.split('-');
-                    if (parts.length < 4) return null;
-                    const [year, month, day, ...titleParts] = parts;
-                    if (!year || !month || !day || titleParts.length === 0) return null;
-                    const isoDate = `${year}-${month}-${day}`;
-                    const title = titleParts.join(' ').replace(/_/g, ' ');
-                    return { date: isoDate, title, image: file.name };
-                }).filter(Boolean);
-                const sortedEvents = sortByDate(events);
-                renderEvents(sortedEvents, eventsGrid, 'assets/events', 'No upcoming events');
-            }
-        } catch (error) {
-            console.error('Error loading events:', error);
-            renderEvents([], eventsGrid, 'assets/events', 'No upcoming events'); // Show friendly message
-        }
+        console.warn('Could not load events cache:', e);
+        renderEvents([], eventsGrid, 'assets/events', 'No upcoming events');
     }
 
     // Load archived events
