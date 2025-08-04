@@ -46,7 +46,17 @@ This repository contains the static files for the Boteco restaurant website.
    python3 -m http.server
    ```
 
-7. Commit the resulting changes and deploy.
+7. (Optional) Lint and run tests before committing:
+
+   ```bash
+   npm run lint
+   # or
+   npm test   # runs the lint task
+   ```
+
+   Linting checks HTML and JavaScript. `npm test` currently runs the lint task and can be expanded with additional tests later.
+
+8. Commit the resulting changes and deploy.
 
 ## Security
 
