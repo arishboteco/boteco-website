@@ -58,6 +58,10 @@ This repository contains the static files for the Boteco restaurant website.
 
 8. Commit the resulting changes and deploy.
 
+## Deployment
+
+Ensure your server or CDN is configured to serve the generated `.gz` assets with the `Content-Encoding: gzip` header (and `Vary: Accept-Encoding` for proper caching) and fall back to the original files when clients do not support gzip.
+
 ## Security
 
 External CDN resources are loaded with [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) attributes to ensure the assets have not been tampered with. Event titles are inserted using the DOM API to prevent cross-site scripting.
