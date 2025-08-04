@@ -1,3 +1,13 @@
+// Validate that a string is a properly formed URL.
+function isValidUrl(str) {
+    try {
+        new URL(str);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 // Fetch event data from a local cache and build cards.
 async function loadEvents() {
     const eventsSection = document.getElementById('events');
@@ -35,7 +45,7 @@ async function loadEvents() {
             img.alt = evt.title;
 
             let media = img;
-            if (evt.link) {
+            if (isValidUrl(evt.link)) {
                 const anchor = document.createElement('a');
                 anchor.href = evt.link;
                 anchor.target = '_blank';
