@@ -483,4 +483,13 @@ footer a:hover {
   right: 20px;
   z-index: 100;
   cursor: pointer;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+
+.whatsapp_float img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
