@@ -22,13 +22,23 @@ This repository contains the static files for the Boteco restaurant website.
 
    Use `--dry-run` to preview conversions.
 
-4. Build the site (regenerates event and menu caches and minifies assets):
+4. Rebuild menu manifests if you added or removed menu images:
+
+   ```bash
+   python3 scripts/generate_menu_manifest.py
+   # or
+   npm run generate:menus
+   ```
+
+   This step is also run automatically during the build.
+
+5. Build the site (regenerates event caches and minifies assets):
 
    ```bash
    npm run build
    ```
 
-5. Preview the site locally, for example:
+6. Preview the site locally, for example:
 
    ```bash
    npx http-server .
@@ -36,7 +46,7 @@ This repository contains the static files for the Boteco restaurant website.
    python3 -m http.server
    ```
 
-6. Commit the resulting changes and deploy.
+7. Commit the resulting changes and deploy.
 
 ## Security
 
@@ -93,6 +103,17 @@ displays images stored in `assets/menus/` following the naming pattern
 `<menu-name>-pg#.jpg` (for example, `food-menu-pg1.jpg`). All menu pages load
 these images automatically, so simply add or remove files and they will appear
 in their respective galleries.
+
+After changing menu images, regenerate the JSON manifests so pages know which
+files to load:
+
+```bash
+python3 scripts/generate_menu_manifest.py
+# or
+npm run generate:menus
+```
+
+This command is also executed as part of `npm run build`.
 
 ## Image Optimization
 
