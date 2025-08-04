@@ -1,3 +1,5 @@
+const manifestCache = new Map();
+
 document.addEventListener('DOMContentLoaded', () => {
   const galleries = document.querySelectorAll('[data-menu-gallery]');
   galleries.forEach(async (wrapper) => {
@@ -20,15 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = wrapper.querySelector('.next-btn');
 
     async function fetchImages() {
-      try {
-        const res = await fetch(manifest);
-        if (!res.ok) throw new Error('Manifest not found');
-        const files = await res.json();
-        const base = manifest.replace(/[^/]+$/, '');
-        return Array.isArray(files) ? files.map(name => `${base}${name}`) : [];
-      } catch {
-        return [];
+      if (!manifestCache.has(manifest)) {
+        const promise = (async () => {
+          try {
+            const res = await fetch(manifest);
+            if (!res.ok) throw new Error('Manifest not found');
+            const files = await res.json();
+            const base = manifest.replace(/[^/]+$/, '');
+            return Array.isArray(files) ? files.map(name => `${base}${name}`) : [];
+          } catch {
+            return [];
+          }
+        })();
+        manifestCache.set(manifest, promise);
+        const images = await promise;
+        manifestCache.set(manifest, images);
+        return images;
       }
+      return manifestCache.get(manifest);
     }
 
     const images = await fetchImages();
