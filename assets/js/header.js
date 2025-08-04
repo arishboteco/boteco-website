@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var navbar = document.querySelector('nav.navbar');
+  const navbar = document.querySelector('nav.navbar');
   if (!navbar) return;
 
-  var pointerInTop = false;
-  var scrolledPastTop = false;
+  let pointerInTop = false;
+  let scrolledPastTop = false;
 
-  var sentinel = document.createElement('div');
+  const sentinel = document.createElement('div');
   sentinel.style.position = 'absolute';
   sentinel.style.top = 0;
   sentinel.style.left = 0;
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   sentinel.style.pointerEvents = 'none';
   document.body.prepend(sentinel);
 
-  var observer = new IntersectionObserver(function (entries) {
+  const observer = new IntersectionObserver(function (entries) {
     scrolledPastTop = !entries[0].isIntersecting;
     updateVisibility();
   });
@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
     updateVisibility();
   });
 
-  var awardsContainer = document.getElementById('header-awards');
+  const awardsContainer = document.getElementById('header-awards');
   if (awardsContainer) {
     awardsContainer.style.display = 'flex';
     awardsContainer.style.gap = '12px';
 
-    var socialLinks = [
+    const socialLinks = [
       {
         href: 'https://www.instagram.com/boteco_india/?hl=en',
         icon: 'instagram',
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
         color: '#4285F4'
       }
     ];
-    var svgNS = 'http://www.w3.org/2000/svg';
+    const svgNS = 'http://www.w3.org/2000/svg';
 
     socialLinks.forEach(function (link) {
-      var a = document.createElement('a');
+      const a = document.createElement('a');
       a.href = link.href;
       a.target = '_blank';
       a.rel = 'noopener';
@@ -76,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
       a.classList.add('social-icon', link.icon);
       a.style.setProperty('--hover-color', link.color);
 
-      var svg = document.createElementNS(svgNS, 'svg');
-      var title = document.createElementNS(svgNS, 'title');
+      const svg = document.createElementNS(svgNS, 'svg');
+      const title = document.createElementNS(svgNS, 'title');
       title.textContent = link.alt;
-      var use = document.createElementNS(svgNS, 'use');
+      const use = document.createElementNS(svgNS, 'use');
       use.setAttribute('href', 'assets/icons/sprite.svg#' + link.icon);
       svg.appendChild(title);
       svg.appendChild(use);
