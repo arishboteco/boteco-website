@@ -1,25 +1,11 @@
 const CACHE_VERSION = 'v1';
 const CACHE_NAME = `boteco-cache-${CACHE_VERSION}`;
 
+// Import build-generated asset manifest
+importScripts('/precache-manifest.js');
+
 // Core assets required for the shell of the site
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/bar-menu.html',
-  '/food-menu.html',
-  '/party-booking.html',
-  '/specials-menu.html',
-  '/assets/css/boteco_style.min.css',
-  '/assets/js/events.min.js',
-  '/assets/js/hero-video.min.js',
-  '/assets/js/header.min.js',
-  '/assets/js/fade-in.min.js',
-  '/assets/js/uniform-menu-heights.min.js',
-  '/assets/js/carousel-counter.min.js',
-  '/assets/js/menu-gallery.min.js',
-  '/assets/events/events.json',
-  '/assets/events/archive/archive.json'
-];
+const ASSETS = self.__ASSETS_MANIFEST || [];
 
 self.addEventListener('install', event => {
   self.skipWaiting();
