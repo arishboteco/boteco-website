@@ -24,12 +24,23 @@ def parse_event(path: Path):
 
 
 def collect_events():
-    """Separate upcoming and past events, moving past ones to the archive."""
+    """Separate upcoming and past events, moving past ones to the archive.
+
+    If multiple image formats exist for the same event (e.g. ``.jpg`` and
+    ``.webp``), prefer the ``.webp`` version to avoid duplicate entries in the
+    generated ``events.json``.
+    """
+
     today = date.today()
-    upcoming = []
-    archived = []
+    # Use dictionaries keyed by the event slug (date + title) so that we can
+    # de-duplicate different image formats for the same event.
+    upcoming = {}
+    archived = {}
 
     ARCHIVE_DIR.mkdir(exist_ok=True)
+
+    # Define a simple priority for image formats. Higher wins.
+    ext_priority = {".webp": 3, ".jpg": 2, ".jpeg": 2, ".png": 1}
 
     for path in sorted(EVENT_DIR.iterdir()):
         if path.name in {"events.json", ARCHIVE_DIR.name} or not path.is_file():
@@ -38,23 +49,32 @@ def collect_events():
         if not event:
             continue
         event_date = date.fromisoformat(event["date"])
+        key = path.stem.lower()
+        ext = path.suffix.lower()
+        target = archived if event_date < today else upcoming
         if event_date < today:
             path.rename(ARCHIVE_DIR / path.name)
-            archived.append(event)
-        else:
-            upcoming.append(event)
+
+        existing = target.get(key)
+        if not existing or ext_priority.get(ext, 0) > ext_priority.get(Path(existing["image"]).suffix.lower(), 0):
+            target[key] = event
 
     for path in sorted(ARCHIVE_DIR.iterdir()):
         if path.name == "archive.json" or not path.is_file():
             continue
         event = parse_event(path)
-        if event:
-            archived.append(event)
+        if not event:
+            continue
+        key = path.stem.lower()
+        ext = path.suffix.lower()
+        existing = archived.get(key)
+        if not existing or ext_priority.get(ext, 0) > ext_priority.get(Path(existing["image"]).suffix.lower(), 0):
+            archived[key] = event
 
-    upcoming.sort(key=lambda e: e["date"])
-    archived.sort(key=lambda e: e["date"], reverse=True)
+    upcoming_list = sorted(upcoming.values(), key=lambda e: e["date"])
+    archived_list = sorted(archived.values(), key=lambda e: e["date"], reverse=True)
 
-    return upcoming, archived
+    return upcoming_list, archived_list
 
 
 def write_events(upcoming, archived):
