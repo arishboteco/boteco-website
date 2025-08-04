@@ -47,15 +47,20 @@ async function loadEvents() {
             let media = img;
             if (isValidUrl(evt.link)) {
                 const anchor = document.createElement('a');
-                anchor.href = '#';
+                anchor.href = evt.link;
+                anchor.target = '_blank';
+                anchor.rel = 'noopener noreferrer';
                 anchor.dataset.bsToggle = 'modal';
                 anchor.dataset.bsTarget = '#eventLinkModal';
                 anchor.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const iframe = document.getElementById('eventLinkIframe');
-                    if (iframe) {
-                        iframe.src = evt.link;
-                        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('eventLinkModal'));
+                    const modalEl = document.getElementById('eventLinkModal');
+                    if (typeof bootstrap !== 'undefined' && modalEl) {
+                        e.preventDefault();
+                        const iframe = document.getElementById('eventLinkIframe');
+                        if (iframe) {
+                            iframe.src = evt.link;
+                        }
+                        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                         modal.show();
                     }
                 });
