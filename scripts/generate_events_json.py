@@ -6,6 +6,28 @@ import re
 from datetime import date
 from pathlib import Path
 
+
+def _slugify(event: dict) -> str:
+    """Return a slug for looking up existing metadata such as links."""
+    return f"{event['date']}-{event['title'].replace(' ', '-')}".lower()
+
+
+def _load_existing_links() -> dict:
+    """Load existing link fields from events and archive JSON files."""
+    link_map = {}
+    for file in [EVENT_DIR / "events.json", ARCHIVE_DIR / "archive.json"]:
+        if not file.exists():
+            continue
+        try:
+            with file.open("r", encoding="utf-8") as f:
+                for event in json.load(f):
+                    link = event.get("link")
+                    if link:
+                        link_map[_slugify(event)] = link
+        except Exception:
+            continue
+    return link_map
+
 EVENT_DIR = Path(__file__).resolve().parents[1] / "assets" / "events"
 ARCHIVE_DIR = EVENT_DIR / "archive"
 PATTERN = re.compile(r"(?P<date>\d{4}-\d{2}-\d{2})-(?P<title>.+?)\.(?:jpg|png|webp)$", re.IGNORECASE)
@@ -100,7 +122,14 @@ def write_events(upcoming, archived):
 
 
 def main() -> None:
+    link_map = _load_existing_links()
     upcoming, archived = collect_events()
+    for event in upcoming:
+        if (link := link_map.get(_slugify(event))):
+            event["link"] = link
+    for event in archived:
+        if (link := link_map.get(_slugify(event))):
+            event["link"] = link
     write_events(upcoming, archived)
 
 
