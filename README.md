@@ -48,6 +48,13 @@ This repository contains the static files for the Boteco restaurant website.
 
 External CDN resources are loaded with [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) attributes to ensure the assets have not been tampered with. Event titles are inserted using the DOM API to prevent cross-site scripting.
 
+## External Scripts
+
+The Instagram feed uses a self-hosted copy of the LightWidget embed script (`assets/js/lightwidget.js`).
+This file was downloaded from [https://cdn.lightwidget.com/widgets/lightwidget.js](https://cdn.lightwidget.com/widgets/lightwidget.js) on 2025-08-04.
+Periodically check the upstream source for updates and replace the local file when necessary.
+If reverting to the CDN-hosted script, include appropriate `integrity` and `crossorigin` attributes.
+
 ## Updating Events
 
 Event cards on the homepage are built from images in `assets/events/`.
