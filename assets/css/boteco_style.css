@@ -83,11 +83,12 @@ html {
   color: var(--color-text-muted);
 }
 
-.menu-card img {
+.menus-section .menu-card img {
   width: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  aspect-ratio: 4 / 3;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /* Events section styling – white background with card design */
@@ -325,11 +326,7 @@ footer a:hover {
   }
 }
 
-@media (max-width: 575.98px) {
-  .menu-card img {
-    max-height: 160px;
-  }
-}
+
 
 /* Menu gallery styles */
 .menu-gallery {
@@ -469,11 +466,20 @@ footer a:hover {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
 }
 
 .fade-in-section.visible {
   opacity: 1;
   transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* WhatsApp floating chat button */

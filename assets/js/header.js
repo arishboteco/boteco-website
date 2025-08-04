@@ -29,9 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  document.addEventListener('mousemove', function (e) {
-    pointerInTop = e.clientY <= 80;
-    updateVisibility();
+  var throttleTimeout;
+  document.addEventListener('pointermove', function (e) {
+    if (throttleTimeout) return;
+    throttleTimeout = setTimeout(function () {
+      throttleTimeout = null;
+    }, 100);
+    var isInTop = e.clientY <= 80;
+    if (isInTop !== pointerInTop) {
+      pointerInTop = isInTop;
+      updateVisibility();
+    }
   });
 
   var awardsContainer = document.getElementById('header-awards');
