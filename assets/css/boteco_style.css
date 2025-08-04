@@ -467,13 +467,22 @@ footer a:hover {
 /* Fade in sections when they appear */
 .fade-in-section {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s ease-out;
 }
 
 .fade-in-section.visible {
   opacity: 1;
-  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section {
+    opacity: 1;
+    transition: none;
+  }
+
+  .navbar {
+    transition: none;
+  }
 }
 
 /* WhatsApp floating chat button */
