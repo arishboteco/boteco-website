@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const galleries = document.querySelectorAll('[data-menu-gallery]');
   galleries.forEach(async (wrapper) => {
     const menu = wrapper.dataset.menuGallery;
+    const manifest = wrapper.dataset.menuManifest || `assets/menus/${menu}.json`;
     const imgEl = wrapper.querySelector('.menu-image');
     const container = imgEl.parentElement;
     const overlay = imgEl.cloneNode();
@@ -19,26 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = wrapper.querySelector('.next-btn');
 
     async function fetchImages() {
-      const checks = Array.from({ length: 50 }, (_, i) => {
-        const url = `assets/menus/${menu}-pg${i + 1}.jpg`;
-        return new Promise(resolve => {
-          const img = new Image();
-          img.onload = () => resolve({ url, index: i });
-          img.onerror = () => resolve({ url: null, index: i });
-          img.src = url;
-        });
-      });
-
-      const results = await Promise.all(checks);
-      const imgs = [];
-      for (const res of results) {
-        if (res.url) {
-          imgs.push(res.url);
-        } else {
-          break;
-        }
+      try {
+        const res = await fetch(manifest);
+        if (!res.ok) throw new Error('Manifest not found');
+        const files = await res.json();
+        const base = manifest.replace(/[^/]+$/, '');
+        return Array.isArray(files) ? files.map(name => `${base}${name}`) : [];
+      } catch {
+        return [];
       }
-      return imgs;
     }
 
     const images = await fetchImages();

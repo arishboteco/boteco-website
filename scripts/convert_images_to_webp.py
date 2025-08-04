@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from generate_menu_manifest import generate_manifest
+
 try:
     from PIL import Image
 except ImportError as exc:
@@ -38,6 +40,9 @@ def main() -> None:
     for path in ASSETS_DIR.rglob("*"):
         if path.is_file() and path.suffix.lower() in IMAGE_EXTS:
             convert_image(path, dry_run=args.dry_run)
+
+    if not args.dry_run:
+        generate_manifest()
 
 
 if __name__ == "__main__":
