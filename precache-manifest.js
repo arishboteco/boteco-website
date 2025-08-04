@@ -8,6 +8,5 @@ self.__ASSETS_MANIFEST = [
   "/assets/css/boteco_style.min.css",
   "/assets/js/main.min.js",
   "/assets/js/menu-gallery.min.js",
-  "/assets/events/archive/archive.json",
-  "/assets/events/events.json"
+  "/assets/events/events_combined.json"
 ];
