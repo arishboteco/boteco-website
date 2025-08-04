@@ -28,22 +28,18 @@
   --color-text-muted: #545454;
   --color-bg-light: #f7f8fc;
 }
-/* Try to load a custom font from assets/fonts/ first. Use the font's
- * original filename and format, for example
- * `Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf`. If the file is not
- * present the rule is ignored and the site falls back to the Fraunces
- * web font. */
+/* Try to load a custom Fraunces font from assets/fonts/. If the file is
+ * missing the browser will simply fall back to generic serif fonts. */
 @font-face {
   font-family: 'BotecoFont';
-  src: url('../fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf')
-       format('truetype');
+  src: url('../fonts/Fraunces.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-body { font-family: 'BotecoFont', 'Fraunces', serif; }
-h1, h2, h3, .brand-name { font-family: 'BotecoFont', 'Fraunces', serif; }
+body { font-family: 'BotecoFont', serif; }
+h1, h2, h3, .brand-name { font-family: 'BotecoFont', serif; }
 
 /* Enable smooth scrolling between internal anchor links */
 html {
