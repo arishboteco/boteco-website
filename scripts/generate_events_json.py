@@ -23,6 +23,39 @@ def parse_event(path: Path):
     }
 
 
+def load_event_dir(dir_path: Path, target: dict, ext_priority: dict, archive: bool = False):
+    """Populate ``target`` with events from ``dir_path`` honoring extension priority.
+
+    When ``archive`` is ``False``, past events are moved into the archive
+    directory before being processed when the archive itself is loaded.
+    """
+
+    today = date.today()
+    skip_names = {"archive.json"} if archive else {"events.json", ARCHIVE_DIR.name}
+
+    for path in sorted(dir_path.iterdir()):
+        if path.name in skip_names or not path.is_file():
+            continue
+
+        event = parse_event(path)
+        if not event:
+            continue
+
+        if not archive:
+            event_date = date.fromisoformat(event["date"])
+            if event_date < today:
+                path.rename(ARCHIVE_DIR / path.name)
+                continue
+
+        key = path.stem.lower()
+        ext = path.suffix.lower()
+        existing = target.get(key)
+        if not existing or ext_priority.get(ext, 0) > ext_priority.get(
+            Path(existing["image"]).suffix.lower(), 0
+        ):
+            target[key] = event
+
+
 def collect_events():
     """Separate upcoming and past events, moving past ones to the archive.
 
@@ -31,7 +64,6 @@ def collect_events():
     generated ``events.json``.
     """
 
-    today = date.today()
     # Use dictionaries keyed by the event slug (date + title) so that we can
     # de-duplicate different image formats for the same event.
     upcoming = {}
@@ -42,34 +74,8 @@ def collect_events():
     # Define a simple priority for image formats. Higher wins.
     ext_priority = {".webp": 3, ".jpg": 2, ".jpeg": 2, ".png": 1}
 
-    for path in sorted(EVENT_DIR.iterdir()):
-        if path.name in {"events.json", ARCHIVE_DIR.name} or not path.is_file():
-            continue
-        event = parse_event(path)
-        if not event:
-            continue
-        event_date = date.fromisoformat(event["date"])
-        key = path.stem.lower()
-        ext = path.suffix.lower()
-        target = archived if event_date < today else upcoming
-        if event_date < today:
-            path.rename(ARCHIVE_DIR / path.name)
-
-        existing = target.get(key)
-        if not existing or ext_priority.get(ext, 0) > ext_priority.get(Path(existing["image"]).suffix.lower(), 0):
-            target[key] = event
-
-    for path in sorted(ARCHIVE_DIR.iterdir()):
-        if path.name == "archive.json" or not path.is_file():
-            continue
-        event = parse_event(path)
-        if not event:
-            continue
-        key = path.stem.lower()
-        ext = path.suffix.lower()
-        existing = archived.get(key)
-        if not existing or ext_priority.get(ext, 0) > ext_priority.get(Path(existing["image"]).suffix.lower(), 0):
-            archived[key] = event
+    load_event_dir(EVENT_DIR, upcoming, ext_priority)
+    load_event_dir(ARCHIVE_DIR, archived, ext_priority, archive=True)
 
     upcoming_list = sorted(upcoming.values(), key=lambda e: e["date"])
     archived_list = sorted(archived.values(), key=lambda e: e["date"], reverse=True)
