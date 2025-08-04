@@ -2,11 +2,13 @@
   {
     "date": "2025-08-07",
     "title": "Brazilian Churrasco Night",
-    "image": "2025-08-07-Brazilian-Churrasco-Night.webp"
+    "image": "2025-08-07-Brazilian-Churrasco-Night.webp",
+    "link": "https://example.com/embed/brazilian-churrasco-night"
   },
   {
     "date": "2025-08-24",
     "title": "Unlimited Breakfast Buffet",
-    "image": "2025-08-24-Unlimited-Breakfast-Buffet.webp"
+    "image": "2025-08-24-Unlimited-Breakfast-Buffet.webp",
+    "link": "https://example.com/embed/unlimited-breakfast-buffet"
   }
 ]

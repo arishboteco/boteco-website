@@ -34,6 +34,16 @@ async function loadEvents() {
             img.className = 'card-img-top';
             img.alt = evt.title;
 
+            let media = img;
+            if (evt.link) {
+                const anchor = document.createElement('a');
+                anchor.href = evt.link;
+                anchor.target = '_blank';
+                anchor.rel = 'noopener';
+                anchor.appendChild(img);
+                media = anchor;
+            }
+
             const body = document.createElement('div');
             body.className = 'card-body';
 
@@ -47,7 +57,7 @@ async function loadEvents() {
 
             body.appendChild(titleEl);
             body.appendChild(dateEl);
-            card.appendChild(img);
+            card.appendChild(media);
             card.appendChild(body);
             col.appendChild(card);
             fragment.appendChild(col);
