@@ -15,6 +15,7 @@ async function loadEvents() {
             return;
         }
         container.innerHTML = '';
+        const fragment = document.createDocumentFragment();
         events.forEach(evt => {
             const dateObj = new Date(evt.date);
             const dateString = isNaN(dateObj)
@@ -49,9 +50,9 @@ async function loadEvents() {
             card.appendChild(img);
             card.appendChild(body);
             col.appendChild(card);
-
-            container.appendChild(col);
+            fragment.appendChild(col);
         });
+        container.appendChild(fragment);
     };
 
     // Attempt to load cached events first
