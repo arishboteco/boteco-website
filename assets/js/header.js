@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         color: '#4285F4'
       }
     ];
+    var svgNS = 'http://www.w3.org/2000/svg';
 
     socialLinks.forEach(function (link) {
       var a = document.createElement('a');
@@ -75,13 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
       a.classList.add('social-icon', link.icon);
       a.style.setProperty('--hover-color', link.color);
 
-      fetch('assets/icons/' + link.icon + '.svg')
-        .then(function (res) {
-          return res.text();
-        })
-        .then(function (svg) {
-          a.innerHTML = svg;
-        });
+      var svg = document.createElementNS(svgNS, 'svg');
+      var title = document.createElementNS(svgNS, 'title');
+      title.textContent = link.alt;
+      var use = document.createElementNS(svgNS, 'use');
+      use.setAttribute('href', 'assets/icons/sprite.svg#' + link.icon);
+      svg.appendChild(title);
+      svg.appendChild(use);
+      a.appendChild(svg);
 
       awardsContainer.appendChild(a);
     });
