@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `boteco-cache-${CACHE_VERSION}`;
 
 // Import build-generated asset manifest
