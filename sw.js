@@ -16,7 +16,9 @@ const ASSETS = [
   '/assets/js/fade-in.min.js',
   '/assets/js/uniform-menu-heights.min.js',
   '/assets/js/carousel-counter.min.js',
-  '/assets/js/menu-gallery.min.js'
+  '/assets/js/menu-gallery.min.js',
+  '/assets/events/events.json',
+  '/assets/events/archive/archive.json'
 ];
 
 self.addEventListener('install', event => {
