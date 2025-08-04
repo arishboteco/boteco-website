@@ -4,10 +4,11 @@
   "description": "This repository contains the static files for the Boteco restaurant website.",
   "scripts": {
     "generate:menus": "python scripts/generate_menu_manifest.py",
+    "generate:events": "python scripts/generate_events_json.py",
     "prefix:css": "postcss assets/css/boteco_style.css --no-map -o assets/css/boteco_style.css",
     "minify:css": "cleancss -o assets/css/boteco_style.min.css assets/css/boteco_style.css",
     "minify:js": "bash -c 'for file in assets/js/*.js; do [[ \"$file\" == *.min.js ]] && continue; uglifyjs \"$file\" -c -m -o \"${file%.js}.min.js\"; done'",
-    "build": "npm-run-all generate:menus prefix:css minify:css minify:js",
+    "build": "npm-run-all generate:menus generate:events prefix:css minify:css minify:js",
     "lint:js": "eslint assets/js",
     "lint:html": "htmlhint \"**/*.html\" --ignore node_modules/**",
     "lint": "npm-run-all lint:js lint:html",
