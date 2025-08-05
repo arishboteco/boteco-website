@@ -9,10 +9,8 @@ from pathlib import Path
 
 MENU_DIR = Path(__file__).resolve().parents[1] / "assets" / "menus"
 PATTERN = re.compile(r"(?P<menu>.+-menu)-pg(?P<page>\d+)\.(?P<ext>jpg|jpeg|png|webp)$", re.IGNORECASE)
-EXT_PRIORITY = {".webp": 3, ".jpg": 2, ".jpeg": 2, ".png": 1}
-
 def generate_manifest() -> None:
-    menus: dict[str, dict[int, str]] = {}
+    menus: dict[str, dict[int, dict[str, str]]] = {}
     for path in MENU_DIR.iterdir():
         if not path.is_file():
             continue
@@ -21,13 +19,25 @@ def generate_manifest() -> None:
             continue
         menu = m.group("menu").lower()
         page = int(m.group("page"))
-        ext = path.suffix.lower()
+        ext = path.suffix.lower().lstrip(".")
         menu_pages = menus.setdefault(menu, {})
-        existing = menu_pages.get(page)
-        if not existing or EXT_PRIORITY.get(ext, 0) > EXT_PRIORITY.get(Path(existing).suffix.lower(), 0):
-            menu_pages[page] = path.name
+        page_files = menu_pages.setdefault(page, {})
+        page_files[ext] = path.name
+
     for menu, pages in menus.items():
-        files = [pages[i] for i in sorted(pages)]
+        files: list[list[str]] = []
+        for i in sorted(pages):
+            page_files = pages[i]
+            entry: list[str] = []
+            webp = page_files.get("webp")
+            jpg = page_files.get("jpg") or page_files.get("jpeg") or page_files.get("png")
+            if webp:
+                entry.append(webp)
+            if jpg:
+                entry.append(jpg)
+            if not entry:
+                continue
+            files.append(entry)
         manifest_path = MENU_DIR / f"{menu}.json"
         with manifest_path.open("w", encoding="utf-8") as f:
             json.dump(files, f, indent=2)
