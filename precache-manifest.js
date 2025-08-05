@@ -13,6 +13,7 @@ self.__ASSETS_MANIFEST = [
   "/assets/js/fade-in.min.js",
   "/assets/js/header.min.js",
   "/assets/js/hero-video.min.js",
+  "/assets/js/lightwidget.min.js",
   "/assets/js/main.min.js",
   "/assets/js/menu-gallery.min.js",
   "/assets/js/uniform-menu-heights.min.js",
