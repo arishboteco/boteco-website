@@ -26,7 +26,7 @@ function renderEvents(e, t, c, n) {
             d.alt = n.title;
             let r = d;
             isValidUrl(n.link) && ((s = document.createElement("a")).href = n.link,
-            s.addEventListener("click", e => {
+            !1 === n.embeddable ? (s.target = "_blank", s.rel = "noopener") : s.addEventListener("click", e => {
                 var t = document.getElementById("eventLinkModal");
                 "undefined" != typeof bootstrap && t && (e.preventDefault(), (e = document.getElementById("eventLinkIframe")) && (e.src = "", e.setAttribute("data-src", n.link)),
                 bootstrap.Modal.getOrCreateInstance(t).show());
