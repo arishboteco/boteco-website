@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll('.modal').forEach(modal => {
     modal.addEventListener('shown.bs.modal', function () {
         const iframe = this.querySelector('iframe[data-src]');
-        if (iframe && !iframe.src) {
+        if (iframe && !iframe.getAttribute('src')) {
             iframe.src = iframe.getAttribute('data-src');
         }
     });
