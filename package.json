@@ -14,7 +14,7 @@
     "lint:js": "eslint assets/js",
     "lint:html": "htmlhint \"**/*.html\" --ignore node_modules/**",
     "lint": "npm-run-all lint:js lint:html",
-    "test": "npm run lint"
+    "test": "npm run lint && node --test"
   },
   "keywords": [],
   "author": "Boteco",
