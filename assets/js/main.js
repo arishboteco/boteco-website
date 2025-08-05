@@ -108,8 +108,9 @@ document.querySelectorAll('.modal').forEach(modal => {
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('iframe[data-src]').forEach(iframe => {
-        if (!iframe.closest('.modal')) {
-            iframe.src = iframe.getAttribute('data-src');
+        const src = iframe.getAttribute('data-src');
+        if (src) {
+            iframe.src = src;
         }
     });
 });
