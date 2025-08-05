@@ -25,9 +25,8 @@ function renderEvents(e, t, c, n) {
             d.loading = "lazy", d.src = c + "/" + n.image, d.className = "card-img-top", 
             d.alt = n.title;
             let r = d;
-            isValidUrl(n.link) && ((s = document.createElement("a")).href = n.link, 
-            s.target = "_blank", s.rel = "noopener noreferrer", s.dataset.bsToggle = "modal", 
-            s.dataset.bsTarget = "#eventLinkModal", s.addEventListener("click", e => {
+            isValidUrl(n.link) && ((s = document.createElement("a")).href = n.link,
+            s.addEventListener("click", e => {
                 var t = document.getElementById("eventLinkModal");
                 "undefined" != typeof bootstrap && t && (e.preventDefault(), (e = document.getElementById("eventLinkIframe")) && (e.src = "", e.setAttribute("data-src", n.link)),
                 bootstrap.Modal.getOrCreateInstance(t).show());
