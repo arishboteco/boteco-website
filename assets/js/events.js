@@ -1,8 +1,8 @@
 // Validate that a string is a properly formed URL.
 function isValidUrl(str) {
     try {
-        new URL(str);
-        return true;
+        const url = new URL(str);
+        return url.protocol === 'http:' || url.protocol === 'https:';
     } catch {
         return false;
     }

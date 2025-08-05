@@ -1,7 +1,8 @@
 /* eslint-disable */
 function isValidUrl(e) {
     try {
-        return new URL(e), !0;
+        var t = new URL(e);
+        return "http:" === t.protocol || "https:" === t.protocol;
     } catch {
         return !1;
     }
