@@ -53,7 +53,8 @@ function renderEvents(events, container, basePath, emptyMsg) {
                     e.preventDefault();
                     const iframe = document.getElementById('eventLinkIframe');
                     if (iframe) {
-                        iframe.src = evt.link;
+                        iframe.src = '';
+                        iframe.setAttribute('data-src', evt.link);
                     }
                     const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                     modal.show();
