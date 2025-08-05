@@ -219,3 +219,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }), a && a.addEventListener("click", () => e.prev()), n && n.addEventListener("click", () => e.next());
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        const hash = link.getAttribute('href');
+        if (hash.length > 1 && !link.hasAttribute('data-bs-toggle')) {
+            link.addEventListener('click', e => {
+                const target = document.querySelector(hash);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+    });
+});
