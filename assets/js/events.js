@@ -43,10 +43,6 @@ function renderEvents(events, container, basePath, emptyMsg) {
         if (isValidUrl(evt.link)) {
             const anchor = document.createElement('a');
             anchor.href = evt.link;
-            anchor.target = '_blank';
-            anchor.rel = 'noopener noreferrer';
-            anchor.dataset.bsToggle = 'modal';
-            anchor.dataset.bsTarget = '#eventLinkModal';
             anchor.addEventListener('click', (e) => {
                 const modalEl = document.getElementById('eventLinkModal');
                 if (typeof bootstrap !== 'undefined' && modalEl) {
