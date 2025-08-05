@@ -1,18 +1,17 @@
 # Auto-detect text files and enforce Unix-style line endings
 * text=auto eol=lf
 
-# Declare binary file types
-*.png   binary
-*.jpg   binary
-*.jpeg  binary
-*.gif   binary
-*.webp  binary
-*.ico   binary
-*.mp4   binary
-*.webm  binary
-*.ttf   binary
-*.woff  binary
-*.woff2 binary
-*.eot   binary
-*.gz    binary
-*.gz -text
+# Force diff generation for common binary assets without EOL conversions
+*.png -text diff
+*.jpg -text diff
+*.jpeg -text diff
+*.gif -text diff
+*.webp -text diff
+*.ico -text diff
+*.mp4 -text diff
+*.webm -text diff
+*.ttf -text diff
+*.woff -text diff
+*.woff2 -text diff
+*.eot -text diff
+*.gz -text diff
