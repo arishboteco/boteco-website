@@ -74,18 +74,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (c) {
         let t = c.getAttribute("poster"), e = c.querySelectorAll("source");
         var r = window.matchMedia("(prefers-reduced-motion: reduce)").matches, a = window.matchMedia("(prefers-reduced-data: reduce)").matches || navigator.connection && navigator.connection.saveData;
-        let o = () => {
+        let n, i, o = () => {
             var e = document.createElement("img");
-            e.src = t, e.alt = "Boteco hero image", e.className = "hero-video", 
-            c.replaceWith(e);
+            e.src = t, e.alt = "Boteco hero image", e.className = "hero-video",
+            c.replaceWith(e), c.removeEventListener("pause", n), c.removeEventListener("ended", n), document.removeEventListener("visibilitychange", i);
         };
         if (r || a) o(); else {
+            n = () => {
+                c.play().catch(o);
+            }, i = () => {
+                "visible" === document.visibilityState && n();
+            };
             let r = () => {
                 e.forEach(e => {
                     e.src = e.dataset.src;
                 }), c.addEventListener("error", o, {
                     once: !0
-                }), c.load(), c.play().catch(() => {});
+                }), c.load(), n(), c.addEventListener("pause", n), c.addEventListener("ended", n), document.addEventListener("visibilitychange", i);
             };
             "IntersectionObserver" in window ? new IntersectionObserver((e, t) => {
                 e.forEach(e => {
