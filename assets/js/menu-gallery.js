@@ -4,19 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const galleries = document.querySelectorAll('[data-menu-gallery]');
   galleries.forEach(async (wrapper) => {
     const menu = wrapper.dataset.menuGallery;
-    const manifest = wrapper.dataset.menuManifest || `assets/menus/${menu}.json`;
-    const imgEl = wrapper.querySelector('.menu-image');
-    const container = imgEl.parentElement;
-    const overlay = imgEl.cloneNode();
-    overlay.style.position = 'absolute';
-    overlay.style.inset = '0';
-    overlay.style.opacity = 0;
-    overlay.style.pointerEvents = 'none';
-    imgEl.style.pointerEvents = 'none';
-    container.style.position = 'relative';
-    container.appendChild(overlay);
-    let activeImg = imgEl;
-    let hiddenImg = overlay;
+    const manifest =
+      wrapper.dataset.menuManifest || `assets/menus/${menu}.json`;
+    const pictureEl = wrapper.querySelector('picture');
+    let sourceEl = pictureEl.querySelector('source');
+    if (!sourceEl) {
+      sourceEl = document.createElement('source');
+      sourceEl.type = 'image/webp';
+      pictureEl.prepend(sourceEl);
+    }
+    const imgEl = pictureEl.querySelector('.menu-image') || pictureEl.querySelector('img');
     const counterEl = wrapper.querySelector('.image-counter');
     const prevBtn = wrapper.querySelector('.prev-btn');
     const nextBtn = wrapper.querySelector('.next-btn');
@@ -29,7 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!res.ok) throw new Error('Manifest not found');
             const files = await res.json();
             const base = manifest.replace(/[^/]+$/, '');
-            return Array.isArray(files) ? files.map(name => `${base}${name}`) : [];
+            const images = Array.isArray(files)
+              ? files.map((item) =>
+                  Array.isArray(item)
+                    ? item.map((name) => `${base}${name}`)
+                    : [`${base}${item}`]
+                )
+              : [];
+            return images;
           } catch {
             return [];
           }
@@ -48,34 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const cache = images.map(src => {
-      const img = new Image();
-      img.src = src;
-      return img;
-    });
-
     let index = 0;
     const update = () => {
-      const cached = cache[index];
-      const show = () => {
-        hiddenImg.src = cached.src;
-        counterEl.textContent = `${index + 1} / ${images.length}`;
-        prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === images.length - 1;
-        requestAnimationFrame(() => {
-          activeImg.style.opacity = 0;
-          hiddenImg.style.opacity = 1;
-        });
-        const tmp = activeImg;
-        activeImg = hiddenImg;
-        hiddenImg = tmp;
-      };
-
-      if (cached.complete) {
-        show();
-      } else {
-        cached.addEventListener('load', show, { once: true });
-      }
+      const current = images[index];
+      sourceEl.srcset = current[0];
+      imgEl.src = current[1] || current[0];
+      counterEl.textContent = `${index + 1} / ${images.length}`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === images.length - 1;
     };
 
     prevBtn.addEventListener('click', () => {
@@ -111,9 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    wrapper.addEventListener('pointerup', () => { startX = null; });
-    wrapper.addEventListener('pointercancel', () => { startX = null; });
+    wrapper.addEventListener('pointerup', () => {
+      startX = null;
+    });
+    wrapper.addEventListener('pointercancel', () => {
+      startX = null;
+    });
 
     update();
   });
 });
+
