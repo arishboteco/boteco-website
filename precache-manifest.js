@@ -16,7 +16,6 @@ self.__ASSETS_MANIFEST = [
   "/assets/js/lightwidget.min.js",
   "/assets/js/main.min.js",
   "/assets/js/menu-gallery.min.js",
-  "/assets/js/uniform-menu-heights.min.js",
   "/assets/events/archive/archive.json",
   "/assets/events/events.json",
   "/assets/events/events_combined.json"
