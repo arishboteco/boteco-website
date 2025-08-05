@@ -6,7 +6,9 @@
  * to ensure a harmonious look and feel across the site. If you use
  * this file remember to remove or comment out the existing colour
  * definitions in your current CSS to avoid conflicts.
- */
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
 
 /* Palette reference:
  * Primary (dark blue):  #005aab
@@ -28,18 +30,21 @@
   --color-text-muted: #545454;
   --color-bg-light: #f7f8fc;
 }
-/* Try to load a custom Fraunces font from assets/fonts/. If the file is
- * missing the browser will simply fall back to generic serif fonts. */
-@font-face {
-  font-family: 'BotecoFont';
-  src: url("../fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf") format('truetype');
-  font-weight: normal;
+body,
+h1,
+h2,
+h3,
+.brand-name {
+  font-family: "Fraunces", serif;
+  font-optical-sizing: auto;
   font-style: normal;
-  font-display: swap;
+  font-variation-settings:
+    "SOFT" 0,
+    "WONK" 0;
 }
 
-body { font-family: 'BotecoFont', serif; }
-h1, h2, h3, .brand-name { font-family: 'BotecoFont', serif; }
+body { font-weight: 400; }
+h1, h2, h3, .brand-name { font-weight: 700; }
 
 /* Enable smooth scrolling between internal anchor links */
 html {

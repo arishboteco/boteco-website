@@ -138,11 +138,15 @@ will also run this script on pushes to ensure WebP versions are committed.
 
 ## Custom Fonts
 
-Place your own font file(s) in `assets/fonts/` using the original file
-name and extension of the downloaded font. For example,
-`Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf`. Update the CSS
-`@font-face` rule to reference this file. If the directory is empty the
-site falls back to the Fraunces typeface served from Google Fonts.
+Fonts are loaded from [Google Fonts](https://fonts.google.com/) using an
+`@import` rule in `assets/css/boteco_style.css`:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+```
+
+To use a different font, change the `@import` URL and update the
+`font-family` declarations in the stylesheet.
 
 ## License
 
