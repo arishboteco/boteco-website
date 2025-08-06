@@ -213,15 +213,15 @@ html {
 }
 
 /* Section styling for dark areas */
-/* Section styling – lighten backgrounds for a more airy look while
-   retaining accent colours for headings. */
+/* Section styling for dark areas – apply a dark background with light text
+   while retaining accent colours for headings. */
 .section-dark {
-  background-color: var(--color-bg-light);
-  color: var(--color-text-dark);
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
 }
 
 .section-dark h2 {
-  color: var(--color-primary);
+  color: var(--color-accent-1);
 }
 
 /* Button styling – matches the golden accent */
