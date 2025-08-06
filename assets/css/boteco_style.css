@@ -27,6 +27,7 @@
   --color-text-dark: #1a1a1a;
   --color-text-muted: #545454;
   --color-bg-light: #f7f8fc;
+  --hover-color: var(--color-accent-1);
 }
 /* Try to load a custom Fraunces font from assets/fonts/. If the file is
  * missing the browser will simply fall back to generic serif fonts. */
