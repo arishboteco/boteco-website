@@ -17,4 +17,10 @@
   <symbol id="chevron-right" viewBox="0 0 24 24">
     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6Z"/>
   </symbol>
+  <symbol id="icon-menu" viewBox="0 0 30 30">
+    <path stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/>
+  </symbol>
+  <symbol id="icon-close" viewBox="0 0 16 16">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 2l12 12M14 2L2 14"/>
+  </symbol>
 </svg>
