@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     img.className = 'hero-video';
     video.replaceWith(img);
     video.removeEventListener('pause', attemptPlay);
-    video.removeEventListener('ended', attemptPlay);
     document.removeEventListener('visibilitychange', onVisibilityChange);
   };
 
@@ -40,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     sources.forEach(source => {
       source.src = source.dataset.src;
     });
+    video.loop = true; // Ensure loop attribute is set
     video.addEventListener('error', swapToImage, { once: true });
     video.load();
     attemptPlay();
     video.addEventListener('pause', attemptPlay);
-    video.addEventListener('ended', attemptPlay);
     document.addEventListener('visibilitychange', onVisibilityChange);
   };
 
