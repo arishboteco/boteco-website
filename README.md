@@ -129,6 +129,55 @@ npm run generate:menus
 
 This command is also executed as part of `npm run build`.
 
+### Update a menu directly from a PDF (recommended)
+
+If your design team sends a new menu as a PDF, you can now convert it and
+update the website in one command.
+
+1. Place the PDF anywhere in the repo (for example: `incoming/food-menu.pdf`).
+2. Run:
+
+   ```bash
+   python3 scripts/update_menu_from_pdf.py --pdf incoming/food-menu.pdf --menu food-menu
+   # or
+   npm run update:menu:pdf -- --pdf incoming/food-menu.pdf --menu food-menu
+   ```
+
+What this does automatically:
+
+- Renders every PDF page as a high-quality image.
+- Saves each page as `assets/menus/<menu>-pg#.jpg` and
+  `assets/menus/<menu>-pg#.webp`.
+- Regenerates `assets/menus/<menu>.json` so the gallery loads the new pages.
+
+What happens to previous images:
+
+- By default, old page images for the same menu are removed first
+  (for example `food-menu-pg1.jpg`, `food-menu-pg2.webp`, etc.) and then
+  replaced with pages from the new PDF.
+- Only the target menu is touched; other menus are left as-is.
+  Updating `food-menu` will not change `bar-menu`, and vice versa.
+- If you want to keep existing files for that menu, add `--keep-old`.
+
+Useful options:
+
+- `--dpi 220` controls render resolution (higher = sharper + larger files).
+- `--quality 88` controls JPEG/WebP compression quality.
+- `--keep-old` keeps old pages instead of replacing them.
+
+Examples for the main menus:
+
+```bash
+# Food menu
+python3 scripts/update_menu_from_pdf.py --pdf incoming/food-menu.pdf --menu food-menu
+
+# Bar menu
+python3 scripts/update_menu_from_pdf.py --pdf incoming/bar-menu.pdf --menu bar-menu
+```
+
+After running the command, open the matching menu page in your browser and
+confirm the new pages look correct.
+
 ## Image Optimization
 
 Add images as `.jpg`, `.png`, or `.gif` and create faster-loading `.webp` copies with:
