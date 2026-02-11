@@ -51,14 +51,7 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Keep existing pages for this menu instead of deleting and replacing them.",
     )
-    args = parser.parse_args()
-
-    if args.dpi < 72 or args.dpi > 600:
-        parser.error("--dpi must be between 72 and 600.")
-    if args.quality < 1 or args.quality > 100:
-        parser.error("--quality must be between 1 and 100.")
-
-    return args
+    return parser.parse_args()
 
 
 def normalize_menu_name(menu: str) -> str:
@@ -68,17 +61,11 @@ def normalize_menu_name(menu: str) -> str:
     return cleaned
 
 
-def list_menu_page_images(menu: str) -> list[Path]:
-    candidates = sorted(MENU_DIR.glob(f"{menu}-pg*"))
-    supported = {".jpg", ".jpeg", ".png", ".webp"}
-    return [path for path in candidates if path.suffix.lower() in supported and path.is_file()]
-
-
-def remove_existing_pages(menu: str) -> int:
-    existing_files = list_menu_page_images(menu)
-    for file_path in existing_files:
-        file_path.unlink(missing_ok=True)
-    return len(existing_files)
+def remove_existing_pages(menu: str) -> None:
+    extensions = ("*.jpg", "*.jpeg", "*.png", "*.webp")
+    for pattern in extensions:
+        for file_path in MENU_DIR.glob(f"{menu}-pg*{pattern[1:]}"):
+            file_path.unlink(missing_ok=True)
 
 
 def render_pdf_pages(pdf_path: Path, dpi: int) -> list[Image.Image]:
@@ -107,8 +94,7 @@ def render_pdf_pages(pdf_path: Path, dpi: int) -> list[Image.Image]:
     return pages
 
 
-def save_pages(menu: str, pages: list[Image.Image], quality: int) -> int:
-    files_written = 0
+def save_pages(menu: str, pages: list[Image.Image], quality: int) -> None:
     for index, image in enumerate(pages, start=1):
         jpg_name = f"{menu}-pg{index}.jpg"
         webp_name = f"{menu}-pg{index}.webp"
@@ -119,9 +105,6 @@ def save_pages(menu: str, pages: list[Image.Image], quality: int) -> int:
         image.save(webp_path, format="WEBP", method=6, quality=quality)
         print(f"Wrote {jpg_path.relative_to(ROOT)}")
         print(f"Wrote {webp_path.relative_to(ROOT)}")
-        files_written += 2
-
-    return files_written
 
 
 def regenerate_manifests() -> None:
@@ -143,24 +126,16 @@ def main() -> None:
     menu = normalize_menu_name(args.menu)
     MENU_DIR.mkdir(parents=True, exist_ok=True)
 
-    deleted_count = 0
     if not args.keep_old:
-        deleted_count = remove_existing_pages(menu)
+        remove_existing_pages(menu)
 
     pages = render_pdf_pages(pdf_path, dpi=args.dpi)
-    files_written = save_pages(menu, pages, quality=args.quality)
+    save_pages(menu, pages, quality=args.quality)
     regenerate_manifests()
 
     print("\nDone.")
-    print(f"Target menu: {menu}")
-    if args.keep_old:
-        print("Old files: kept (only new page files were added/overwritten)")
-    else:
-        print(f"Old files removed for this menu: {deleted_count}")
-    print("Other menus were not modified.")
-    print(f"Menu updated from PDF: {pdf_path}")
+    print(f"Menu '{menu}' was updated from: {pdf_path}")
     print(f"Pages generated: {len(pages)}")
-    print(f"Image files written: {files_written}")
     print("Open the corresponding menu page in your browser to verify visual quality.")
 
 

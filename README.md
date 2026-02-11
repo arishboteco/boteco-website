@@ -131,65 +131,6 @@ This command is also executed as part of `npm run build`.
 
 ### Update a menu directly from a PDF (recommended)
 
-### Automatic mode (no command needed after upload)
-
-If you upload a PDF to `incoming/` and push to GitHub, the workflow
-`Update menus from uploaded PDFs` runs automatically.
-
-- Trigger folder: `incoming/` (PDF files only).
-- Example filenames:
-  - `incoming/food-menu.pdf`
-  - `incoming/bar-menu.pdf`
-  - `incoming/specials-menu.pdf`
-- The workflow converts the PDF pages into `assets/menus/` images and updates
-  the related manifest JSON automatically.
-
-How menu type is chosen in automatic mode:
-
-- The PDF filename decides the menu target.
-- `food-menu.pdf` updates `food-menu` pages.
-- `bar-menu.pdf` updates `bar-menu` pages.
-- A filename like `bar.pdf` is normalized to `bar-menu`.
-
-### Exact click-by-click: how to run the command
-
-Use this when you have never done it before.
-
-1. Save your PDF file in the repo (recommended folder: `incoming/`).
-
-   Example:
-
-   ```bash
-   mkdir -p incoming
-   # then copy your file so it becomes:
-   # incoming/food-menu.pdf
-   ```
-
-2. Open a terminal in the project root (`/workspace/boteco-website`) and run one command:
-
-   ```bash
-   # Food menu
-   python3 scripts/update_menu_from_pdf.py --pdf incoming/food-menu.pdf --menu food-menu
-
-   # Bar menu
-   python3 scripts/update_menu_from_pdf.py --pdf incoming/bar-menu.pdf --menu bar-menu
-   ```
-
-3. Wait for a `Done.` message. The script will tell you:
-   - how many old files were removed for that menu,
-   - how many pages were generated,
-   - and how many image files were written.
-
-4. Check output files in `assets/menus/`:
-   - images like `food-menu-pg1.jpg` and `food-menu-pg1.webp`
-   - updated manifest like `food-menu.json`
-
-5. Open the matching page in browser and verify:
-   - `food-menu.html` for food
-   - `bar-menu.html` for bar
-
-If your file path or file name is different, just change the `--pdf` value to match the real location.
-
 If your design team sends a new menu as a PDF, you can now convert it and
 update the website in one command.
 
@@ -209,33 +150,14 @@ What this does automatically:
   `assets/menus/<menu>-pg#.webp`.
 - Regenerates `assets/menus/<menu>.json` so the gallery loads the new pages.
 
-What happens to previous images:
-
-- By default, old page images for the same menu are removed first
-  (for example `food-menu-pg1.jpg`, `food-menu-pg2.webp`, etc.) and then
-  replaced with pages from the new PDF.
-- Only the target menu is touched; other menus are left as-is.
-  Updating `food-menu` will not change `bar-menu`, and vice versa.
-- If you want to keep existing files for that menu, add `--keep-old`.
-
 Useful options:
 
 - `--dpi 220` controls render resolution (higher = sharper + larger files).
 - `--quality 88` controls JPEG/WebP compression quality.
 - `--keep-old` keeps old pages instead of replacing them.
 
-Examples for the main menus:
-
-```bash
-# Food menu
-python3 scripts/update_menu_from_pdf.py --pdf incoming/food-menu.pdf --menu food-menu
-
-# Bar menu
-python3 scripts/update_menu_from_pdf.py --pdf incoming/bar-menu.pdf --menu bar-menu
-```
-
-After running the command, open the matching menu page in your browser and
-confirm the new pages look correct.
+After running the command, open the menu page in your browser and confirm the
+new pages look correct.
 
 ## Image Optimization
 
