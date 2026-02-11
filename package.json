@@ -14,7 +14,8 @@
     "lint:js": "eslint assets/js",
     "lint:html": "htmlhint \"**/*.html\" --ignore node_modules/**",
     "lint": "npm-run-all lint:js lint:html",
-    "test": "npm run lint && node --test"
+    "test": "npm run lint && node --test",
+    "update:menu:pdf": "python3 scripts/update_menu_from_pdf.py"
   },
   "keywords": [],
   "author": "Boteco",
