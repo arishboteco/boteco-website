@@ -540,19 +540,30 @@
     <section id="contact" class="py-5 contact-section fade-in-section">
         <div class="container">
             <h2 class="text-center mb-4">Find Us</h2>
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-6 col-lg-5">
+                    <label for="outletSelector" class="form-label"><strong>Select Outlet:</strong></label>
+                    <select id="outletSelector" class="form-select" aria-label="Select Boteco outlet">
+                        <option value="" selected disabled>Loading outlets...</option>
+                    </select>
+                </div>
+            </div>
             <div class="row g-4 align-items-center">
                 <div class="col-md-6 contact-info">
                     <p><strong>Address:</strong><br>
-                        Unit 6, IndiQube Symphony, 25,<br>
-                        Mahatma Gandhi Rd, Craig Park Layout,<br>
-                        Ashok Nagar, Bengaluru,<br>
-                        Karnataka 560001, India
+                        <span id="outletAddress">
+                            Unit 6, IndiQube Symphony, 25,<br>
+                            Mahatma Gandhi Rd, Craig Park Layout,<br>
+                            Ashok Nagar, Bengaluru,<br>
+                            Karnataka 560001, India
+                        </span>
                     </p>
-                    <p><strong>Phone:</strong> <a href="tel:+918792045444">+91 87920 45444</a></p>
+                    <p><strong>Phone:</strong> <a id="outletPhone" href="tel:+918792045444">+91 87920 45444</a></p>
+                    <p><strong>Hours:</strong> <span id="outletHours">Mon-Sun, 12:00 PM - 1:00 AM</span></p>
                 </div>
                 <div class="col-md-6">
                     <div class="ratio ratio-4x3">
-                        <iframe loading="lazy" class="maps-iframe" allowfullscreen width="600" height="450" title="Boteco location on Google Maps" src="https://www.google.com/maps?q=Unit%206%2C%20IndiQube%20Symphony%2C%2025%2C%20Mahatma%20Gandhi%20Rd%2C%20Craig%20Park%20Layout%2C%20Ashok%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560001%2C%20India&output=embed"></iframe>
+                        <iframe id="outletMap" loading="lazy" class="maps-iframe" allowfullscreen width="600" height="450" title="Boteco location on Google Maps" src="https://www.google.com/maps?q=Unit%206%2C%20IndiQube%20Symphony%2C%2025%2C%20Mahatma%20Gandhi%20Rd%2C%20Craig%20Park%20Layout%2C%20Ashok%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560001%2C%20India&output=embed"></iframe>
                     </div>
                 </div>
             </div>
@@ -564,12 +575,13 @@
     </footer>
 
     <!-- WhatsApp Floating Chat Widget -->
-    <a href="https://wa.me/918792045444?text=Hi%20there%2C%20I%20visited%20your%20website%20and%20have%20a%20question" class="whatsapp_float" target="_blank" rel="noopener">
+    <a id="outletWhatsapp" href="https://wa.me/918792045444?text=Hi%20there%2C%20I%20visited%20your%20website%20and%20have%20a%20question" class="whatsapp_float" target="_blank" rel="noopener">
       <img src="assets/images/logos/Digital_Glyph_Green.svg" alt="WhatsApp logo" width="64" height="64">
     </a>
 
     <!-- Consolidated site scripts -->
     <script src="assets/js/main.min.js" defer></script>
+    <script src="assets/js/outlets.js" defer></script>
     <script src="assets/js/bootstrap.bundle.min.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {
