@@ -5,7 +5,7 @@
             name: 'Boteco - Indiqube Symphony, MG Road',
             phoneRaw: '+918792045444',
             phoneDisplay: '+91 87920 45444',
-            hours: 'Mon-Sun, 12:00 PM - 1:00 AM',
+            hours: 'Mon-Sun, 12:00 PM - 1:00 AM | Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM',
             addressLines: [
                 'Unit 6, IndiQube Symphony, 25,',
                 'Mahatma Gandhi Rd, Craig Park Layout,',
@@ -19,7 +19,7 @@
             name: 'Boteco - Bagmane Solarium City (Coming Soon)',
             phoneRaw: '+918792045444',
             phoneDisplay: '+91 87920 45444',
-            hours: 'Mon-Sun, 12:00 PM - 1:00 AM',
+            hours: 'Mon-Sun, 12:00 PM - 1:00 AM | Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM',
             addressLines: [
                 'Bagmane Solarium City,',
                 'Bengaluru, Karnataka, India'
