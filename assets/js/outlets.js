@@ -2,7 +2,7 @@
     const outlets = [
         {
             id: 'mg-road',
-            name: 'Boteco MG Road (Current)',
+            name: 'Boteco - Indiqube Symphony, MG Road',
             phoneRaw: '+918792045444',
             phoneDisplay: '+91 87920 45444',
             hours: 'Mon-Sun, 12:00 PM - 1:00 AM',
@@ -16,7 +16,7 @@
         },
         {
             id: 'bagmane-solarium-city',
-            name: 'Boteco - Bagmane Solarium City',
+            name: 'Boteco - Bagmane Solarium City (Coming Soon)',
             phoneRaw: '+918792045444',
             phoneDisplay: '+91 87920 45444',
             hours: 'Mon-Sun, 12:00 PM - 1:00 AM',
