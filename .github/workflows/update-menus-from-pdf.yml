@@ -1,0 +1,46 @@
+name: Update menus from uploaded PDFs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '*menu*.pdf'
+      - 'incoming/**/*.pdf'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Process uploaded menu PDFs
+        run: python3 scripts/process_incoming_menu_pdfs.py
+
+      - name: Commit and push generated menu assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git status --porcelain | grep -E 'assets/menus/'; then
+            git add assets/menus
+            git commit -m 'chore: update menu assets from uploaded pdfs'
+            git push origin HEAD:${GITHUB_REF#refs/heads/}
+          else
+            echo 'No generated menu changes to commit.'
+          fi
