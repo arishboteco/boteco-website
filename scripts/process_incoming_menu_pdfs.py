@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Process all menu PDFs from incoming/ and update website menu assets.
+"""Process uploaded menu PDFs and update website menu assets.
 
 This utility is intended for automation in CI when PDFs are uploaded to the repo.
 """
@@ -9,21 +9,31 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from update_menu_from_pdf import normalize_menu_name, regenerate_manifests, remove_existing_pages, render_pdf_pages, save_pages
+from update_menu_from_pdf import (
+    normalize_menu_name,
+    regenerate_manifests,
+    remove_existing_pages,
+    render_pdf_pages,
+    save_pages,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE_DIR = ROOT / "incoming"
+DEFAULT_SOURCE_DIRS = [ROOT / "incoming", ROOT]
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Convert every PDF in a folder into menu images and refresh menu manifests."
+        description="Convert uploaded menu PDFs into menu images and refresh menu manifests."
     )
     parser.add_argument(
         "--source-dir",
+        action="append",
+        dest="source_dirs",
         type=Path,
-        default=DEFAULT_SOURCE_DIR,
-        help="Folder that contains uploaded menu PDFs (default: incoming/).",
+        help=(
+            "Folder to scan for menu PDFs. Repeat the option to include multiple folders. "
+            "Default scan locations: incoming/ and repo root."
+        ),
     )
     parser.add_argument(
         "--dpi",
@@ -49,6 +59,9 @@ def parse_args() -> argparse.Namespace:
     if args.quality < 1 or args.quality > 100:
         parser.error("--quality must be between 1 and 100.")
 
+    if not args.source_dirs:
+        args.source_dirs = DEFAULT_SOURCE_DIRS
+
     return args
 
 
@@ -57,22 +70,38 @@ def infer_menu_from_pdf_name(pdf_path: Path) -> str:
 
     Examples:
       food-menu.pdf -> food-menu
-      bar.pdf -> bar-menu
-      specials_menu.pdf -> specials-menu
+      bar-menu.pdf -> bar-menu
+      specials-menu.pdf -> specials-menu
     """
     return normalize_menu_name(pdf_path.stem)
 
 
+def collect_pdf_paths(source_dirs: list[Path]) -> list[Path]:
+    pdfs: dict[str, Path] = {}
+    for source_dir in source_dirs:
+        resolved_dir = source_dir.resolve()
+        if not resolved_dir.exists():
+            continue
+        for path in resolved_dir.glob("*.pdf"):
+            if not path.is_file():
+                continue
+            # Keep automation focused on menu uploads and avoid unrelated PDFs.
+            if "menu" not in path.stem.lower():
+                continue
+            pdfs[str(path.resolve())] = path.resolve()
+    return sorted(pdfs.values())
+
+
 def main() -> None:
     args = parse_args()
-    source_dir = args.source_dir.resolve()
-    if not source_dir.exists():
-        print(f"No source folder found at: {source_dir}")
-        return
+    source_dirs = [p.resolve() for p in args.source_dirs]
 
-    pdf_paths = sorted(path for path in source_dir.glob("*.pdf") if path.is_file())
+    pdf_paths = collect_pdf_paths(source_dirs)
     if not pdf_paths:
-        print(f"No PDFs found in: {source_dir}")
+        print("No menu PDFs found. Checked folders:")
+        for folder in source_dirs:
+            print(f"- {folder}")
+        print("Tip: use names like 'food-menu.pdf' or 'bar-menu.pdf'.")
         return
 
     total_pages = 0
@@ -104,7 +133,7 @@ def main() -> None:
 
     regenerate_manifests()
 
-    print("\nDone processing uploaded PDFs.")
+    print("\nDone processing uploaded menu PDFs.")
     print(f"PDF files processed: {len(pdf_paths)}")
     print(f"Total pages generated: {total_pages}")
     print(f"Total image files written: {total_files_written}")

@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - '*menu*.pdf'
       - 'incoming/**/*.pdf'
 
 permissions:
@@ -27,7 +28,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Process uploaded menu PDFs
-        run: python3 scripts/process_incoming_menu_pdfs.py --source-dir incoming
+        run: python3 scripts/process_incoming_menu_pdfs.py
 
       - name: Commit and push generated menu assets
         env:
