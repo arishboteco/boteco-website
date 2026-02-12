@@ -15,16 +15,16 @@
             mapEmbedUrl: 'https://www.google.com/maps?q=Unit%206%2C%20IndiQube%20Symphony%2C%2025%2C%20Mahatma%20Gandhi%20Rd%2C%20Craig%20Park%20Layout%2C%20Ashok%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560001%2C%20India&output=embed'
         },
         {
-            id: 'new-outlet-placeholder',
-            name: 'Boteco New Outlet (Coming Soon)',
-            phoneRaw: '+919999999999',
-            phoneDisplay: '+91 99999 99999',
-            hours: 'Mon-Sun, 12:00 PM - 12:00 AM',
+            id: 'bagmane-solarium-city',
+            name: 'Boteco - Bagmane Solarium City',
+            phoneRaw: '+918792045444',
+            phoneDisplay: '+91 87920 45444',
+            hours: 'Mon-Sun, 12:00 PM - 1:00 AM',
             addressLines: [
-                'New Boteco outlet opening soon,',
+                'Bagmane Solarium City,',
                 'Bengaluru, Karnataka, India'
             ],
-            mapEmbedUrl: 'https://www.google.com/maps?q=Bengaluru%2C%20Karnataka%2C%20India&output=embed'
+            mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.979672437753!2d77.7092662!3d12.973151900000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1100215001ff%3A0x40d062e8953b5276!2sBagmane%20Solarium%20City!5e0!3m2!1sen!2snl!4v1770897935199!5m2!1sen!2snl'
         }
     ];
 
