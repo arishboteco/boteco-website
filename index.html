@@ -530,6 +530,8 @@
         <div class="container">
             <h2 class="text-center mb-4">Follow Us on Instagram</h2>
             <div class="instagram-feed text-center">
+                <!-- Ensure LightWidget's parent-page bridge is ready before the widget iframe posts lightbox events -->
+                <script src="assets/js/lightwidget.min.js"></script>
                 <!-- LightWidget WIDGET -->
                 <iframe loading="lazy" src="https://cdn.lightwidget.com/widgets/6b9d7a521d8f583d89c382ffd9de6921.html" scrolling="no" allowtransparency="true" class="lightwidget-widget"></iframe>
             </div>
