@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    const REPO_OWNER = 'anomalyco';
+    const REPO_OWNER = 'arishboteco';
     const REPO_NAME = 'boteco-website';
     const GITHUB_API = 'https://api.github.com';
 
