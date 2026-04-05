@@ -615,5 +615,6 @@ footer a:hover {
 .lw-lightbox img {
   max-width: 100% !important;
   max-height: 90vh !important;
-  object-fit: contain !important;
+  -o-object-fit: contain !important;
+     object-fit: contain !important;
 }
