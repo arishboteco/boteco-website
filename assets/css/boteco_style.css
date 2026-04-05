@@ -587,3 +587,33 @@ footer a:hover {
 .maps-iframe {
   border: 0;
 }
+
+/* LightWidget lightbox overrides — prevent clipping/overflow issues */
+[class*="lw-"],
+[class*="lightbox-"],
+.lw-lightbox,
+.lw-overlay,
+.lw-lightbox-container,
+.lw-lightbox-item {
+  box-sizing: border-box;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.lw-lightbox {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  overflow: visible !important;
+}
+
+.lw-lightbox img {
+  max-width: 100% !important;
+  max-height: 90vh !important;
+  object-fit: contain !important;
+}
