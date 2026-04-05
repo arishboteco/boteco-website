@@ -10,24 +10,24 @@
     let currentUser = null;
 
     function getStoredPat() {
-        return sessionStorage.getItem(STORAGE_KEY);
+        return localStorage.getItem(STORAGE_KEY);
     }
 
     function storePat(pat) {
-        sessionStorage.setItem(STORAGE_KEY, pat);
-        sessionStorage.setItem(SESSION_START_KEY, Date.now().toString());
+        localStorage.setItem(STORAGE_KEY, pat);
+        localStorage.setItem(SESSION_START_KEY, Date.now().toString());
     }
 
     function clearSession() {
-        sessionStorage.removeItem(STORAGE_KEY);
-        sessionStorage.removeItem(USER_KEY);
-        sessionStorage.removeItem(SESSION_START_KEY);
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(USER_KEY);
+        localStorage.removeItem(SESSION_START_KEY);
         currentPat = null;
         currentUser = null;
     }
 
     function isSessionValid() {
-        const start = sessionStorage.getItem(SESSION_START_KEY);
+        const start = localStorage.getItem(SESSION_START_KEY);
         if (!start) return false;
         return (Date.now() - parseInt(start, 10)) < SESSION_DURATION_MS;
     }
@@ -62,7 +62,7 @@
             currentPat = pat;
             currentUser = user;
             storePat(pat);
-            sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+            localStorage.setItem(USER_KEY, JSON.stringify(user));
             AdminUtils.hideLoading(loading);
             showDashboard();
             AdminUtils.showToast(`Welcome, ${user.login}!`, 'success');
@@ -103,7 +103,7 @@
         if (!timerEl) return;
 
         function update() {
-            const start = parseInt(sessionStorage.getItem(SESSION_START_KEY) || '0', 10);
+            const start = parseInt(localStorage.getItem(SESSION_START_KEY) || '0', 10);
             const remaining = SESSION_DURATION_MS - (Date.now() - start);
 
             if (remaining <= 0) {
@@ -132,7 +132,7 @@
     }
 
     function getUser() {
-        return currentUser || JSON.parse(sessionStorage.getItem(USER_KEY) || 'null');
+        return currentUser || JSON.parse(localStorage.getItem(USER_KEY) || 'null');
     }
 
     async function githubApi(path, options = {}) {
@@ -173,7 +173,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const storedPat = getStoredPat();
         if (storedPat && isSessionValid()) {
-            const storedUser = JSON.parse(sessionStorage.getItem(USER_KEY) || 'null');
+            const storedUser = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
             if (storedUser) {
                 currentPat = storedPat;
                 currentUser = storedUser;
