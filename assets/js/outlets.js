@@ -16,15 +16,16 @@
         },
         {
             id: 'bagmane-solarium-city',
-            name: 'Boteco - Bagmane Solarium City (Coming Soon)',
+            name: 'Boteco - Bagmane Solarium City, Brookefield (Coming Soon)',
             phoneRaw: '+918792045444',
             phoneDisplay: '+91 87920 45444',
             hours: 'Mon-Sun, 12:00 PM - 1:00 AM | Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM',
             addressLines: [
-                'Bagmane Solarium City,',
-                'Bengaluru, Karnataka, India'
+                '366, Dodda Nekkundi Extension,',
+                'Brookefield, Bengaluru,',
+                'Karnataka 560037, India'
             ],
-            mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.979672437753!2d77.7092662!3d12.973151900000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1100215001ff%3A0x40d062e8953b5276!2sBagmane%20Solarium%20City!5e0!3m2!1sen!2snl!4v1770897935199!5m2!1sen!2snl'
+            mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.994918520729!2d77.708105!3d12.9721766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13d4b3c4fc31%3A0x918315b068024f40!2sBoteco%20-%20Restaurante%20Brasileiro%20(Bagmane%20Solarium%20City%2C%20Brookefield)!5e0!3m2!1sen!2sin!4v1775379958876!5m2!1sen!2sin'
         }
     ];
 
