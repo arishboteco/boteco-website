@@ -86,10 +86,7 @@
             const data = await AdminAuth.githubApi(`/contents/${filePath}`);
             return data.sha;
         } catch (err) {
-            if (err.message && err.message.includes('404')) {
-                return null;
-            }
-            throw err;
+            return null;
         }
     }
 
@@ -111,7 +108,7 @@
                 for (const change of pendingChanges) {
                     const sha = await getFileSha(change.filePath);
                     const content = await change.contentFn();
-                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/=]+$/.test(content);
+                    const isBase64 = typeof content === 'string' && content.length > 0 && !content.includes('<') && (content.length % 4 === 0 || content.includes('='));
                     const base64Content = isBase64 ? content : btoa(unescape(encodeURIComponent(content)));
 
                     const body = {
@@ -120,6 +117,8 @@
                         branch: 'main'
                     };
                     if (sha) body.sha = sha;
+                    
+                    console.log('Committing file:', change.filePath, 'sha:', sha, 'content length:', base64Content.length);
 
                     await AdminAuth.githubApi(`/contents/${change.filePath}`, {
                         method: 'PUT',
