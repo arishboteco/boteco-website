@@ -111,7 +111,8 @@
                 for (const change of pendingChanges) {
                     const sha = await getFileSha(change.filePath);
                     const content = await change.contentFn();
-                    const base64Content = btoa(unescape(encodeURIComponent(content)));
+                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/=]+$/.test(content);
+                    const base64Content = isBase64 ? content : btoa(unescape(encodeURIComponent(content)));
 
                     const body = {
                         message: commitMessage,
@@ -145,7 +146,8 @@
                 for (const change of pendingChanges) {
                     const sha = await getFileSha(change.filePath);
                     const content = await change.contentFn();
-                    const base64Content = btoa(unescape(encodeURIComponent(content)));
+                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/=]+$/.test(content);
+                    const base64Content = isBase64 ? content : btoa(unescape(encodeURIComponent(content)));
 
                     const body = {
                         message: commitMessage,
