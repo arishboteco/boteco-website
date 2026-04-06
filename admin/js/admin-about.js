@@ -105,9 +105,9 @@
                     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
                 <p>${imgInfo.label}</p>
-                <p class="upload-hint">Drop image here or click to browse</p>
+                <p class="upload-hint">Drop image or video here or click to browse</p>
             </div>
-            <input type="file" accept="image/*" class="file-input" hidden>
+            <input type="file" accept="image/*,video/*" class="file-input" hidden>
         `;
 
         const fileInput = zone.querySelector('.file-input');
@@ -139,24 +139,39 @@
 
     async function handleImageUpload(targetPath, file, zone) {
         try {
+            const isVideo = file.type.startsWith('video/');
             let base64Content;
-            if (AdminCompress.isImageFile(file)) {
+            let commitMessage;
+            
+            if (isVideo) {
+                base64Content = await AdminCompress.fileToBase64(file);
+                const ext = file.name.split('.').pop().toLowerCase();
+                const num = targetPath.match(/tile(\d+)/)[1];
+                targetPath = 'assets/images/about/about-us-tile' + num + '.' + ext;
+                commitMessage = 'Replace about tile ' + num + ' video';
+            } else if (AdminCompress.isImageFile(file)) {
                 const compressed = await AdminCompress.compressImage(file);
                 base64Content = await AdminCompress.blobToBase64(compressed.webp);
                 AdminUtils.showToast(`Compressed: ${AdminCompress.formatBytes(file.size)} → ${AdminCompress.formatBytes(compressed.webpSize)}`, 'success');
+                commitMessage = 'Replace image';
             } else {
                 base64Content = await AdminCompress.fileToBase64(file);
+                commitMessage = 'Replace file';
             }
 
             AdminCommit.addChange(
                 targetPath,
-                `Replace image`,
+                commitMessage,
                 async () => base64Content
             );
 
-            const preview = document.createElement('img');
+            const preview = document.createElement(isVideo ? 'video' : 'img');
             preview.className = 'upload-preview';
             preview.src = URL.createObjectURL(file);
+            preview.autoplay = true;
+            preview.loop = true;
+            preview.muted = true;
+            preview.playsInline = true;
             zone.appendChild(preview);
         } catch (err) {
             AdminUtils.showToast(`Upload failed: ${err.message}`, 'error');

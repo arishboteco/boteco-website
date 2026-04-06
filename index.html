@@ -110,30 +110,39 @@
             </div>
             <!-- Grid of photos showcasing the restaurant -->
             <div id="about-images-grid" class="about-photo-grid mb-4">
-                <picture>
-                    <source srcset="assets/images/about/about-us-tile1.webp" type="image/webp">
-                    <img loading="lazy" src="assets/images/about/about-us-tile1.jpg" alt="Boteco interior image 1" class="rounded" width="1080" height="1080">
-                </picture>
-                <picture>
-                    <source srcset="assets/images/about/about-us-tile2.webp" type="image/webp">
-                    <img loading="lazy" src="assets/images/about/about-us-tile2.jpg" alt="Boteco interior image 2" class="rounded" width="1080" height="1080">
-                </picture>
-                <picture>
-                    <source srcset="assets/images/about/about-us-tile3.webp" type="image/webp">
-                    <img loading="lazy" src="assets/images/about/about-us-tile3.jpg" alt="Boteco interior image 3" class="rounded" width="1080" height="1080">
-                </picture>
-                <video autoplay loop muted playsinline class="rounded" width="1080" height="1080" poster="assets/images/about/about-us-tile4.jpg">
-                    <source src="assets/images/about/About_Us GIF.MP4" type="video/mp4">
-                    <img loading="lazy" src="assets/images/about/about-us-tile4.gif" alt="Boteco interior animation 4" class="rounded" width="1080" height="1080">
-                </video>
-                <picture>
-                    <source srcset="assets/images/about/about-us-tile5.webp" type="image/webp">
-                    <img loading="lazy" src="assets/images/about/about-us-tile5.jpg" alt="Boteco interior image 5" class="rounded" width="1080" height="1080">
-                </picture>
-                <picture>
-                    <source srcset="assets/images/about/about-us-tile6.webp" type="image/webp">
-                    <img loading="lazy" src="assets/images/about/about-us-tile6.jpg" alt="Boteco interior image 6" class="rounded" width="1080" height="1080">
-                </picture>
+                <script>
+                (function() {
+                    const tiles = [
+                        { num: 1, types: ['jpg', 'webp'] },
+                        { num: 2, types: ['jpg', 'webp'] },
+                        { num: 3, types: ['jpg', 'webp'] },
+                        { num: 4, types: ['jpg', 'webp'], video: 'mp4' },
+                        { num: 5, types: ['jpg', 'webp'] },
+                        { num: 6, types: ['jpg', 'webp'] }
+                    ];
+                    const grid = document.getElementById('about-images-grid');
+                    tiles.forEach((tile, idx) => {
+                        const container = document.createElement('div');
+                        const basePath = 'assets/images/about/about-us-tile' + tile.num;
+                        const videoSrc = tile.video ? basePath + '.' + tile.video : null;
+                        if (videoSrc) {
+                            container.innerHTML = 
+                                '<video autoplay loop muted playsinline class="rounded" width="1080" height="1080" poster="' + basePath + '.jpg">' +
+                                    '<source src="' + videoSrc + '" type="video/' + tile.video + '">' +
+                                    '<img loading="lazy" src="' + basePath + '.gif" alt="Boteco interior animation ' + tile.num + '" class="rounded" width="1080" height="1080">' +
+                                '</video>';
+                        } else {
+                            let sources = '', imgSrc = basePath + '.jpg';
+                            tile.types.forEach(ext => {
+                                if (ext === 'webp') sources += '<source srcset="' + basePath + '.webp" type="image/webp">';
+                            });
+                            sources += '<img loading="lazy" src="' + imgSrc + '" alt="Boteco interior image ' + tile.num + '" class="rounded" width="1080" height="1080">';
+                            container.innerHTML = '<picture>' + sources + '</picture>';
+                        }
+                        grid.appendChild(container);
+                    });
+                })();
+                </script>
             </div>
             <div class="row row-cols-1 row-cols-md-2 g-3">
                 <div class="col">
