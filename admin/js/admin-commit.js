@@ -86,7 +86,7 @@
             const data = await AdminAuth.githubApi(`/contents/${filePath}`);
             return data.sha;
         } catch (err) {
-            console.log('getFileSha error:', err.message, 'for:', filePath);
+            console.log('getFileSha caught error:', err);
             return null;
         }
     }
