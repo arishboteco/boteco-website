@@ -121,11 +121,16 @@
                     
                     console.log('Committing file:', change.filePath, 'sha:', sha, 'content length:', base64Content.length);
 
-                    await AdminAuth.githubApi(`/contents/${change.filePath}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
+                    try {
+                        await AdminAuth.githubApi(`/contents/${change.filePath}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body)
+                        });
+                    } catch (putErr) {
+                        console.log('PUT failed:', putErr);
+                        throw putErr;
+                    }
                 }
                 AdminUtils.showToast('Changes committed successfully!', 'success');
             } else {
