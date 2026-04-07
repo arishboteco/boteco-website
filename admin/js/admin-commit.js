@@ -108,8 +108,8 @@
                 for (const change of pendingChanges) {
                     const sha = await getFileSha(change.filePath);
                     const content = await change.contentFn();
-                    const isBase64 = typeof content === 'string' && content.length > 0 && !content.includes('<') && (content.length % 4 === 0 || content.includes('='));
-                    const base64Content = isBase64 ? content : btoa(unescape(encodeURIComponent(content)));
+                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/]+=*$/.test(content.replace(/\s/g, ''));
+                    const base64Content = isBase64 ? content.replace(/\s/g, '') : btoa(unescape(encodeURIComponent(content)));
 
                     const body = {
                         message: commitMessage,
@@ -143,8 +143,8 @@
                 for (const change of pendingChanges) {
                     const sha = await getFileSha(change.filePath);
                     const content = await change.contentFn();
-                    const isBase64 = typeof content === 'string' && content.length > 0 && !content.includes('<') && (content.length % 4 === 0 || content.includes('='));
-                    const base64Content = isBase64 ? content : btoa(unescape(encodeURIComponent(content)));
+                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/]+=*$/.test(content.replace(/\s/g, ''));
+                    const base64Content = isBase64 ? content.replace(/\s/g, '') : btoa(unescape(encodeURIComponent(content)));
 
                     const body = {
                         message: commitMessage,
