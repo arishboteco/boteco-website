@@ -137,6 +137,23 @@
         return zone;
     }
 
+    async function updateTilesConfig(tileNum, type, ext) {
+        try {
+            const data = await AdminAuth.githubApi('/contents/assets/data/about-tiles.json');
+            const config = JSON.parse(atob(data.content));
+            const tile = config.find(t => t.num === tileNum);
+            if (tile) {
+                tile.type = type;
+                if (ext) tile.ext = ext;
+                else delete tile.ext;
+            }
+            return { sha: data.sha, content: JSON.stringify(config, null, 2) };
+        } catch (err) {
+            console.error('Failed to update tiles config:', err);
+            return null;
+        }
+    }
+
     async function handleImageUpload(targetPath, file, zone) {
         try {
             const isVideo = file.type.startsWith('video/');
@@ -146,14 +163,33 @@
             if (isVideo) {
                 base64Content = await AdminCompress.fileToBase64(file);
                 const ext = file.name.split('.').pop().toLowerCase();
-                const num = targetPath.match(/tile(\d+)/)[1];
+                const num = parseInt(targetPath.match(/tile(\d+)/)[1]);
                 targetPath = 'assets/images/about/about-us-tile' + num + '.' + ext;
                 commitMessage = 'Replace about tile ' + num + ' video';
+                
+                const configUpdate = await updateTilesConfig(num, 'video', ext);
+                if (configUpdate) {
+                    AdminCommit.addChange(
+                        'assets/data/about-tiles.json',
+                        'Update tiles config',
+                        async () => configUpdate.content
+                    );
+                }
             } else if (AdminCompress.isImageFile(file)) {
                 const compressed = await AdminCompress.compressImage(file);
                 base64Content = await AdminCompress.blobToBase64(compressed.webp);
-                AdminUtils.showToast(`Compressed: ${AdminCompress.formatBytes(file.size)} → ${AdminCompress.formatBytes(compressed.webpSize)}`, 'success');
+                AdminUtils.showToast('Compressed: ' + AdminCompress.formatBytes(file.size) + ' → ' + AdminCompress.formatBytes(compressed.webpSize), 'success');
                 commitMessage = 'Replace image';
+                
+                const num = parseInt(targetPath.match(/tile(\d+)/)[1]);
+                const configUpdate = await updateTilesConfig(num, 'image');
+                if (configUpdate) {
+                    AdminCommit.addChange(
+                        'assets/data/about-tiles.json',
+                        'Update tiles config',
+                        async () => configUpdate.content
+                    );
+                }
             } else {
                 base64Content = await AdminCompress.fileToBase64(file);
                 commitMessage = 'Replace file';
@@ -174,7 +210,7 @@
             preview.playsInline = true;
             zone.appendChild(preview);
         } catch (err) {
-            AdminUtils.showToast(`Upload failed: ${err.message}`, 'error');
+            AdminUtils.showToast('Upload failed: ' + err.message, 'error');
         }
     }
 
