@@ -1,7 +1,7 @@
 [
     { "num": 1, "type": "image" },
     { "num": 2, "type": "image" },
-    { "num": 3, "type": "image" },
+    { "num": 3, "type": "video", "ext": "mp4" },
     { "num": 4, "type": "video", "ext": "mp4" },
     { "num": 5, "type": "image" },
     { "num": 6, "type": "image" }
