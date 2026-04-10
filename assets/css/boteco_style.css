@@ -588,13 +588,10 @@ footer a:hover {
   border: 0;
 }
 
-/* LightWidget lightbox overrides — prevent clipping/overflow issues */
-[class*="lw-"],
-[class*="lightbox-"],
+/* LightWidget lightbox overrides — prevent clipping/overflow issues on overlay */
 .lw-lightbox,
 .lw-overlay,
-.lw-lightbox-container,
-.lw-lightbox-item {
+.lw-lightbox-container {
   box-sizing: border-box;
   max-width: none !important;
   max-height: none !important;
@@ -612,9 +609,10 @@ footer a:hover {
   overflow: visible !important;
 }
 
-.lw-lightbox img {
-  max-width: 100% !important;
-  max-height: 90vh !important;
+.lw-lightbox img,
+.lw-lightbox video {
+  max-width: 90% !important;
+  max-height: 80vh !important;
   -o-object-fit: contain !important;
      object-fit: contain !important;
 }
