@@ -162,6 +162,44 @@ document.addEventListener('DOMContentLoaded', loadEvents);
 })(window, document, ['lightwidget.com', 'dev.lightwidget.com', 'cdn.lightwidget.com']);
 
 // ============================================================================
+// LIGHTWIDGET LIGHTBOX Z-INDEX FIX
+// ============================================================================
+
+(() => {
+    function forceLightboxOnTop(el) {
+        if (el.nodeType !== 1) return;
+        const cls = el.className || '';
+        if (/\blw-lightbox\b/.test(cls) || /\blightbox-/.test(cls)) {
+            el.style.setProperty('z-index', '999999', 'important');
+            el.style.setProperty('position', 'fixed', 'important');
+        }
+        if (/\blw-overlay\b/.test(cls)) {
+            el.style.setProperty('z-index', '999998', 'important');
+            el.style.setProperty('position', 'fixed', 'important');
+        }
+        if (/\blw-lightbox-container\b/.test(cls)) {
+            el.style.setProperty('position', 'fixed', 'important');
+        }
+    }
+
+    const existing = document.querySelectorAll('[class*="lw-"], [class*="lightbox-"]');
+    existing.forEach(forceLightboxOnTop);
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                forceLightboxOnTop(node);
+                if (node.nodeType === 1) {
+                    node.querySelectorAll('[class*="lw-"], [class*="lightbox-"]').forEach(forceLightboxOnTop);
+                }
+            });
+        });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+
+// ============================================================================
 // HERO VIDEO MODULE
 // ============================================================================
 
