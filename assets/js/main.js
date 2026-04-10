@@ -166,37 +166,51 @@ document.addEventListener('DOMContentLoaded', loadEvents);
 // ============================================================================
 
 (() => {
-    function forceLightboxOnTop(el) {
-        if (el.nodeType !== 1) return;
-        const cls = el.className || '';
+    var LIGHTBOX_Z = '999999';
+    var OVERLAY_Z = '999998';
+
+    function forceOnTop(el) {
+        if (el.nodeType !== 1 || !el.className || typeof el.className !== 'string') return;
+        var cls = el.className;
         if (/\blw-lightbox\b/.test(cls) || /\blightbox-/.test(cls)) {
-            el.style.setProperty('z-index', '999999', 'important');
+            el.style.setProperty('z-index', LIGHTBOX_Z, 'important');
             el.style.setProperty('position', 'fixed', 'important');
+            el.style.setProperty('top', '0', 'important');
+            el.style.setProperty('left', '0', 'important');
+            el.style.setProperty('width', '100vw', 'important');
+            el.style.setProperty('height', '100vh', 'important');
         }
         if (/\blw-overlay\b/.test(cls)) {
-            el.style.setProperty('z-index', '999998', 'important');
+            el.style.setProperty('z-index', OVERLAY_Z, 'important');
             el.style.setProperty('position', 'fixed', 'important');
+            el.style.setProperty('top', '0', 'important');
+            el.style.setProperty('left', '0', 'important');
+            el.style.setProperty('width', '100vw', 'important');
+            el.style.setProperty('height', '100vh', 'important');
         }
         if (/\blw-lightbox-container\b/.test(cls)) {
             el.style.setProperty('position', 'fixed', 'important');
         }
     }
 
-    const existing = document.querySelectorAll('[class*="lw-"], [class*="lightbox-"]');
-    existing.forEach(forceLightboxOnTop);
+    function scanAll() {
+        try {
+            document.querySelectorAll('[class*="lw-"], [class*="lightbox-"]').forEach(forceOnTop);
+        } catch (e) { /* selector unsupported */ }
+    }
 
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            mutation.addedNodes.forEach(node => {
-                forceLightboxOnTop(node);
-                if (node.nodeType === 1) {
-                    node.querySelectorAll('[class*="lw-"], [class*="lightbox-"]').forEach(forceLightboxOnTop);
-                }
-            });
-        });
+    scanAll();
+
+    var observer = new MutationObserver(function () {
+        requestAnimationFrame(scanAll);
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
 })();
 
 // ============================================================================
