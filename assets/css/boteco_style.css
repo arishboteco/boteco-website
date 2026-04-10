@@ -174,8 +174,6 @@ html {
   padding-top: 0 !important;   /* Keep header height equal to the logo */
   padding-bottom: 0 !important;
   transition: transform .3s ease;
-  position: relative;
-  z-index: 1020;
 }
 
 .navbar-hidden {
