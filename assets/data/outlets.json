@@ -4,22 +4,22 @@
         "name": "Boteco - Indiqube Symphony, MG Road",
         "phoneRaw": "+918792045444",
         "phoneDisplay": "+91 87920 45444",
-        "hours": "Mon-Sun, 12:00 PM - 1:00 AM | Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM",
+        "hours": "Mon-Sun - Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM",
         "addressLines": [
             "Unit 6, IndiQube Symphony, 25,",
             "Mahatma Gandhi Rd, Craig Park Layout,",
             "Ashok Nagar, Bengaluru,",
             "Karnataka 560001, India"
         ],
-        "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9771901367135!2d77.61202931128253!3d12.973310687289462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17e1d0a13d69%3A0xf9be1419d46205be!2sBoteco%20-%20Restaurante%20Brasileiro%20(Indiqube%20Symphony%2C%20M.G.%20Road)!5e0!3m2!1sen!2sin!4v1775912197249!5m2!1sen!2sin\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade",
+        "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9771901367135!2d77.61202931128253!3d12.973310687289462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17e1d0a13d69%3A0xf9be1419d46205be!2sBoteco%20-%20Restaurante%20Brasileiro%20(Indiqube%20Symphony%2C%20M.G.%20Road)!5e0!3m2!1sen!2sin!4v1775912197249!5m2!1sen!2sin",
         "whatsappNumber": "+918792045444"
     },
     {
         "id": "bagmane-solarium-city",
-        "name": "Boteco - Bagmane Solarium City, Brookefield (Coming Soon)",
-        "phoneRaw": "+918792045444",
-        "phoneDisplay": "+91 87920 45444",
-        "hours": "Mon-Sun, 12:00 PM - 1:00 AM | Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM",
+        "name": "Boteco - Bagmane Solarium City, Brookefield",
+        "phoneRaw": "+918792087333",
+        "phoneDisplay": "+91 87920 87333",
+        "hours": "Mon-Sun - Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM",
         "addressLines": [
             "Unit R06, Argon South,",
             "Bagmane Solarium City Campus, ",
