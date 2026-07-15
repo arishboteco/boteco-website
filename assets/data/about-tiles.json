@@ -19,7 +19,8 @@
   },
   {
     "num": 5,
-    "type": "image"
+    "type": "video",
+    "ext": "mp4"
   },
   {
     "num": 6,
