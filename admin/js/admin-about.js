@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    const MAX_GITHUB_VIDEO_BYTES = 100 * 1024 * 1024;
+    const MEDIA_RELEASE_TAG = 'admin-media';
+    const MAX_RELEASE_ASSET_BYTES = 2 * 1024 * 1024 * 1024;
 
     const ABOUT_BLOCKS = [
         { key: 'our-story', label: 'Our Story: Where It All Began' },
@@ -107,7 +108,7 @@
                     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
                 <p>${imgInfo.label}</p>
-                <p class="upload-hint">Drop image or video here or click to browse (videos up to 100 MB)</p>
+                <p class="upload-hint">Drop image or video here or click to browse</p>
             </div>
             <input type="file" accept="image/*,video/*" class="file-input" hidden>
         `;
@@ -139,7 +140,7 @@
         return zone;
     }
 
-    async function updateTilesConfig(tileNum, type, ext) {
+    async function updateTilesConfig(tileNum, type, ext, url) {
         try {
             const data = await AdminAuth.githubApi('/contents/assets/data/about-tiles.json');
             const config = JSON.parse(atob(data.content));
@@ -148,12 +149,50 @@
                 tile.type = type;
                 if (ext) tile.ext = ext;
                 else delete tile.ext;
+                if (url) tile.url = url;
+                else delete tile.url;
             }
             return { sha: data.sha, content: JSON.stringify(config, null, 2) };
         } catch (err) {
             console.error('Failed to update tiles config:', err);
             return null;
         }
+    }
+
+    async function getOrCreateMediaRelease() {
+        try {
+            return await AdminAuth.githubApi(`/releases/tags/${MEDIA_RELEASE_TAG}`);
+        } catch (err) {
+            if (err.status !== 404) throw err;
+            return AdminAuth.githubApi('/releases', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    tag_name: MEDIA_RELEASE_TAG,
+                    target_commitish: 'main',
+                    name: 'Admin Media',
+                    body: 'Large media uploaded through the Boteco admin console.',
+                    draft: false,
+                    prerelease: false
+                })
+            });
+        }
+    }
+
+    async function uploadAboutVideo(file, tileNum, ext) {
+        if (file.size > MAX_RELEASE_ASSET_BYTES) {
+            throw new Error(
+                `Video is ${AdminCompress.formatBytes(file.size)}. `
+                + 'GitHub release assets must be smaller than 2 GB.'
+            );
+        }
+
+        const release = await getOrCreateMediaRelease();
+        const assetName = `about-tile${tileNum}-${Date.now()}.${ext}`;
+        const uploadUrl = release.upload_url.replace('{?name,label}', '')
+            + `?name=${encodeURIComponent(assetName)}`;
+        const asset = await AdminAuth.githubUpload(uploadUrl, file);
+        return asset.browser_download_url;
     }
 
     async function handleImageUpload(targetPath, file, zone) {
@@ -163,19 +202,13 @@
             let commitMessage;
             
             if (isVideo) {
-                if (file.size > MAX_GITHUB_VIDEO_BYTES) {
-                    throw new Error(
-                        `Video is ${AdminCompress.formatBytes(file.size)}. `
-                        + 'GitHub accepts files up to 100 MB; compress the video and try again.'
-                    );
-                }
-                base64Content = await AdminCompress.fileToBase64(file);
                 const ext = file.name.split('.').pop().toLowerCase();
                 const num = parseInt(targetPath.match(/tile(\d+)/)[1]);
-                targetPath = 'assets/images/about/about-us-tile' + num + '.' + ext;
-                commitMessage = 'Replace about tile ' + num + ' video';
+                AdminUtils.showToast('Uploading video to GitHub media storage...', 'info');
+                const videoUrl = await uploadAboutVideo(file, num, ext);
+                AdminUtils.showToast('Video uploaded. Commit the queued configuration change.', 'success');
                 
-                const configUpdate = await updateTilesConfig(num, 'video', ext);
+                const configUpdate = await updateTilesConfig(num, 'video', ext, videoUrl);
                 if (configUpdate) {
                     AdminCommit.addChange(
                         'assets/data/about-tiles.json',
@@ -203,11 +236,13 @@
                 commitMessage = 'Replace file';
             }
 
-            AdminCommit.addChange(
-                targetPath,
-                commitMessage,
-                async () => base64Content
-            );
+            if (!isVideo) {
+                AdminCommit.addChange(
+                    targetPath,
+                    commitMessage,
+                    async () => base64Content
+                );
+            }
 
             const preview = document.createElement(isVideo ? 'video' : 'img');
             preview.className = 'upload-preview';
@@ -246,5 +281,5 @@
         window.AdminDashboard.registerSection('about', render);
     }
 
-    window.AdminAbout = { render, ABOUT_BLOCKS, ABOUT_IMAGES };
+    window.AdminAbout = { render, ABOUT_BLOCKS, ABOUT_IMAGES, uploadAboutVideo };
 })();

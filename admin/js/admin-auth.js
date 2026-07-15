@@ -163,10 +163,39 @@
                 throw new Error(`Rate limit exceeded. Resets at ${new Date(resetTime).toLocaleTimeString()}`);
             }
             const body = await response.json().catch(() => ({}));
-            throw new Error(body.message || `API error: ${response.status}`);
+            const error = new Error(body.message || `API error: ${response.status}`);
+            error.status = response.status;
+            throw error;
         }
 
         if (response.status === 204) return null;
+        return response.json();
+    }
+
+    async function githubUpload(url, file) {
+        const pat = getPat();
+        if (!pat) {
+            throw new Error('Not authenticated');
+        }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${pat}`,
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28',
+                'Content-Type': file.type || 'application/octet-stream'
+            },
+            body: file
+        });
+
+        if (!response.ok) {
+            const body = await response.json().catch(() => ({}));
+            const error = new Error(body.message || `Upload API error: ${response.status}`);
+            error.status = response.status;
+            throw error;
+        }
+
         return response.json();
     }
 
@@ -225,6 +254,7 @@
         getPat,
         getUser,
         githubApi,
+        githubUpload,
         logout,
         isSessionValid
     };

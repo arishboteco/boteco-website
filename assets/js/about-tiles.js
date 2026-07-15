@@ -15,9 +15,10 @@
             const container = document.createElement('div');
             const basePath = 'assets/images/about/about-us-tile' + tile.num;
             if (tile.type === 'video') {
+                const videoSrc = tile.url || (basePath + '.' + tile.ext);
                 container.innerHTML = 
                     '<video autoplay loop muted playsinline class="rounded" width="1080" height="1080" poster="' + basePath + '.jpg">' +
-                        '<source src="' + basePath + '.' + tile.ext + '" type="video/' + tile.ext + '">' +
+                        '<source src="' + videoSrc + '" type="video/' + tile.ext + '">' +
                         '<img loading="lazy" src="' + basePath + '.gif" alt="Boteco interior animation ' + tile.num + '" class="rounded" width="1080" height="1080">' +
                     '</video>';
             } else {
