@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    const MAX_GITHUB_VIDEO_BYTES = 100 * 1024 * 1024;
+
     const ABOUT_BLOCKS = [
         { key: 'our-story', label: 'Our Story: Where It All Began' },
         { key: 'experience', label: 'The Boteco Experience' },
@@ -105,7 +107,7 @@
                     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
                 <p>${imgInfo.label}</p>
-                <p class="upload-hint">Drop image or video here or click to browse</p>
+                <p class="upload-hint">Drop image or video here or click to browse (videos up to 100 MB)</p>
             </div>
             <input type="file" accept="image/*,video/*" class="file-input" hidden>
         `;
@@ -161,6 +163,12 @@
             let commitMessage;
             
             if (isVideo) {
+                if (file.size > MAX_GITHUB_VIDEO_BYTES) {
+                    throw new Error(
+                        `Video is ${AdminCompress.formatBytes(file.size)}. `
+                        + 'GitHub accepts files up to 100 MB; compress the video and try again.'
+                    );
+                }
                 base64Content = await AdminCompress.fileToBase64(file);
                 const ext = file.name.split('.').pop().toLowerCase();
                 const num = parseInt(targetPath.match(/tile(\d+)/)[1]);

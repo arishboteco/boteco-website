@@ -1,6 +1,7 @@
 (function () {
     'use strict';
 
+    const MAX_GITHUB_BLOB_BYTES = 100 * 1024 * 1024;
     let pendingChanges = [];
 
     function init() {
@@ -81,13 +82,87 @@
         }
     }
 
-    async function getFileSha(filePath) {
-        try {
-            const data = await AdminAuth.githubApi(`/contents/${filePath}`);
-            return data.sha;
-        } catch (err) {
-            return null;
+    function prepareBlob(content) {
+        const compactContent = typeof content === 'string' ? content.replace(/\s/g, '') : '';
+        const isBase64 = compactContent.length > 0
+            && compactContent.length % 4 === 0
+            && /^[A-Za-z0-9+/]*={0,2}$/.test(compactContent);
+
+        if (isBase64) {
+            const padding = compactContent.endsWith('==') ? 2 : (compactContent.endsWith('=') ? 1 : 0);
+            return {
+                content: compactContent,
+                encoding: 'base64',
+                size: (compactContent.length * 3 / 4) - padding
+            };
         }
+
+        const textContent = String(content);
+        return {
+            content: textContent,
+            encoding: 'utf-8',
+            size: new TextEncoder().encode(textContent).length
+        };
+    }
+
+    async function commitWithGitDataApi(refName, commitMessage, changes) {
+        const refData = await AdminAuth.githubApi(`/git/ref/heads/${refName}`);
+        const baseSha = refData.object.sha;
+        const baseCommit = await AdminAuth.githubApi(`/git/commits/${baseSha}`);
+        const tree = [];
+
+        for (let index = 0; index < changes.length; index++) {
+            const change = changes[index];
+            const content = await change.contentFn();
+            const blob = prepareBlob(content);
+
+            if (blob.size > MAX_GITHUB_BLOB_BYTES) {
+                throw new Error(
+                    `${change.filePath} is ${AdminCompress.formatBytes(blob.size)}. `
+                    + 'GitHub only accepts files up to 100 MB; compress the video and try again.'
+                );
+            }
+
+            const commitBtn = document.getElementById('btn-commit');
+            commitBtn.textContent = `Uploading ${index + 1} of ${changes.length}...`;
+
+            const blobData = await AdminAuth.githubApi('/git/blobs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: blob.content, encoding: blob.encoding })
+            });
+
+            tree.push({
+                path: change.filePath,
+                mode: '100644',
+                type: 'blob',
+                sha: blobData.sha
+            });
+        }
+
+        const treeData = await AdminAuth.githubApi('/git/trees', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree })
+        });
+
+        const commitData = await AdminAuth.githubApi('/git/commits', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: commitMessage,
+                tree: treeData.sha,
+                parents: [baseSha]
+            })
+        });
+
+        await AdminAuth.githubApi(`/git/refs/heads/${refName}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sha: commitData.sha, force: false })
+        });
+
+        return commitData;
     }
 
     async function executeCommit() {
@@ -105,25 +180,7 @@
 
         try {
             if (commitMode === 'direct') {
-                for (const change of pendingChanges) {
-                    const sha = await getFileSha(change.filePath);
-                    const content = await change.contentFn();
-                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/]+=*$/.test(content.replace(/\s/g, ''));
-                    const base64Content = isBase64 ? content.replace(/\s/g, '') : btoa(unescape(encodeURIComponent(content)));
-
-                    const body = {
-                        message: commitMessage,
-                        content: base64Content,
-                        branch: 'main'
-                    };
-                    if (sha) body.sha = sha;
-
-                    await AdminAuth.githubApi(`/contents/${change.filePath}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
-                }
+                await commitWithGitDataApi('main', commitMessage, pendingChanges);
                 AdminUtils.showToast('Changes committed successfully!', 'success');
             } else {
                 const branchName = `admin-update-${Date.now()}`;
@@ -140,25 +197,7 @@
                     })
                 });
 
-                for (const change of pendingChanges) {
-                    const sha = await getFileSha(change.filePath);
-                    const content = await change.contentFn();
-                    const isBase64 = typeof content === 'string' && /^[A-Za-z0-9+/]+=*$/.test(content.replace(/\s/g, ''));
-                    const base64Content = isBase64 ? content.replace(/\s/g, '') : btoa(unescape(encodeURIComponent(content)));
-
-                    const body = {
-                        message: commitMessage,
-                        content: base64Content,
-                        branch: branchName
-                    };
-                    if (sha) body.sha = sha;
-
-                    await AdminAuth.githubApi(`/contents/${change.filePath}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
-                }
+                await commitWithGitDataApi(branchName, commitMessage, pendingChanges);
 
                 const prData = await AdminAuth.githubApi(`/pulls`, {
                     method: 'POST',
