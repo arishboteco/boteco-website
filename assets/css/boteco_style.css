@@ -485,19 +485,16 @@ footer a:hover {
   }
 }
 
-/* About section info tiles */
-.about-tile {
-  background-color: var(--color-bg-light);
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+/* About section introduction */
+.about-intro {
+  max-width: 68rem;
+  margin-inline: auto;
 }
 
-.about-tile .h5 {
-  color: var(--color-primary);
-}
-
-.about-tile p {
+.about-intro-copy {
   color: var(--color-text-muted);
+  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.125rem);
+  line-height: 1.75;
 }
 
 /* About section image grid */

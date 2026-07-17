@@ -5,10 +5,7 @@
     const MAX_RELEASE_ASSET_BYTES = 2 * 1024 * 1024 * 1024;
 
     const ABOUT_BLOCKS = [
-        { key: 'our-story', label: 'Our Story: Where It All Began' },
-        { key: 'experience', label: 'The Boteco Experience' },
-        { key: 'chef', label: 'Meet the Chef Behind the Magic' },
-        { key: 'menu-desc', label: 'Our Menu: A Taste of Brazil' }
+        { key: 'experience', label: 'The Boteco Experience' }
     ];
 
     const ABOUT_IMAGES = [

@@ -34,6 +34,10 @@ test('large About videos upload as binary release assets', async () => {
 
     require('../admin/js/admin-about.js');
 
+    assert.deepEqual(window.AdminAbout.ABOUT_BLOCKS, [
+        { key: 'experience', label: 'The Boteco Experience' }
+    ]);
+
     const file = { size: 75 * 1024 * 1024, type: 'video/mp4' };
     const url = await window.AdminAbout.uploadAboutVideo(file, 5, 'mp4');
 
