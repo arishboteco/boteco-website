@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; media-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; media-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
     <meta name="description" content="A visual guide to the dishes at Boteco Restaurante Brasileiro.">
     <link rel="canonical" href="https://boteco.co.in/menu-guide.html">
     <link rel="icon" type="image/x-icon" href="assets/images/logos/favicon.ico">
     <link rel="preload" href="assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/menu-guide/01-bolinho-de-apim.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="stylesheet" href="assets/css/menu-guide.css">
+    <script src="assets/menu-guide/menu-guide.js" defer></script>
     <title>Menu Guide | Boteco Restaurante Brasileiro</title>
 </head>
 <body>
@@ -775,6 +776,19 @@
                 </figure>
             </li>
         </ol>
+
+        <nav class="magazine-controls" aria-label="Menu guide pages">
+            <button class="magazine-button" type="button" data-previous-page disabled>
+                <span aria-hidden="true">&larr;</span> Previous
+            </button>
+            <p class="magazine-status" aria-live="polite" aria-atomic="true">
+                Page <span data-current-page>1</span> of <span data-total-pages>62</span>
+            </p>
+            <button class="magazine-button" type="button" data-next-page>
+                Next <span aria-hidden="true">&rarr;</span>
+            </button>
+        </nav>
+        <p class="magazine-help">Use the buttons, arrow keys, or swipe across the page.</p>
     </main>
 
     <footer class="guide-footer">

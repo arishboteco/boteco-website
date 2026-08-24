@@ -58,6 +58,11 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
+button:focus-visible {
+  outline: 3px solid var(--guide-focus);
+  outline-offset: 3px;
+}
+
 .skip-link {
   position: absolute;
   z-index: 10;
@@ -166,6 +171,150 @@ a:focus-visible {
   aspect-ratio: 1050 / 1495;
 }
 
+.magazine-controls,
+.magazine-help {
+  display: none;
+}
+
+.guide-magazine-ready .guide-header {
+  padding: clamp(1.25rem, 3vw, 2rem) 1rem clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.guide-magazine-ready .guide-brand {
+  width: clamp(7.5rem, 18vw, 10rem);
+  margin-bottom: 0.75rem;
+}
+
+.guide-magazine-ready .guide-kicker {
+  margin-bottom: 0.2rem;
+  font-size: 0.75rem;
+}
+
+.guide-magazine-ready .guide-header h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.guide-magazine-ready .guide-intro {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.guide-magazine-ready .guide-main {
+  min-height: calc(100dvh - 12rem);
+  padding: clamp(1rem, 3vw, 2rem) clamp(0.75rem, 4vw, 2rem) 2.5rem;
+  scroll-margin-top: 1rem;
+}
+
+.guide-magazine-ready .guide-list {
+  display: block;
+  width: min(100%, 64rem);
+  touch-action: pan-y;
+}
+
+.guide-magazine-ready .guide-item {
+  display: flex;
+  justify-content: center;
+}
+
+.guide-magazine-ready .guide-item[hidden] {
+  display: none;
+}
+
+.guide-magazine-ready .guide-card {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.guide-magazine-ready .guide-card picture {
+  aspect-ratio: auto;
+}
+
+.guide-magazine-ready .guide-card img {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 17rem);
+}
+
+.guide-magazine-ready .guide-item.is-active .guide-card {
+  animation: magazine-page-in 220ms ease-out;
+}
+
+.guide-magazine-ready .magazine-controls {
+  display: grid;
+  width: min(100%, 47.5rem);
+  margin: 1.25rem auto 0;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.magazine-button {
+  min-height: 3rem;
+  padding: 0.625rem clamp(0.75rem, 3vw, 1.25rem);
+  border: 0;
+  border-radius: 0.25rem;
+  background: var(--guide-primary-dark);
+  color: var(--guide-paper);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  touch-action: manipulation;
+  transition: background-color 180ms ease-out, color 180ms ease-out;
+}
+
+.magazine-button:first-child {
+  justify-self: start;
+}
+
+.magazine-button:last-child {
+  justify-self: end;
+}
+
+.magazine-button:hover:not(:disabled) {
+  background: var(--guide-gold);
+  color: var(--guide-primary-dark);
+}
+
+.magazine-button:active:not(:disabled) {
+  background: var(--guide-primary);
+}
+
+.magazine-button:disabled {
+  background: #cbd4dc;
+  color: #526170;
+  cursor: not-allowed;
+}
+
+.magazine-status {
+  margin: 0;
+  color: var(--guide-primary-dark);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.guide-magazine-ready .magazine-help {
+  display: block;
+  margin: 0.75rem auto 0;
+  color: var(--guide-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+@keyframes magazine-page-in {
+  from {
+    opacity: 0;
+    transform: translateX(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .guide-footer {
   padding: 2.25rem 1.25rem 2.5rem;
   background: var(--guide-primary-dark);
@@ -220,6 +369,108 @@ a:focus-visible {
   .guide-card {
     box-shadow: 0 10px 28px rgba(0, 45, 81, 0.12);
   }
+
+  .magazine-button {
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .magazine-status {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .guide-magazine-ready .guide-header {
+    display: grid;
+    grid-template-areas:
+      "brand kicker"
+      "brand title"
+      "brand intro";
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    column-gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .guide-magazine-ready .guide-brand {
+    width: 5.5rem;
+    margin: 0;
+    grid-area: brand;
+  }
+
+  .guide-magazine-ready .guide-kicker {
+    align-self: end;
+    margin: 0;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    grid-area: kicker;
+  }
+
+  .guide-magazine-ready .guide-header h1 {
+    font-size: 2rem;
+    grid-area: title;
+  }
+
+  .guide-magazine-ready .guide-intro {
+    align-self: start;
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    grid-area: intro;
+  }
+}
+
+@media (min-width: 768px) {
+  .guide-magazine-ready .guide-header {
+    display: grid;
+    grid-template-areas:
+      "brand kicker"
+      "brand title"
+      "brand intro";
+    grid-template-columns: 8rem minmax(0, 36rem);
+    column-gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    text-align: left;
+  }
+
+  .guide-magazine-ready .guide-brand {
+    width: 8rem;
+    margin: 0;
+    grid-area: brand;
+  }
+
+  .guide-magazine-ready .guide-kicker {
+    align-self: end;
+    grid-area: kicker;
+  }
+
+  .guide-magazine-ready .guide-header h1 {
+    grid-area: title;
+  }
+
+  .guide-magazine-ready .guide-intro {
+    align-self: start;
+    margin-right: 0;
+    margin-left: 0;
+    grid-area: intro;
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .guide-magazine-ready .guide-card {
+    width: min(100%, 42rem);
+  }
+
+  .guide-magazine-ready .guide-card img {
+    width: 100%;
+    max-height: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -227,5 +478,13 @@ a:focus-visible {
   *::before,
   *::after {
     scroll-behavior: auto !important;
+  }
+
+  .guide-magazine-ready .guide-item.is-active .guide-card {
+    animation: none;
+  }
+
+  .magazine-button {
+    transition: none;
   }
 }
