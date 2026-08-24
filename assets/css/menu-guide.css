@@ -211,7 +211,7 @@ button:focus-visible {
 
 .guide-magazine-ready .magazine-stage {
   position: relative;
-  width: min(100%, calc((100dvh - 6.5rem) * 1050 / 1495));
+  width: min(100%, calc((100dvh - 7.75rem) * 1050 / 1495));
   margin: 0 auto;
   perspective: 100rem;
   transition: filter 460ms ease-out;
@@ -391,7 +391,7 @@ button:focus-visible {
 
 .guide-magazine-ready .magazine-meta {
   display: grid;
-  width: min(100%, calc((100dvh - 6.5rem) * 1050 / 1495));
+  width: min(100%, calc((100dvh - 7.75rem) * 1050 / 1495));
   margin: 1rem auto 0;
   align-items: center;
   grid-template-columns: 1fr;
@@ -544,14 +544,14 @@ button:focus-visible {
 
   .guide-magazine-ready .magazine-stage,
   .guide-magazine-ready .magazine-meta {
-    width: min(86vw, calc((100dvh - 5.5rem) * 1050 / 1495));
+    width: min(86vw, calc((100dvh - 7.75rem) * 1050 / 1495));
   }
 }
 
-@media (min-width: 768px) and (min-height: 600px) and (orientation: landscape) {
+@media (min-width: 768px) and (orientation: landscape) and (min-aspect-ratio: 4 / 3) {
   .guide-magazine-ready .magazine-stage,
   .guide-magazine-ready .magazine-meta {
-    width: min(94vw, calc((100dvh - 7rem) * 2100 / 1495), 72rem);
+    width: min(94vw, calc((100dvh - 7.75rem) * 2100 / 1495), 72rem);
   }
 
   .guide-magazine-ready .guide-list {
@@ -592,14 +592,14 @@ button:focus-visible {
   }
 }
 
-@media (max-height: 599px) and (orientation: landscape) {
+@media (max-height: 599px) and (orientation: landscape) and (min-aspect-ratio: 4 / 3) {
   .guide-magazine-ready .guide-main {
     padding-top: 0.5rem;
   }
 
   .guide-magazine-ready .magazine-stage,
   .guide-magazine-ready .magazine-meta {
-    width: min(70vw, 24rem);
+    width: min(94vw, calc((100dvh - 7rem) * 2100 / 1495), 72rem);
   }
 
   .guide-magazine-ready .magazine-arrow-previous {

@@ -25,7 +25,7 @@
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const spreadMode = window.matchMedia(
-    "(min-width: 768px) and (min-height: 600px) and (orientation: landscape)"
+    "(min-width: 768px) and (orientation: landscape) and (min-aspect-ratio: 4/3)"
   );
   const pagePattern = /^#page-(\d+)$/;
   const transitionDuration = 340;
