@@ -204,7 +204,6 @@ button:focus-visible {
 }
 
 .guide-magazine-ready .guide-main {
-  min-height: calc(100dvh - 7rem);
   padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.75rem, 4vw, 2rem) 2rem;
   scroll-margin-top: 0;
   transition: background-color 460ms ease-out;
@@ -212,7 +211,7 @@ button:focus-visible {
 
 .guide-magazine-ready .magazine-stage {
   position: relative;
-  width: min(100%, calc((100dvh - 11rem) * 1050 / 1495));
+  width: min(100%, calc((100dvh - 6.5rem) * 1050 / 1495));
   margin: 0 auto;
   perspective: 100rem;
   transition: filter 460ms ease-out;
@@ -233,10 +232,6 @@ button:focus-visible {
 
 .guide-reading-mode .magazine-status {
   color: var(--guide-paper);
-}
-
-.guide-reading-mode .magazine-help {
-  color: #c8d7e2;
 }
 
 .guide-magazine-ready .guide-list {
@@ -394,8 +389,48 @@ button:focus-visible {
 }
 
 .guide-magazine-ready .magazine-meta {
-  display: block;
+  display: grid;
+  width: min(100%, calc((100dvh - 6.5rem) * 1050 / 1495));
   margin: 1rem auto 0;
+  align-items: center;
+  grid-template-columns: 14rem minmax(0, 1fr) 14rem;
+  row-gap: 0.5rem;
+}
+
+.magazine-corner-logo {
+  position: relative;
+  display: inline-flex;
+  width: 14rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  grid-column: 3;
+  grid-row: 1;
+  transition: opacity 180ms ease-out;
+}
+
+.magazine-corner-logo:hover {
+  opacity: 0.82;
+}
+
+.magazine-logo-crop {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 786 / 158;
+}
+
+.magazine-logo-crop img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 152.8%;
+  max-width: none;
+  height: auto;
+  transform: translate(-17.24%, -32.59%);
 }
 
 .magazine-status {
@@ -405,14 +440,8 @@ button:focus-visible {
   font-weight: 700;
   text-align: center;
   white-space: nowrap;
-}
-
-.guide-magazine-ready .magazine-help {
-  display: block;
-  margin: 0.75rem auto 0;
-  color: var(--guide-muted);
-  font-size: 0.875rem;
-  text-align: center;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 @keyframes magazine-page-fade-out {
@@ -531,20 +560,38 @@ button:focus-visible {
   .magazine-status {
     font-size: 0.9rem;
   }
+
+  .guide-magazine-ready .magazine-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .magazine-status {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .magazine-corner-logo {
+    width: 11rem;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
 }
 
-@media (min-width: 768px) and (max-width: 1366px) {
+@media (min-width: 768px) and (min-height: 600px) and (max-width: 1366px) {
   .guide-magazine-ready .guide-main {
     padding-top: 0.75rem;
   }
 
-  .guide-magazine-ready .magazine-stage {
-    width: min(86vw, calc((100dvh - 9.5rem) * 1050 / 1495));
+  .guide-magazine-ready .magazine-stage,
+  .guide-magazine-ready .magazine-meta {
+    width: min(86vw, calc((100dvh - 5.5rem) * 1050 / 1495));
   }
 }
 
-@media (min-width: 768px) and (orientation: landscape) {
-  .guide-magazine-ready .magazine-stage {
+@media (min-width: 768px) and (min-height: 600px) and (orientation: landscape) {
+  .guide-magazine-ready .magazine-stage,
+  .guide-magazine-ready .magazine-meta {
     width: min(94vw, calc((100dvh - 7rem) * 2100 / 1495), 72rem);
   }
 
@@ -586,7 +633,16 @@ button:focus-visible {
   }
 }
 
-@media (max-height: 600px) and (orientation: landscape) {
+@media (max-height: 599px) and (orientation: landscape) {
+  .guide-magazine-ready .guide-main {
+    padding-top: 0.5rem;
+  }
+
+  .guide-magazine-ready .magazine-stage,
+  .guide-magazine-ready .magazine-meta {
+    width: min(70vw, 24rem);
+  }
+
   .guide-magazine-ready .magazine-arrow-previous {
     left: 0.5rem;
     transform: translateY(-50%);
@@ -596,6 +652,24 @@ button:focus-visible {
     right: 0.5rem;
     transform: translateY(-50%);
   }
+
+  .guide-magazine-ready .magazine-meta {
+    grid-template-columns: 1fr;
+    margin-top: 0.75rem;
+  }
+
+  .magazine-corner-logo {
+    width: 12rem;
+    min-height: 2.75rem;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .magazine-status {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -7,7 +7,6 @@
   const pageLabel = document.querySelector("[data-page-label]");
   const currentPage = document.querySelector("[data-current-page]");
   const totalPages = document.querySelector("[data-total-pages]");
-  const guideMain = document.querySelector(".guide-main");
   const guideList = document.querySelector(".guide-list");
 
   if (
@@ -17,7 +16,6 @@
     !pageLabel ||
     !currentPage ||
     !totalPages ||
-    !guideMain ||
     !guideList
   ) {
     return;
@@ -26,7 +24,9 @@
   document.documentElement.classList.add("guide-magazine-ready");
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const spreadMode = window.matchMedia("(min-width: 768px) and (orientation: landscape)");
+  const spreadMode = window.matchMedia(
+    "(min-width: 768px) and (min-height: 600px) and (orientation: landscape)"
+  );
   const pagePattern = /^#page-(\d+)$/;
   const transitionDuration = 340;
   let activeIndex = getPageFromHash();
@@ -83,21 +83,6 @@
 
   function enterReadingMode() {
     document.documentElement.classList.add("guide-reading-mode");
-  }
-
-  function focusGuideOnFirstScroll() {
-    if (window.scrollY < 8) {
-      return;
-    }
-
-    window.removeEventListener("scroll", focusGuideOnFirstScroll);
-    enterReadingMode();
-    if (window.scrollY < guideMain.offsetTop + Math.min(window.innerHeight * 0.5, 400)) {
-      guideMain.scrollIntoView({
-        behavior: reducedMotion.matches ? "auto" : "smooth",
-        block: "start",
-      });
-    }
   }
 
   function updatePageState({ updateUrl = false } = {}) {
@@ -304,6 +289,6 @@
     spreadMode.addListener(handleSpreadChange);
   }
 
-  window.addEventListener("scroll", focusGuideOnFirstScroll, { passive: true });
   renderPage();
+  window.requestAnimationFrame(() => window.requestAnimationFrame(enterReadingMode));
 })();
