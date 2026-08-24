@@ -1,0 +1,231 @@
+@font-face {
+  font-family: "BotecoFont";
+  src: url("../fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2"),
+       url("../fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --guide-primary: #005aab;
+  --guide-primary-dark: #003560;
+  --guide-gold: #fdb813;
+  --guide-paper: #ffffff;
+  --guide-canvas: #f2f3ef;
+  --guide-text: #172536;
+  --guide-muted: #536170;
+  --guide-focus: #fdb813;
+  --guide-shadow: 0 18px 50px rgba(0, 45, 81, 0.14);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--guide-canvas);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background: var(--guide-canvas);
+  color: var(--guide-text);
+  font-family: "BotecoFont", Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--guide-focus);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 10;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.75rem 1rem;
+  transform: translateY(-180%);
+  background: var(--guide-primary-dark);
+  color: var(--guide-paper);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.guide-header {
+  position: relative;
+  padding: clamp(2.5rem, 7vw, 5rem) 1.25rem clamp(2.75rem, 7vw, 4.75rem);
+  overflow: hidden;
+  background: var(--guide-paper);
+  text-align: center;
+}
+
+.guide-header::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 0.375rem;
+  background: linear-gradient(90deg, var(--guide-primary) 0 72%, var(--guide-gold) 72% 100%);
+  content: "";
+}
+
+.guide-brand {
+  display: block;
+  width: clamp(10.5rem, 30vw, 14rem);
+  margin: 0 auto 1.75rem;
+}
+
+.guide-brand img {
+  width: 100%;
+  height: auto;
+}
+
+.guide-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--guide-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.guide-header h1 {
+  margin: 0;
+  color: var(--guide-primary-dark);
+  font-size: clamp(2.4rem, 7vw, 4.75rem);
+  font-variation-settings: "opsz" 72, "SOFT" 50, "WONK" 1;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.guide-intro {
+  max-width: 34rem;
+  margin: 1rem auto 0;
+  color: var(--guide-muted);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+}
+
+.guide-main {
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2rem) clamp(3.5rem, 8vw, 7rem);
+}
+
+.guide-list {
+  display: grid;
+  width: min(100%, 47.5rem);
+  margin: 0 auto;
+  padding: 0;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  list-style: none;
+}
+
+.guide-item,
+.guide-card {
+  margin: 0;
+}
+
+.guide-card {
+  overflow: hidden;
+  background: var(--guide-paper);
+  box-shadow: var(--guide-shadow);
+}
+
+.guide-card picture {
+  display: block;
+  aspect-ratio: 1050 / 1495;
+  background: var(--guide-paper);
+}
+
+.guide-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1050 / 1495;
+}
+
+.guide-footer {
+  padding: 2.25rem 1.25rem 2.5rem;
+  background: var(--guide-primary-dark);
+  color: var(--guide-paper);
+  text-align: center;
+}
+
+.guide-footer p {
+  margin: 0 0 0.75rem;
+  color: #cfe8fb;
+}
+
+.guide-footer a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.25rem;
+  color: var(--guide-paper);
+  font-weight: 700;
+  text-decoration-color: var(--guide-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35rem;
+}
+
+.guide-footer a:hover {
+  color: var(--guide-gold);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 479px) {
+  .guide-main {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .guide-list {
+    gap: 1rem;
+  }
+
+  .guide-card {
+    box-shadow: 0 10px 28px rgba(0, 45, 81, 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
