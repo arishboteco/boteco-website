@@ -11,8 +11,8 @@
     <link rel="icon" type="image/x-icon" href="assets/images/logos/favicon.ico">
     <link rel="preload" href="assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/menu-guide/01-bolinho-de-apim.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="stylesheet" href="assets/css/menu-guide.css">
-    <script src="assets/menu-guide/menu-guide.js" defer></script>
+    <link rel="stylesheet" href="assets/css/menu-guide.css?v=4">
+    <script src="assets/menu-guide/menu-guide.js?v=4" defer></script>
     <title>Menu Guide | Boteco Restaurante Brasileiro</title>
 </head>
 <body>
@@ -24,12 +24,13 @@
             <img src="assets/images/logos/logo.png" alt="Boteco Restaurante Brasileiro" width="900" height="751">
         </picture>
         <p class="guide-kicker">Restaurante Brasileiro</p>
-        <h1>Menu Guide</h1>
+        <h1 class="sr-only">Menu Guide</h1>
         <p class="guide-intro">Explore the flavours, stories and signature dishes of Boteco.</p>
     </header>
 
     <main id="menu-guide" class="guide-main">
         <h2 class="sr-only">Boteco dishes</h2>
+        <div class="magazine-stage">
         <ol class="guide-list">
             <li class="guide-item">
                 <figure class="guide-card" aria-labelledby="dish-title-01" aria-describedby="dish-description-01">
@@ -777,23 +778,29 @@
             </li>
         </ol>
 
-        <nav class="magazine-controls" aria-label="Menu guide pages">
-            <button class="magazine-button" type="button" data-previous-page disabled>
-                <span aria-hidden="true">&larr;</span> Previous
+        <nav class="magazine-arrows" aria-label="Menu guide pages">
+            <button class="magazine-arrow magazine-arrow-previous" type="button" data-previous-page disabled aria-label="Previous page">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="m14.5 5-7 7 7 7" />
+                </svg>
             </button>
-            <p class="magazine-status" aria-live="polite" aria-atomic="true">
-                Page <span data-current-page>1</span> of <span data-total-pages>62</span>
-            </p>
-            <button class="magazine-button" type="button" data-next-page>
-                Next <span aria-hidden="true">&rarr;</span>
+            <button class="magazine-arrow magazine-arrow-next" type="button" data-next-page aria-label="Next page">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="m9.5 5 7 7-7 7" />
+                </svg>
             </button>
         </nav>
-        <p class="magazine-help">Use the buttons, arrow keys, or swipe across the page.</p>
+        </div>
+        <div class="magazine-meta">
+            <p class="magazine-status" aria-live="polite" aria-atomic="true">
+                <span data-page-label>Page</span> <span data-current-page>1</span> of <span data-total-pages>62</span>
+            </p>
+            <p class="magazine-help">Use the arrows, keyboard, or swipe across the page.</p>
+        </div>
     </main>
 
     <footer class="guide-footer">
-        <p>Boteco Restaurante Brasileiro</p>
-        <a href="https://boteco.co.in/">Visit the main website</a>
+        <p>&copy; 2015&ndash;2025 Boteco Restaurants Private Limited. All rights reserved.</p>
     </footer>
 </body>
 </html>
