@@ -204,7 +204,7 @@ button:focus-visible {
 }
 
 .guide-magazine-ready .guide-main {
-  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.75rem, 4vw, 2rem) 1.25rem;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.75rem, 4vw, 2rem) 0.75rem;
   scroll-margin-top: 0;
   transition: background-color 460ms ease-out;
 }
@@ -217,6 +217,7 @@ button:focus-visible {
   transition: filter 460ms ease-out;
 }
 
+.guide-reading-mode,
 .guide-reading-mode body,
 .guide-reading-mode .guide-main {
   background: #081c2a;
