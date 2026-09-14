@@ -1,3 +1,9 @@
+// Keep the footer year current on every page load.
+document.addEventListener('DOMContentLoaded', () => {
+    const year = document.getElementById('copyright-year');
+    if (year) year.textContent = String(new Date().getFullYear());
+});
+
 // Main JavaScript file for Boteco Website
 // This file combines all modular JavaScript components
 
