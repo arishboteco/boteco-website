@@ -21,21 +21,20 @@
 
         gtag('config', 'G-RPDE0S6068');
     </script>
-    <meta name="description" content="Boteco IndiQube is a Brazilian restaurant on MG Road, Ashok Nagar, Bengaluru, serving Brazilian grills, tapas, steaks and cocktails for lunch and dinner.">
+    <meta name="description" content="Boteco IndiQube is a Brazilian restaurant on MG Road, Ashok Nagar, Bengaluru, serving authentic Brazilian food, grills, tapas, steaks and cocktails.">
     <meta property="og:title" content="Boteco IndiQube | Brazilian Restaurant on MG Road, Bengaluru">
-    <meta property="og:description" content="Brazilian grills, tapas, steaks and cocktails at Boteco IndiQube on MG Road, Ashok Nagar, Bengaluru.">
+    <meta property="og:description" content="Visit Boteco IndiQube on MG Road, Ashok Nagar for authentic Brazilian food, grills, tapas, steaks and cocktails.">
     <meta property="og:image" content="https://boteco.co.in/assets/images/hero.jpg">
     <meta property="og:url" content="https://boteco.co.in/indiqube/">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Restaurant",
-        "name": "Boteco IndiQube – Brazilian Restaurant on MG Road",
+        "name": "Boteco IndiQube – Restaurante Brasileiro",
         "image": "assets/images/hero.jpg",
         "url": "https://boteco.co.in/indiqube/",
         "telephone": "+91 87920 45444",
         "servesCuisine": "Brazilian",
-        "priceRange": "₹₹₹",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Unit 6, IndiQube Symphony, 25, Mahatma Gandhi Rd, Craig Park Layout",
@@ -68,7 +67,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3 navbar-hidden">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="/" aria-label="Boteco home">
+            <a class="navbar-brand d-flex align-items-center" href="#">
                 <!-- Larger logo; text removed for a cleaner header -->
                 <picture>
                     <source srcset="assets/images/logos/logo.webp" type="image/webp">
@@ -109,33 +108,10 @@
         <!-- Semi‑transparent overlay to improve text contrast -->
         <div class="hero-overlay"></div>
         <div class="container position-relative">
-            <p class="text-white text-uppercase small mb-2">Boteco IndiQube · Ashok Nagar</p>
-            <h1 class="text-white mb-3">Brazilian Restaurant on MG Road, Bengaluru</h1>
-            <p class="lead text-white mb-4">Brazilian grills, tapas, steaks and cocktails at IndiQube Symphony — open for lunch and dinner.</p>
-            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                <a href="/indiqube/#" data-bs-toggle="modal" data-bs-target="#reservationsModal" class="btn btn-lg btn-primary px-4">Reserve Your Table</a>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Boteco+IndiQube+Symphony+MG+Road+Bengaluru" target="_blank" rel="noopener" class="btn btn-lg btn-outline-light px-4">Get Directions</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- IndiQube Location Summary -->
-    <section class="py-4 fade-in-section" aria-label="Boteco IndiQube location details">
-        <div class="container">
-            <div class="row g-4 text-center align-items-center">
-                <div class="col-md-4">
-                    <p class="small text-uppercase mb-1">Location</p>
-                    <p class="mb-0"><strong>IndiQube Symphony · MG Road</strong><br>Ashok Nagar, Bengaluru 560001</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="small text-uppercase mb-1">Dining Hours</p>
-                    <p class="mb-0"><strong>Lunch 12:00–3:30 PM</strong><br>Dinner 6:00 PM–1:00 AM</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="small text-uppercase mb-1">Contact</p>
-                    <p class="mb-0"><a href="tel:+918792045444"><strong>+91 87920 45444</strong></a><br><a href="https://www.google.com/maps/dir/?api=1&destination=Boteco+IndiQube+Symphony+MG+Road+Bengaluru" target="_blank" rel="noopener">Directions on Google Maps</a></p>
-                </div>
-            </div>
+            <h1 class="text-white mb-3">Boteco – Restaurante Brasileiro</h1>
+            <p class="lead text-white mb-4">Ranked among India’s top 50, by Condé Nast Traveller. We bring the true spirit of Brazil to your table.</p>
+            <a href="/indiqube/#" data-bs-toggle="modal" data-bs-target="#reservationsModal" class="btn btn-lg btn-primary px-4">Reserve Your Table</a>
+            <p class="small text-white mt-3 mb-0"><a class="text-white text-decoration-none" href="/indiqube/#contact">IndiQube Symphony · MG Road · Ashok Nagar</a></p>
         </div>
     </section>
 
@@ -517,7 +493,15 @@
     <!-- Contact Section -->
     <section id="contact" class="py-5 contact-section fade-in-section">
         <div class="container">
-            <h2 class="text-center mb-4">Find Boteco IndiQube</h2>
+            <h2 class="text-center mb-4">Find Us</h2>
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-6 col-lg-5">
+                    <label for="outletSelector" class="form-label"><strong>Select Outlet:</strong></label>
+                    <select id="outletSelector" class="form-select" aria-label="Select Boteco outlet">
+                        <option value="" selected disabled>Loading outlets...</option>
+                    </select>
+                </div>
+            </div>
             <div class="row g-4 align-items-center">
                 <div class="col-md-6 contact-info">
                     <p><strong>Address:</strong><br>
@@ -551,6 +535,7 @@
 
     <!-- Consolidated site scripts -->
     <script src="assets/js/main.min.js" defer></script>
+    <script src="assets/js/outlets.js" defer></script>
     <script src="assets/js/bootstrap.bundle.min.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {
