@@ -21,9 +21,9 @@
 
         gtag('config', 'G-RPDE0S6068');
     </script>
-    <meta name="description" content="Boteco IndiQube is a Brazilian restaurant on MG Road, Ashok Nagar, Bengaluru, serving authentic Brazilian food, grills, tapas, steaks and cocktails.">
+    <meta name="description" content="Boteco IndiQube is a Brazilian restaurant on MG Road, Ashok Nagar, Bengaluru, serving Brazilian cuisine, grilled dishes, steaks, cocktails and signature caipirinhas.">
     <meta property="og:title" content="Boteco IndiQube | Brazilian Restaurant on MG Road, Bengaluru">
-    <meta property="og:description" content="Visit Boteco IndiQube on MG Road, Ashok Nagar for authentic Brazilian food, grills, tapas, steaks and cocktails.">
+    <meta property="og:description" content="Visit Boteco IndiQube on MG Road, Ashok Nagar for Brazilian cuisine, grilled dishes, steaks, cocktails and signature caipirinhas.">
     <meta property="og:image" content="https://boteco.co.in/assets/images/hero.jpg">
     <meta property="og:url" content="https://boteco.co.in/indiqube/">
     <script type="application/ld+json">
@@ -57,6 +57,30 @@
     <!-- Custom color palette derived from logo -->
     <link rel="stylesheet" href="assets/css/boteco_style.min.css">
     <script src="assets/js/meta-tracking.js" defer></script>
+    <style>
+      .indiqube-location-link {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        font-size: .78rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .indiqube-location-link .location-icon {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+        stroke: none;
+      }
+      @media (min-width: 992px) {
+        .location-nav-item {
+          margin-left: .4rem;
+          padding-left: .8rem;
+          border-left: 1px solid rgba(19, 50, 74, .16);
+        }
+      }
+    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -88,6 +112,14 @@
                     <li class="nav-item"><a class="nav-link" href="/indiqube/#" data-bs-toggle="modal" data-bs-target="#reservationsModal">Reservations</a></li>
                     <li class="nav-item"><a class="nav-link" href="/indiqube/#" data-bs-toggle="modal" data-bs-target="#partyBookingModal">Party Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" href="/indiqube/#contact">Find Us</a></li>
+                    <li class="nav-item location-nav-item">
+                        <a class="nav-link indiqube-location-link" href="/indiqube/#contact" aria-label="Boteco IndiQube on MG Road">
+                            <svg class="location-icon" aria-hidden="true" viewBox="0 0 24 24">
+                                <use href="assets/icons/sprite.svg#googlemaps"></use>
+                            </svg>
+                            <span>IndiQube · MG Road</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div id="header-awards" class="header-awards ms-auto"></div>
@@ -111,7 +143,6 @@
             <h1 class="text-white mb-3">Boteco – Restaurante Brasileiro</h1>
             <p class="lead text-white mb-4">Ranked among India’s top 50, by Condé Nast Traveller. We bring the true spirit of Brazil to your table.</p>
             <a href="/indiqube/#" data-bs-toggle="modal" data-bs-target="#reservationsModal" class="btn btn-lg btn-primary px-4">Reserve Your Table</a>
-            <p class="small text-white mt-3 mb-0"><a class="text-white text-decoration-none" href="/indiqube/#contact">IndiQube Symphony · MG Road · Ashok Nagar</a></p>
         </div>
     </section>
 
@@ -493,6 +524,7 @@
     <!-- Contact Section -->
     <section id="contact" class="py-5 contact-section fade-in-section">
         <div class="container">
+            <p class="text-center small text-uppercase mb-1">IndiQube Symphony · MG Road · Ashok Nagar</p>
             <h2 class="text-center mb-4">Find Us</h2>
             <div class="row justify-content-center mb-4">
                 <div class="col-md-6 col-lg-5">
