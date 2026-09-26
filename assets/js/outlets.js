@@ -7,6 +7,9 @@
         phone: document.getElementById('outletPhone'),
         hours: document.getElementById('outletHours'),
         map: document.getElementById('outletMap'),
+        mapStatus: document.getElementById('outletMapStatus'),
+        mapStatusText: document.getElementById('outletMapStatusText'),
+        mapFallback: document.getElementById('outletMapFallback'),
         whatsapp: document.getElementById('outletWhatsapp'),
         zomatoReservation: document.getElementById('outletZomatoReservation'),
         swiggyReservation: document.getElementById('outletSwiggyReservation'),
@@ -35,6 +38,28 @@
         });
     }
 
+    function updateMap(outlet) {
+        if (dom.map.dataset.outletId === outlet.id) return;
+
+        dom.mapStatusText.textContent = `Loading ${outlet.id === 'mg-road' ? 'IndiQube' : 'Bagmane'} map…`;
+        dom.mapFallback.href = outlet.mapDirectionsUrl;
+        dom.mapStatus.hidden = false;
+
+        const nextMap = dom.map.cloneNode(false);
+        nextMap.classList.add('is-loading');
+        nextMap.removeAttribute('src');
+        nextMap.dataset.outletId = outlet.id;
+        nextMap.title = `${outlet.name} on Google Maps`;
+        nextMap.addEventListener('load', () => {
+            if (dom.map !== nextMap) return;
+            nextMap.classList.remove('is-loading');
+            dom.mapStatus.hidden = true;
+        });
+        dom.map.replaceWith(nextMap);
+        dom.map = nextMap;
+        nextMap.src = outlet.mapEmbedUrl;
+    }
+
     function updateOutlet(outletId) {
         const outlet = outlets.find(item => item.id === outletId) || outlets[0];
         if (!outlet) return;
@@ -43,7 +68,7 @@
         dom.phone.textContent = outlet.phoneDisplay;
         dom.phone.href = `tel:${outlet.phoneRaw}`;
         dom.hours.textContent = outlet.hours;
-        dom.map.src = outlet.mapEmbedUrl;
+        updateMap(outlet);
         dom.whatsapp.href = buildWhatsappLink(outlet.whatsappNumber || outlet.phoneRaw);
         dom.zomatoReservation.href = outlet.zomatoReservationUrl;
         dom.swiggyReservation.href = outlet.swiggyReservationUrl;
@@ -69,7 +94,7 @@
     }
 
     function initOutletSelector() {
-        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation || !dom.headerSelector || !dom.headerCall || !dom.headerMap) {
+        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.mapStatus || !dom.mapStatusText || !dom.mapFallback || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation || !dom.headerSelector || !dom.headerCall || !dom.headerMap) {
             return;
         }
 

@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Consolidated site styles -->
     <!-- Custom color palette derived from logo -->
-    <link rel="stylesheet" href="assets/css/boteco_style.min.css?v=20260926-6">
+    <link rel="stylesheet" href="assets/css/boteco_style.min.css?v=20260926-7">
     <script src="assets/js/meta-tracking.js" defer></script>
 </head>
 <body>
@@ -544,7 +544,11 @@
                 </div>
                 <div class="col-md-6">
                     <div class="ratio ratio-4x3">
-                        <iframe id="outletMap" loading="lazy" class="maps-iframe" allowfullscreen width="600" height="450" title="Boteco location on Google Maps" src="https://www.google.com/maps?q=Unit%206%2C%20IndiQube%20Symphony%2C%2025%2C%20Mahatma%20Gandhi%20Rd%2C%20Craig%20Park%20Layout%2C%20Ashok%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560001%2C%20India&output=embed"></iframe>
+                        <iframe id="outletMap" loading="lazy" class="maps-iframe is-loading" allowfullscreen width="600" height="450" title="Boteco location on Google Maps"></iframe>
+                        <div id="outletMapStatus" class="outlet-map-status" role="status" aria-live="polite">
+                            <span id="outletMapStatusText">Loading outlet map…</span>
+                            <a id="outletMapFallback" href="https://share.google/NarMPlfSI9EkznbtY" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -562,7 +566,7 @@
 
     <!-- Consolidated site scripts -->
     <script src="assets/js/main.min.js?v=20260926-6" defer></script>
-    <script src="assets/js/outlets.js?v=20260926-6" defer></script>
+    <script src="assets/js/outlets.js?v=20260926-7" defer></script>
     <script src="assets/js/bootstrap.bundle.min.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {
