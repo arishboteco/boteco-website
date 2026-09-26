@@ -144,10 +144,11 @@ html {
 }
 
 .reservation-options {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.6rem;
   margin-top: 1.25rem;
+  max-width: 26rem;
 }
 
 .contact-info .reservation-option {
@@ -177,6 +178,28 @@ html {
 
 .reservation-option svg {
   fill: #e23744;
+}
+
+.reservation-option img,
+.reservation-option svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  object-fit: contain;
+}
+
+@media (max-width: 576px) {
+  .contact-info .reservation-option {
+    gap: 0.3rem;
+    padding: 0.4rem 0.55rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .reservation-options {
+    grid-template-columns: 1fr;
+  }
 }
 
 

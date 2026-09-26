@@ -8,7 +8,9 @@
         hours: document.getElementById('outletHours'),
         map: document.getElementById('outletMap'),
         whatsapp: document.getElementById('outletWhatsapp'),
-        zomatoReservation: document.getElementById('outletZomatoReservation')
+        zomatoReservation: document.getElementById('outletZomatoReservation'),
+        swiggyReservation: document.getElementById('outletSwiggyReservation'),
+        eazyReservation: document.getElementById('outletEazyReservation')
     };
 
     const locationToOutletId = {
@@ -41,6 +43,8 @@
         dom.map.src = outlet.mapEmbedUrl;
         dom.whatsapp.href = buildWhatsappLink(outlet.whatsappNumber || outlet.phoneRaw);
         dom.zomatoReservation.href = outlet.zomatoReservationUrl;
+        dom.swiggyReservation.href = outlet.swiggyReservationUrl;
+        dom.eazyReservation.href = outlet.eazyReservationUrl;
 
         const headerZomato = document.querySelector('#header-awards a.zomato');
         if (headerZomato) headerZomato.href = outlet.zomatoReservationUrl.replace(/\/book$/, '');
@@ -52,7 +56,7 @@
     }
 
     function initOutletSelector() {
-        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation) {
+        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation) {
             return;
         }
 
