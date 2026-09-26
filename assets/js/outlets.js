@@ -7,7 +7,13 @@
         phone: document.getElementById('outletPhone'),
         hours: document.getElementById('outletHours'),
         map: document.getElementById('outletMap'),
-        whatsapp: document.getElementById('outletWhatsapp')
+        whatsapp: document.getElementById('outletWhatsapp'),
+        zomatoReservation: document.getElementById('outletZomatoReservation')
+    };
+
+    const locationToOutletId = {
+        indiqube: 'mg-road',
+        bagmane: 'bagmane-solarium-city'
     };
 
     function buildWhatsappLink(phoneRaw) {
@@ -34,10 +40,19 @@
         dom.hours.textContent = outlet.hours;
         dom.map.src = outlet.mapEmbedUrl;
         dom.whatsapp.href = buildWhatsappLink(outlet.whatsappNumber || outlet.phoneRaw);
+        dom.zomatoReservation.href = outlet.zomatoReservationUrl;
+
+        const headerZomato = document.querySelector('#header-awards a.zomato');
+        if (headerZomato) headerZomato.href = outlet.zomatoReservationUrl.replace(/\/book$/, '');
+
+        const headerMap = document.querySelector('#header-awards a.googlemaps');
+        if (headerMap) headerMap.href = outlet.mapDirectionsUrl;
+
+        return outlet;
     }
 
     function initOutletSelector() {
-        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp) {
+        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation) {
             return;
         }
 
@@ -55,11 +70,24 @@
                 });
 
                 dom.selector.addEventListener('change', event => {
-                    updateOutlet(event.target.value);
+                    const outlet = updateOutlet(event.target.value);
+                    if (outlet) {
+                        const location = Object.keys(locationToOutletId).find(key => locationToOutletId[key] === outlet.id);
+                        if (location) {
+                            const url = new URL(window.location.href);
+                            url.searchParams.set('location', location);
+                            window.history.replaceState(null, '', url);
+                        }
+                    }
                 });
 
-                dom.selector.value = outlets[0].id;
-                updateOutlet(outlets[0].id);
+                const requestedLocation = new URL(window.location.href).searchParams.get('location');
+                const requestedOutletId = locationToOutletId[requestedLocation];
+                const selectedOutlet = outlets.find(outlet => outlet.id === requestedOutletId) || outlets[0];
+                if (selectedOutlet) {
+                    dom.selector.value = selectedOutlet.id;
+                    updateOutlet(selectedOutlet.id);
+                }
             })
             .catch(err => {
                 console.error('Failed to load outlets:', err);

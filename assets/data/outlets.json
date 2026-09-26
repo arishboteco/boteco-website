@@ -12,7 +12,9 @@
             "Karnataka 560001, India"
         ],
         "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9771901367135!2d77.61202931128253!3d12.973310687289462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17e1d0a13d69%3A0xf9be1419d46205be!2sBoteco%20-%20Restaurante%20Brasileiro%20(Indiqube%20Symphony%2C%20M.G.%20Road)!5e0!3m2!1sen!2sin!4v1775912197249!5m2!1sen!2sin",
-        "whatsappNumber": "+918792045444"
+        "mapDirectionsUrl": "https://share.google/NarMPlfSI9EkznbtY",
+        "whatsappNumber": "+918792045444",
+        "zomatoReservationUrl": "https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-1-mg-road-bangalore/book"
     },
     {
         "id": "bagmane-solarium-city",
@@ -27,6 +29,8 @@
             "Bengaluru, Karnataka 560037"
         ],
         "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.994918520729!2d77.708105!3d12.9721766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13d4b3c4fc31%3A0x918315b068024f40!2sBoteco%20-%20Restaurante%20Brasileiro%20(Bagmane%20Solarium%20City%2C%20Brookefield)!5e0!3m2!1sen!2sin!4v1775379958876!5m2!1sen!2sin",
-        "whatsappNumber": "+918792045444"
+        "mapDirectionsUrl": "https://www.google.com/maps/search/?api=1&query=12.9721766%2C77.708105",
+        "whatsappNumber": "+918792045444",
+        "zomatoReservationUrl": "https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-aecs-layout-bangalore/book"
     }
 ]
