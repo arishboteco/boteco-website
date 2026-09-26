@@ -143,6 +143,42 @@ html {
   text-decoration: underline;
 }
 
+.reservation-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.contact-info .reservation-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgba(0, 90, 171, 0.28);
+  border-radius: 0.5rem;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contact-info .reservation-option:hover,
+.contact-info .reservation-option:focus-visible {
+  border-color: var(--color-primary);
+  background: #edf5fc;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+.reservation-option svg {
+  fill: #e23744;
+}
+
 
 /* Announcement bar uses the primary colour */
 .announcement-bar {
