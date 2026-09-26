@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Consolidated site styles -->
     <!-- Custom color palette derived from logo -->
-    <link rel="stylesheet" href="assets/css/boteco_style.min.css?v=20260926-3">
+    <link rel="stylesheet" href="assets/css/boteco_style.min.css?v=20260926-4">
     <script src="assets/js/meta-tracking.js" defer></script>
 </head>
 <body>
@@ -87,7 +87,22 @@
                     <li class="nav-item"><a class="nav-link" href="#contact">Find Us</a></li>
                 </ul>
             </div>
-            <div id="header-awards" class="header-awards ms-auto"></div>
+            <details id="headerOutletMenu" class="header-outlet-menu ms-auto">
+                <summary aria-label="Choose outlet and quick actions">
+                    <span id="headerOutletName">Choose outlet</span>
+                </summary>
+                <div class="header-outlet-panel">
+                    <label for="headerOutletSelector">Select outlet</label>
+                    <select id="headerOutletSelector" class="form-select" aria-label="Select outlet in header">
+                        <option value="" selected disabled>Loading outlets...</option>
+                    </select>
+                    <div class="header-quick-actions" role="group" aria-label="Outlet quick actions">
+                        <a id="headerCall" class="header-quick-action" href="tel:+918792045444">Call</a>
+                        <a id="headerMap" class="header-quick-action" href="https://share.google/NarMPlfSI9EkznbtY" target="_blank" rel="noopener noreferrer">Maps</a>
+                        <button type="button" class="header-quick-action" data-bs-toggle="modal" data-bs-target="#reservationsModal">Reservations</button>
+                    </div>
+                </div>
+            </details>
         </div>
     </nav>
 
@@ -545,8 +560,8 @@
     </a>
 
     <!-- Consolidated site scripts -->
-    <script src="assets/js/main.min.js" defer></script>
-    <script src="assets/js/outlets.js?v=20260926-2" defer></script>
+    <script src="assets/js/main.min.js?v=20260926-4" defer></script>
+    <script src="assets/js/outlets.js?v=20260926-4" defer></script>
     <script src="assets/js/bootstrap.bundle.min.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {

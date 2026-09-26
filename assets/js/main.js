@@ -321,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('nav.navbar');
     if (!navbar) return;
+    const headerOutletMenu = document.getElementById('headerOutletMenu');
 
     let pointerInTop = false;
     let scrolledPastTop = false;
@@ -346,64 +347,10 @@ document.addEventListener('DOMContentLoaded', function () {
         updateVisibility();
     });
 
-    // Add social media icons to header
-    const awardsContainer = document.getElementById('header-awards');
-    if (awardsContainer) {
-        awardsContainer.style.display = 'flex';
-        awardsContainer.style.gap = '12px';
-
-        const socialLinks = [
-            {
-                href: 'https://www.instagram.com/boteco_india/?hl=en',
-                icon: 'instagram',
-                alt: 'Instagram',
-                color: '#FF0069'
-            },
-            {
-                href: 'https://www.facebook.com/BotecoIndiaa/',
-                icon: 'facebook',
-                alt: 'Facebook',
-                color: '#0866FF'
-            },
-            {
-                href: 'https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-1-mg-road-bangalore',
-                icon: 'zomato',
-                alt: 'Zomato',
-                color: '#E23744'
-            },
-            {
-                href: 'https://share.google/NarMPlfSI9EkznbtY',
-                icon: 'googlemaps',
-                alt: 'Google Maps',
-                color: '#4285F4'
-            }
-        ];
-
-        const svgNS = 'http://www.w3.org/2000/svg';
-
-        socialLinks.forEach(function (link) {
-            const a = document.createElement('a');
-            a.href = link.href;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.classList.add('social-icon', link.icon);
-            a.style.setProperty('--hover-color', link.color);
-
-            const svg = document.createElementNS(svgNS, 'svg');
-            const title = document.createElementNS(svgNS, 'title');
-            title.textContent = link.alt;
-            const use = document.createElementNS(svgNS, 'use');
-            use.setAttribute('href', 'assets/icons/sprite.svg#' + link.icon);
-            svg.appendChild(title);
-            svg.appendChild(use);
-            a.appendChild(svg);
-
-            awardsContainer.appendChild(a);
-        });
-    }
+    if (headerOutletMenu) headerOutletMenu.addEventListener('toggle', updateVisibility);
 
     function updateVisibility() {
-        if (scrolledPastTop || pointerInTop) {
+        if (scrolledPastTop || pointerInTop || (headerOutletMenu && headerOutletMenu.open)) {
             navbar.classList.remove('navbar-hidden');
         } else {
             navbar.classList.add('navbar-hidden');

@@ -507,31 +507,104 @@ footer a:hover {
   touch-action: pan-y pinch-zoom;
 }
 
-/* Header awards */
-/* Display awards inline and slightly larger */
-.header-awards {
+/* Header outlet picker and its quick actions */
+.header-outlet-menu {
+  position: relative;
+  flex: none;
+  margin-left: 0.75rem;
+}
+
+.header-outlet-menu summary {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
-}
-
-.header-awards .social-icon svg {
-  height: 24px;
-  width: 24px;
-  fill: currentColor;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid rgba(0, 90, 171, 0.22);
+  border-radius: 0.5rem;
   color: var(--color-primary);
-  transition: color 0.3s ease;
+  background: var(--color-white);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
 }
 
-.header-awards .social-icon:hover svg {
-  color: var(--hover-color);
+.header-outlet-menu summary::-webkit-details-marker {
+  display: none;
 }
 
-@media (max-width: 767.98px) {
-  .header-awards .social-icon svg {
-    height: 24px;
-    width: 24px;
-  }
+.header-outlet-menu summary::after {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-left: 0.2rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-0.15rem) rotate(45deg);
+}
+
+.header-outlet-menu[open] summary::after {
+  transform: translateY(0.1rem) rotate(225deg);
+}
+
+.header-outlet-menu summary:hover,
+.header-outlet-menu summary:focus-visible {
+  border-color: var(--color-primary);
+  background: #edf5fc;
+}
+
+.header-outlet-panel {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 1050;
+  width: min(20.5rem, calc(100vw - 1.5rem));
+  padding: 1rem;
+  border: 1px solid rgba(0, 90, 171, 0.15);
+  border-radius: 0.65rem;
+  background: var(--color-white);
+  box-shadow: 0 10px 28px rgba(0, 53, 96, 0.16);
+}
+
+.header-outlet-panel label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.header-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.header-quick-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(0, 90, 171, 0.25);
+  border-radius: 0.4rem;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header-quick-action:hover,
+.header-quick-action:focus-visible {
+  border-color: var(--color-primary);
+  background: #edf5fc;
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 /* About section introduction */

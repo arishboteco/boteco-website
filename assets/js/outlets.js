@@ -10,7 +10,12 @@
         whatsapp: document.getElementById('outletWhatsapp'),
         zomatoReservation: document.getElementById('outletZomatoReservation'),
         swiggyReservation: document.getElementById('outletSwiggyReservation'),
-        eazyReservation: document.getElementById('outletEazyReservation')
+        eazyReservation: document.getElementById('outletEazyReservation'),
+        headerMenu: document.getElementById('headerOutletMenu'),
+        headerSelector: document.getElementById('headerOutletSelector'),
+        headerName: document.getElementById('headerOutletName'),
+        headerCall: document.getElementById('headerCall'),
+        headerMap: document.getElementById('headerMap')
     };
 
     const locationToOutletId = {
@@ -45,18 +50,30 @@
         dom.zomatoReservation.href = outlet.zomatoReservationUrl;
         dom.swiggyReservation.href = outlet.swiggyReservationUrl;
         dom.eazyReservation.href = outlet.eazyReservationUrl;
-
-        const headerZomato = document.querySelector('#header-awards a.zomato');
-        if (headerZomato) headerZomato.href = outlet.zomatoReservationUrl.replace(/\/book$/, '');
-
-        const headerMap = document.querySelector('#header-awards a.googlemaps');
-        if (headerMap) headerMap.href = outlet.mapDirectionsUrl;
+        dom.selector.value = outlet.id;
+        dom.headerSelector.value = outlet.id;
+        dom.headerName.textContent = outlet.id === 'mg-road' ? 'IndiQube' : 'Bagmane';
+        dom.headerMenu.querySelector('summary').setAttribute('aria-label', `Outlet: ${dom.headerName.textContent}. Choose outlet and quick actions`);
+        dom.headerCall.href = `tel:${outlet.phoneRaw}`;
+        dom.headerMap.href = outlet.mapDirectionsUrl;
 
         return outlet;
     }
 
+    function selectOutlet(outletId) {
+        const outlet = updateOutlet(outletId);
+        if (!outlet) return;
+
+        const location = Object.keys(locationToOutletId).find(key => locationToOutletId[key] === outlet.id);
+        if (location) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('location', location);
+            window.history.replaceState(null, '', url);
+        }
+    }
+
     function initOutletSelector() {
-        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation) {
+        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation || !dom.headerMenu || !dom.headerSelector || !dom.headerName || !dom.headerCall || !dom.headerMap) {
             return;
         }
 
@@ -66,24 +83,21 @@
                 outlets = data;
 
                 dom.selector.innerHTML = '';
+                dom.headerSelector.innerHTML = '';
                 outlets.forEach(outlet => {
                     const option = document.createElement('option');
                     option.value = outlet.id;
                     option.textContent = outlet.name;
                     dom.selector.appendChild(option);
+
+                    const headerOption = document.createElement('option');
+                    headerOption.value = outlet.id;
+                    headerOption.textContent = outlet.id === 'mg-road' ? 'IndiQube / MG Road' : 'Bagmane / Brookefield';
+                    dom.headerSelector.appendChild(headerOption);
                 });
 
-                dom.selector.addEventListener('change', event => {
-                    const outlet = updateOutlet(event.target.value);
-                    if (outlet) {
-                        const location = Object.keys(locationToOutletId).find(key => locationToOutletId[key] === outlet.id);
-                        if (location) {
-                            const url = new URL(window.location.href);
-                            url.searchParams.set('location', location);
-                            window.history.replaceState(null, '', url);
-                        }
-                    }
-                });
+                dom.selector.addEventListener('change', event => selectOutlet(event.target.value));
+                dom.headerSelector.addEventListener('change', event => selectOutlet(event.target.value));
 
                 const requestedLocation = new URL(window.location.href).searchParams.get('location');
                 const requestedOutletId = locationToOutletId[requestedLocation];
@@ -92,6 +106,19 @@
                     dom.selector.value = selectedOutlet.id;
                     updateOutlet(selectedOutlet.id);
                 }
+
+                document.addEventListener('click', event => {
+                    if (!dom.headerMenu.contains(event.target)) dom.headerMenu.open = false;
+                });
+                dom.headerMenu.addEventListener('keydown', event => {
+                    if (event.key === 'Escape') {
+                        dom.headerMenu.open = false;
+                        dom.headerMenu.querySelector('summary').focus();
+                    }
+                });
+                dom.headerMenu.querySelectorAll('.header-quick-action').forEach(action => {
+                    action.addEventListener('click', () => { dom.headerMenu.open = false; });
+                });
             })
             .catch(err => {
                 console.error('Failed to load outlets:', err);
