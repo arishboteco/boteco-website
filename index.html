@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Consolidated site styles -->
     <!-- Custom color palette derived from logo -->
-    <link rel="stylesheet" href="assets/css/boteco_style.min.css?v=20260926-2">
+    <link rel="stylesheet" href="assets/css/boteco_style.min.css?v=20260926-3">
     <script src="assets/js/meta-tracking.js" defer></script>
 </head>
 <body>
@@ -510,22 +510,19 @@
                     </p>
                     <p><strong>Phone:</strong> <a id="outletPhone" href="tel:+918792045444">+91 87920 45444</a></p>
                     <p><strong>Hours:</strong> <span id="outletHours">Mon-Sun, 12:00 PM - 1:00 AM | Lunch: 12:00 PM - 3:30 PM | Dinner: 6:00 PM - 1:00 AM</span></p>
-                    <div class="reservation-options" aria-label="Reservation options">
-                        <button type="button" class="reservation-option" data-bs-toggle="modal" data-bs-target="#reservationsModal">
+                    <p id="reservationOptionsLabel" class="reservation-heading"><strong>Reservations:</strong></p>
+                    <div class="reservation-options" role="group" aria-labelledby="reservationOptionsLabel">
+                        <button type="button" class="reservation-option" data-bs-toggle="modal" data-bs-target="#reservationsModal" aria-label="Book with Boteco" title="Book with Boteco">
                             <img src="assets/images/logos/favicon.ico" alt="" width="24" height="24">
-                            <span>Book with Boteco</span>
                         </button>
-                        <a id="outletZomatoReservation" class="reservation-option" href="https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-1-mg-road-bangalore/book" target="_blank" rel="noopener noreferrer">
+                        <a id="outletZomatoReservation" class="reservation-option" href="https://www.zomato.com/bangalore/boteco-restaurante-brasileiro-1-mg-road-bangalore/book" target="_blank" rel="noopener noreferrer" aria-label="Reserve on Zomato" title="Reserve on Zomato">
                             <svg aria-hidden="true" width="24" height="24"><use href="assets/icons/sprite.svg#zomato"></use></svg>
-                            <span>Zomato</span>
                         </a>
-                        <a id="outletSwiggyReservation" class="reservation-option" href="https://swiggy.onelink.me/BVRZ?af_dp=swiggydiners%3A%2F%2Fdetails%2F1412216%3Fsource%3Dsharing" target="_blank" rel="noopener noreferrer">
+                        <a id="outletSwiggyReservation" class="reservation-option" href="https://swiggy.onelink.me/BVRZ?af_dp=swiggydiners%3A%2F%2Fdetails%2F1412216%3Fsource%3Dsharing" target="_blank" rel="noopener noreferrer" aria-label="Reserve on Swiggy Dineout" title="Reserve on Swiggy Dineout">
                             <img src="assets/images/logos/swiggy.svg" alt="" width="24" height="24">
-                            <span>Swiggy Dineout</span>
                         </a>
-                        <a id="outletEazyReservation" class="reservation-option" href="https://b.ezyd.in/Au6TkSlUJ6b" target="_blank" rel="noopener noreferrer">
+                        <a id="outletEazyReservation" class="reservation-option" href="https://b.ezyd.in/Au6TkSlUJ6b" target="_blank" rel="noopener noreferrer" aria-label="Reserve on EazyDiner" title="Reserve on EazyDiner">
                             <img src="assets/images/logos/eazydiner.png" alt="" width="24" height="24">
-                            <span>EazyDiner</span>
                         </a>
                     </div>
                 </div>

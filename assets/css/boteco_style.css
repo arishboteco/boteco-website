@@ -143,63 +143,53 @@ html {
   text-decoration: underline;
 }
 
+.reservation-heading {
+  margin: 1.25rem 0 0.35rem;
+}
+
 .reservation-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.6rem;
-  margin-top: 1.25rem;
-  max-width: 26rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
 .contact-info .reservation-option {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  min-height: 2.5rem;
-  padding: 0.45rem 0.75rem;
-  border: 1px solid rgba(0, 90, 171, 0.28);
-  border-radius: 0.5rem;
-  background: var(--color-white);
-  color: var(--color-primary);
-  font: inherit;
-  font-size: 0.9rem;
-  line-height: 1.2;
+  justify-content: center;
+  width: 3.85rem;
+  height: 3.25rem;
+  padding: 0.35rem;
+  border: 1px solid transparent;
+  border-radius: 0.65rem;
+  background: transparent;
   text-decoration: none;
   cursor: pointer;
 }
 
 .contact-info .reservation-option:hover,
 .contact-info .reservation-option:focus-visible {
-  border-color: var(--color-primary);
-  background: #edf5fc;
-  color: var(--color-primary-dark);
+  border-color: rgba(0, 90, 171, 0.18);
+  background: var(--color-white);
+  box-shadow: 0 3px 12px rgba(0, 53, 96, 0.08);
   text-decoration: none;
 }
 
+.contact-info .reservation-option:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .reservation-option svg {
+  width: 3rem;
+  height: 3rem;
   fill: #e23744;
 }
 
-.reservation-option img,
-.reservation-option svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  flex: none;
+.reservation-option img {
+  width: 2rem;
+  height: 2rem;
   object-fit: contain;
-}
-
-@media (max-width: 576px) {
-  .contact-info .reservation-option {
-    gap: 0.3rem;
-    padding: 0.4rem 0.55rem;
-    font-size: 0.82rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .reservation-options {
-    grid-template-columns: 1fr;
-  }
 }
 
 
