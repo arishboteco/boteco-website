@@ -11,9 +11,7 @@
         zomatoReservation: document.getElementById('outletZomatoReservation'),
         swiggyReservation: document.getElementById('outletSwiggyReservation'),
         eazyReservation: document.getElementById('outletEazyReservation'),
-        headerMenu: document.getElementById('headerOutletMenu'),
         headerSelector: document.getElementById('headerOutletSelector'),
-        headerName: document.getElementById('headerOutletName'),
         headerCall: document.getElementById('headerCall'),
         headerMap: document.getElementById('headerMap')
     };
@@ -52,8 +50,6 @@
         dom.eazyReservation.href = outlet.eazyReservationUrl;
         dom.selector.value = outlet.id;
         dom.headerSelector.value = outlet.id;
-        dom.headerName.textContent = outlet.id === 'mg-road' ? 'IndiQube' : 'Bagmane';
-        dom.headerMenu.querySelector('summary').setAttribute('aria-label', `Outlet: ${dom.headerName.textContent}. Choose outlet and quick actions`);
         dom.headerCall.href = `tel:${outlet.phoneRaw}`;
         dom.headerMap.href = outlet.mapDirectionsUrl;
 
@@ -73,7 +69,7 @@
     }
 
     function initOutletSelector() {
-        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation || !dom.headerMenu || !dom.headerSelector || !dom.headerName || !dom.headerCall || !dom.headerMap) {
+        if (!dom.selector || !dom.address || !dom.phone || !dom.hours || !dom.map || !dom.whatsapp || !dom.zomatoReservation || !dom.swiggyReservation || !dom.eazyReservation || !dom.headerSelector || !dom.headerCall || !dom.headerMap) {
             return;
         }
 
@@ -92,7 +88,7 @@
 
                     const headerOption = document.createElement('option');
                     headerOption.value = outlet.id;
-                    headerOption.textContent = outlet.id === 'mg-road' ? 'IndiQube / MG Road' : 'Bagmane / Brookefield';
+                    headerOption.textContent = outlet.id === 'mg-road' ? 'IndiQube' : 'Bagmane';
                     dom.headerSelector.appendChild(headerOption);
                 });
 
@@ -107,18 +103,6 @@
                     updateOutlet(selectedOutlet.id);
                 }
 
-                document.addEventListener('click', event => {
-                    if (!dom.headerMenu.contains(event.target)) dom.headerMenu.open = false;
-                });
-                dom.headerMenu.addEventListener('keydown', event => {
-                    if (event.key === 'Escape') {
-                        dom.headerMenu.open = false;
-                        dom.headerMenu.querySelector('summary').focus();
-                    }
-                });
-                dom.headerMenu.querySelectorAll('.header-quick-action').forEach(action => {
-                    action.addEventListener('click', () => { dom.headerMenu.open = false; });
-                });
             })
             .catch(err => {
                 console.error('Failed to load outlets:', err);

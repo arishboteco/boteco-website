@@ -321,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('nav.navbar');
     if (!navbar) return;
-    const headerOutletMenu = document.getElementById('headerOutletMenu');
 
     let pointerInTop = false;
     let scrolledPastTop = false;
@@ -343,14 +342,12 @@ document.addEventListener('DOMContentLoaded', function () {
     observer.observe(sentinel);
 
     document.addEventListener('mousemove', function (e) {
-        pointerInTop = e.clientY <= 80;
+        pointerInTop = e.clientY <= 80 || navbar.contains(e.target);
         updateVisibility();
     });
 
-    if (headerOutletMenu) headerOutletMenu.addEventListener('toggle', updateVisibility);
-
     function updateVisibility() {
-        if (scrolledPastTop || pointerInTop || (headerOutletMenu && headerOutletMenu.open)) {
+        if (scrolledPastTop || pointerInTop) {
             navbar.classList.remove('navbar-hidden');
         } else {
             navbar.classList.add('navbar-hidden');
