@@ -809,15 +809,15 @@ footer a:hover {
      object-fit: contain !important;
 }
 
-/* Text makes direct reservations clear without relying on brand recognition. */
+/* Clear reservation labels with a restrained gold text shimmer. */
 .header-quick-actions {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(60px, 1.4fr);
 }
 .header-reserve-action,
 .contact-info .reservation-option--direct {
-  background: var(--color-accent-1);
-  border-color: var(--color-accent-1);
-  color: var(--color-primary-dark);
+  background: transparent;
+  border-color: rgba(128, 87, 9, 0.28);
+  color: #805709;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.2;
@@ -836,9 +836,10 @@ footer a:hover {
 .header-reserve-action:focus-visible,
 .contact-info .reservation-option--direct:hover,
 .contact-info .reservation-option--direct:focus-visible {
-  background: var(--color-accent-1-dark);
-  border-color: var(--color-accent-1-dark);
-  color: var(--color-primary-dark);
+  background: transparent;
+  box-shadow: none;
+  border-color: #805709;
+  color: #805709;
 }
 @media (max-width: 991.98px) {
   .header-quick-actions {
@@ -849,4 +850,43 @@ footer a:hover {
   .navbar > .container {
     column-gap: 0.125rem;
   }
+}
+
+.header-reserve-action:focus-visible,
+.contact-info .reservation-option--direct:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.reservation-gold-text {
+  display: inline-block;
+  color: #805709;
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .reservation-gold-text {
+    background-image: linear-gradient(110deg, #76500b 0%, #94620d 35%, #805709 55%, #94620d 75%, #76500b 100%);
+    background-size: 220% 100%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: reservation-gold-shimmer 5s ease-in-out infinite alternate;
+  }
+}
+@keyframes reservation-gold-shimmer {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reservation-gold-text { animation: none; }
+}
+@media (forced-colors: active) {
+  .reservation-gold-text {
+    animation: none;
+    background: none;
+    color: ButtonText;
+    -webkit-text-fill-color: ButtonText;
+  }
+  .header-reserve-action,
+  .contact-info .reservation-option--direct { border-color: ButtonText; }
 }
