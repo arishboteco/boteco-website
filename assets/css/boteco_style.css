@@ -808,3 +808,45 @@ footer a:hover {
   -o-object-fit: contain !important;
      object-fit: contain !important;
 }
+
+/* Text makes direct reservations clear without relying on brand recognition. */
+.header-quick-actions {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(60px, 1.4fr);
+}
+.header-reserve-action,
+.contact-info .reservation-option--direct {
+  background: var(--color-accent-1);
+  border-color: var(--color-accent-1);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.header-reserve-action {
+  min-width: 60px;
+  padding-inline: 0.25rem;
+}
+.contact-info .reservation-option--direct {
+  width: auto;
+  min-height: 44px;
+  padding-inline: 0.75rem;
+}
+.header-reserve-action:hover,
+.header-reserve-action:focus-visible,
+.contact-info .reservation-option--direct:hover,
+.contact-info .reservation-option--direct:focus-visible {
+  background: var(--color-accent-1-dark);
+  border-color: var(--color-accent-1-dark);
+  color: var(--color-primary-dark);
+}
+@media (max-width: 991.98px) {
+  .header-quick-actions {
+    grid-template-columns: 44px 44px minmax(60px, 1fr);
+  }
+}
+@media (max-width: 359.98px) {
+  .navbar > .container {
+    column-gap: 0.125rem;
+  }
+}
