@@ -577,6 +577,78 @@ footer a:hover {
   object-fit: contain;
 }
 
+/* On phones and tablets, keep outlet controls in one compact, tappable row. */
+@media (max-width: 991.98px) {
+  .navbar > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .navbar-brand {
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-brand img {
+    max-height: 48px !important;
+    width: auto;
+  }
+
+  .navbar-toggler {
+    min-width: 44px;
+    min-height: 44px;
+    justify-self: end;
+  }
+
+  .header-outlet-tools {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-left: 0 !important;
+  }
+
+  /* Keep the selector's accessible name without a separate visible label. */
+  .header-outlet-tools label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .header-outlet-tools .form-select {
+    min-width: 0;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  .header-quick-actions {
+    grid-template-columns: repeat(3, 44px);
+    gap: 0.125rem;
+    margin-top: 0;
+  }
+
+  .header-quick-action {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .navbar-collapse {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+}
+
 /* About section introduction */
 .about-intro {
   max-width: 68rem;
