@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -37,6 +37,16 @@ jobs:
         run: pip install Pillow imageio-ffmpeg
       - name: Optimize homepage media
         run: python scripts/optimize_home_media.py
+      - name: Save optimized media for all publishing paths
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/videos/optimized assets/images/about/*.webp assets/images/hero.jpg assets/images/placeholders/specials-poster.webp
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: save optimized homepage media"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
       - name: Build site
         run: npm run build
       - name: Remove dependencies
