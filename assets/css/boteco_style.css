@@ -87,7 +87,8 @@ html {
   color: var(--color-text-muted);
 }
 
-.menu-card img {
+.menu-card img,
+.menu-card video {
   width: 100%;
   height: auto;
   -o-object-fit: contain;
