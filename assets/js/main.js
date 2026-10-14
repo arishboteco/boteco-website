@@ -99,6 +99,18 @@ function renderEvents(events, container, basePath, emptyMsg) {
     container.appendChild(fragment);
 }
 
+// Use the restaurant's calendar date, even when visitors are abroad.
+function upcomingEvents(events, now = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(now);
+    const part = type => parts.find(item => item.type === type).value;
+    const today = `${part('year')}-${part('month')}-${part('day')}`;
+    return events.filter(event =>
+        /^\d{4}-\d{2}-\d{2}$/.test(event.date) && event.date >= today
+    );
+}
+
 // Fetch and render events from JSON files
 async function fetchAndRenderEvents(jsonPath, container, section, basePath, emptyMsg) {
     try {
@@ -106,7 +118,8 @@ async function fetchAndRenderEvents(jsonPath, container, section, basePath, empt
         if (!res.ok) {
             throw new Error('Failed to fetch events');
         }
-        const data = await res.json();
+        const raw = await res.json();
+        const data = Array.isArray(raw) ? upcomingEvents(raw) : [];
         if (Array.isArray(data) && data.length > 0) {
             renderEvents(sortByDate(data), container, basePath, emptyMsg);
         } else {
@@ -124,12 +137,9 @@ async function fetchAndRenderEvents(jsonPath, container, section, basePath, empt
 async function loadEvents() {
     const eventsSection = document.getElementById('events');
     const eventsGrid = document.getElementById('events-grid');
-    const archiveSection = document.getElementById('events-archive');
-    const archiveGrid = document.getElementById('archive-grid');
-
     if (!eventsSection || !eventsGrid) return;
 
-    const upcomingPromise = fetchAndRenderEvents(
+    await fetchAndRenderEvents(
         'assets/events/events.json',
         eventsGrid,
         null,
@@ -137,17 +147,6 @@ async function loadEvents() {
         'No upcoming events'
     );
 
-    const archivePromise = (archiveSection && archiveGrid)
-        ? fetchAndRenderEvents(
-            'assets/events/archive/archive.json',
-            archiveGrid,
-            archiveSection,
-            'assets/events/archive',
-            'No past events'
-        )
-        : Promise.resolve();
-
-    await Promise.all([upcomingPromise, archivePromise]);
 }
 
 document.addEventListener('DOMContentLoaded', loadEvents);
