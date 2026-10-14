@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const CACHE_NAME = `boteco-cache-${CACHE_VERSION}`;
 
 // Import build-generated asset manifest
@@ -44,6 +44,9 @@ self.addEventListener('fetch', event => {
 
   const { request } = event;
   const url = new URL(request.url);
+  // Preserve native streaming and avoid caching partial video responses.
+  if (request.headers.has('range') || request.destination === 'video' ||
+      request.destination === 'audio' || /\.(mp4|webm|mp3|ogg)$/i.test(url.pathname)) return;
 
   // Network-first strategy for navigation requests (HTML)
   if (request.mode === 'navigate') {
@@ -102,4 +105,5 @@ self.addEventListener('fetch', event => {
     );
   }
 });
+
 

@@ -29,6 +29,14 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm ci
+      - name: Set up Python for homepage media
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install media tools
+        run: pip install Pillow imageio-ffmpeg
+      - name: Optimize homepage media
+        run: python scripts/optimize_home_media.py
       - name: Build site
         run: npm run build
       - name: Remove dependencies
@@ -40,3 +48,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

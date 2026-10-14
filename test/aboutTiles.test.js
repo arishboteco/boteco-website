@@ -20,8 +20,12 @@ test('About tile renderer uses an external video URL when configured', async () 
     await new Promise(resolve => setImmediate(resolve));
 
     assert.equal(children.length, 1);
+    assert.match(children[0].innerHTML, /preload="none"/);
+    assert.match(children[0].innerHTML, /<source data-src=/);
+    assert.doesNotMatch(children[0].innerHTML, /<source src=/);
     assert.match(children[0].innerHTML, new RegExp(videoUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
     delete global.document;
     delete global.fetch;
 });
+

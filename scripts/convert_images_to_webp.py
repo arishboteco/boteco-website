@@ -27,6 +27,8 @@ def convert_image(path: Path, *, dry_run: bool = False) -> None:
         save_kwargs = {"quality": 80}
         if getattr(img, "is_animated", False):
             save_kwargs["save_all"] = True
+        elif path.parent == ASSETS_DIR / "images" / "about":
+            img.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
         img.save(out_path, "WEBP", **save_kwargs)
 
 
@@ -42,3 +44,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

@@ -103,7 +103,7 @@ function renderEvents(events, container, basePath, emptyMsg) {
 async function fetchAndRenderEvents(jsonPath, container, section, basePath, emptyMsg) {
     try {
         const res = await fetch(jsonPath);
-        if (!res.ok || !(await res.json())) {
+        if (!res.ok) {
             throw new Error('Failed to fetch events');
         }
         const data = await res.json();
@@ -175,27 +175,33 @@ document.addEventListener('DOMContentLoaded', loadEvents);
     var LIGHTBOX_Z = '999999';
     var OVERLAY_Z = '999998';
 
+    function setStyle(el, name, value) {
+        if (el.style.getPropertyValue(name) !== value || el.style.getPropertyPriority(name) !== 'important') {
+            el.style.setProperty(name, value, 'important');
+        }
+    }
+
     function forceOnTop(el) {
         if (el.nodeType !== 1 || !el.className || typeof el.className !== 'string') return;
         var cls = el.className;
         if (/\blw-lightbox\b/.test(cls) || /\blightbox-/.test(cls)) {
-            el.style.setProperty('z-index', LIGHTBOX_Z, 'important');
-            el.style.setProperty('position', 'fixed', 'important');
-            el.style.setProperty('top', '0', 'important');
-            el.style.setProperty('left', '0', 'important');
-            el.style.setProperty('width', '100vw', 'important');
-            el.style.setProperty('height', '100vh', 'important');
+            setStyle(el, 'z-index', LIGHTBOX_Z);
+            setStyle(el, 'position', 'fixed');
+            setStyle(el, 'top', '0');
+            setStyle(el, 'left', '0');
+            setStyle(el, 'width', '100vw');
+            setStyle(el, 'height', '100vh');
         }
         if (/\blw-overlay\b/.test(cls)) {
-            el.style.setProperty('z-index', OVERLAY_Z, 'important');
-            el.style.setProperty('position', 'fixed', 'important');
-            el.style.setProperty('top', '0', 'important');
-            el.style.setProperty('left', '0', 'important');
-            el.style.setProperty('width', '100vw', 'important');
-            el.style.setProperty('height', '100vh', 'important');
+            setStyle(el, 'z-index', OVERLAY_Z);
+            setStyle(el, 'position', 'fixed');
+            setStyle(el, 'top', '0');
+            setStyle(el, 'left', '0');
+            setStyle(el, 'width', '100vw');
+            setStyle(el, 'height', '100vh');
         }
         if (/\blw-lightbox-container\b/.test(cls)) {
-            el.style.setProperty('position', 'fixed', 'important');
+            setStyle(el, 'position', 'fixed');
         }
     }
 
@@ -207,8 +213,14 @@ document.addEventListener('DOMContentLoaded', loadEvents);
 
     scanAll();
 
+    var scanPending = false;
     var observer = new MutationObserver(function () {
-        requestAnimationFrame(scanAll);
+        if (scanPending) return;
+        scanPending = true;
+        requestAnimationFrame(function () {
+            scanPending = false;
+            scanAll();
+        });
     });
 
     observer.observe(document.body, {
@@ -236,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let attemptPlay;
     let onVisibilityChange;
+    let heroVisible = false;
+    let heroLoaded = false;
 
     const swapToImage = () => {
         const img = document.createElement('img');
@@ -258,59 +272,86 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     onVisibilityChange = () => {
-        if (document.visibilityState === 'visible') {
+        if (document.visibilityState === 'visible' && heroVisible) {
             attemptPlay();
+        } else {
+            video.pause();
         }
     };
 
     const loadVideo = () => {
+        if (heroLoaded || !heroVisible || document.hidden) return;
+        heroLoaded = true;
         sources.forEach(source => {
             source.src = source.dataset.src;
         });
         video.addEventListener('error', swapToImage, { once: true });
         video.load();
         attemptPlay();
-        video.addEventListener('pause', attemptPlay);
         video.addEventListener('ended', attemptPlay);
         document.addEventListener('visibilitychange', onVisibilityChange);
     };
 
+    let pageReady = document.readyState === 'complete';
+    function startWhenReady() {
+        if (pageReady && heroVisible) loadVideo();
+    }
+    if (!pageReady) {
+        window.addEventListener('load', () => {
+            window.setTimeout(() => {
+                pageReady = true;
+                startWhenReady();
+            }, 500);
+        }, { once: true });
+    }
     if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadVideo();
-                    obs.disconnect();
-                }
+                heroVisible = entry.isIntersecting;
+                if (!heroVisible) video.pause();
+                else if (heroLoaded) attemptPlay();
+                else startWhenReady();
             });
         });
         observer.observe(video);
     } else {
-        loadVideo();
+        heroVisible = true;
+        startWhenReady();
     }
+
 });
 
 // ============================================================================
 // IFRAME LAZY LOADING
 // ============================================================================
 
-// Lazy-load iframes when modal is opened
-document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('shown.bs.modal', function () {
-        const iframe = this.querySelector('iframe[data-src]');
-        if (iframe && !iframe.getAttribute('src')) {
-            iframe.src = iframe.getAttribute('data-src');
-        }
-    });
-});
-
-// Lazy-load all iframes with data-src on page load
+// Booking forms load only when opened; other embeds load near the viewport.
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('iframe[data-src]').forEach(iframe => {
+    function loadFrame(iframe) {
         const src = iframe.getAttribute('data-src');
-        if (src) {
+        if (src && !iframe.getAttribute('src')) {
             iframe.src = src;
         }
+    }
+
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('shown.bs.modal', () => {
+            modal.querySelectorAll('iframe[data-src]').forEach(loadFrame);
+        });
+    });
+
+    const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            loadFrame(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '200px' }) : null;
+
+    document.querySelectorAll('iframe[data-src]').forEach(iframe => {
+        if (iframe.closest('.modal')) return;
+        if (observer) observer.observe(iframe);
+        else loadFrame(iframe);
     });
 });
 

@@ -14,22 +14,24 @@
         tiles.forEach(tile => {
             const container = document.createElement('div');
             const basePath = 'assets/images/about/about-us-tile' + tile.num;
+            const webpPath = basePath + '.webp?v=20261014-perf1';
             if (tile.type === 'video') {
-                const videoSrc = tile.url || (basePath + '.' + tile.ext);
+                const videoSrc = tile.url || ('assets/videos/optimized/about-tile' + tile.num + '.mp4');
                 container.innerHTML = 
-                    '<video autoplay loop muted playsinline class="rounded" width="1080" height="1080" poster="' + basePath + '.jpg">' +
-                        '<source src="' + videoSrc + '" type="video/' + tile.ext + '">' +
-                        '<img loading="lazy" src="' + basePath + '.gif" alt="Boteco interior animation ' + tile.num + '" class="rounded" width="1080" height="1080">' +
+                    '<video data-lazy-video loop muted playsinline preload="none" class="rounded" width="1080" height="1080" poster="' + webpPath + '" aria-label="Boteco restaurant video ' + tile.num + '">' +
+                        '<source data-src="' + videoSrc + '" type="video/mp4">' +
+                        '<img loading="lazy" src="' + webpPath + '" alt="Boteco interior ' + tile.num + '" class="rounded" width="1080" height="1080">' +
                     '</video>';
             } else {
                 container.innerHTML = 
                     '<picture>' +
-                        '<source srcset="' + basePath + '.webp" type="image/webp">' +
+                        '<source srcset="' + webpPath + '" type="image/webp">' +
                         '<img loading="lazy" src="' + basePath + '.jpg" alt="Boteco interior image ' + tile.num + '" class="rounded" width="1080" height="1080">' +
                     '</picture>';
             }
             grid.appendChild(container);
         });
+        if (document.dispatchEvent) document.dispatchEvent(new Event('boteco:media-added'));
     }
     
     fetch('assets/data/about-tiles.json')
