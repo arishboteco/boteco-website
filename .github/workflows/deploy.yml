@@ -37,18 +37,18 @@ jobs:
         run: pip install Pillow imageio-ffmpeg
       - name: Optimize homepage media
         run: python scripts/optimize_home_media.py
-      - name: Save optimized media for all publishing paths
+      - name: Build site
+        run: npm run build
+      - name: Save built assets for all publishing paths
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/videos/optimized assets/images/about/*.webp assets/images/hero.jpg assets/images/placeholders/specials-poster.webp
+          git add assets/videos/optimized assets/images/about/*.webp assets/images/hero.jpg assets/images/placeholders/specials-poster.webp assets/js assets/css assets/events assets/menus '*.html.gz' precache-manifest.js
           if ! git diff --cached --quiet; then
-            git commit -m "chore: save optimized homepage media"
+            git commit -m "chore: save optimized homepage build"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
-      - name: Build site
-        run: npm run build
       - name: Remove dependencies
         run: rm -rf node_modules
       - name: Upload Pages artifact
