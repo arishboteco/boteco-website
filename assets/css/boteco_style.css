@@ -98,8 +98,8 @@ html {
 .menus-section .menu-card .card-img-top {
   aspect-ratio: 4/3;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 /* Events section styling – white background with card design */
@@ -408,7 +408,8 @@ footer a:hover {
 }
 
 @media (max-width: 575.98px) {
-  .menu-card img {
+  .menu-card img,
+  .menu-card video {
     max-height: 160px;
   }
 }
